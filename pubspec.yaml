@@ -32,6 +32,8 @@ dependencies:
   firebase_core: ^1.4.0
   firebase_auth: ^3.0.1
   get: ^4.3.8
+  flutter_svg: ^0.22.0
+  shared_preferences: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +52,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
+  assets:
+    - assets/images/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -64,6 +68,19 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+    - family: OpenSans-Light
+      fonts:
+        - asset: assets/fonts/OpenSans-Light.ttf
+    - family: OpenSans-Bold
+      fonts:
+        - asset: assets/fonts/OpenSans-Bold.ttf
+    - family: OpenSans-ExtraBold
+      fonts:
+        - asset: assets/fonts/OpenSans-ExtraBold.ttf    
   # fonts:
   #   - family: Schyler
   #     fonts:

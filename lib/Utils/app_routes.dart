@@ -1,11 +1,17 @@
+import 'package:e_lib_admin/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
-  static const String loginRoute = "/login";
+  static const String splashScreenRoute = "/splashScreen";
 
   static routes() {
+    GetPage<dynamic> _page(String route, var page) {
+      return GetPage(name: route, page: page);
+    }
+
     return [
+      _page(splashScreenRoute, () => SplashScreen()),
       // GetPage(name: loginRoute, page: () => LoginScreen()),
       // GetPage(
       //     name: homeitemviewRoute,
