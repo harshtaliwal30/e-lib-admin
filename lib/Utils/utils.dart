@@ -8,13 +8,17 @@ class Utils {
   static const grey = Colors.grey;
   static const red = Color(0xFFFF406C);
   static const green = Color(0xFF66B032);
+  static const lightGrey = Color(0xFFE0E0E0);
   static const darkGrey = Color(0XFF5b5b5b);
   static const darkBlue = Color(0XFF202B3D);
   static const errorColor = Color(0xFFFF0000);
   static const blue = Color(0xFF00A2FE);
   static const linen = Color(0XFFFCF4E9);
   static const crimson = Color(0XFFED2736);
+  static const aliceBlue = Color(0xFFEAF3FC);
+  static const primaryColor = Color(0XFF2F3044);
   static const whip = Color(0XFFF8E8CF);
+  static const amber = Color(0XFFFFC500);
 
   // static const primaryColor = Color(0XFF085078);
   static const secondaryColor = Color(0XFFEFF3F6);
