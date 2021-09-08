@@ -18,30 +18,34 @@ class AddBookScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: getWithPadding(
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      vertical: AppUIConst.safeBlockVertical * 0.5,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Utils.primaryColor,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.file_upload_outlined,
-                      color: Utils.primaryColor,
-                    ),
-                  ),
-                  left: AppUIConst.safeBlockHorizontal * 3,
-                  right: AppUIConst.safeBlockHorizontal * 3,
-                  top: AppUIConst.safeBlockVertical * 1.5,
+          getWithPadding(
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(
+                vertical: AppUIConst.safeBlockVertical * 0.5,
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Utils.primaryColor,
                 ),
               ),
-            ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  getText(
+                    "Upload Image   ",
+                    fontSize: AppUIConst.baseFontSize * 3.0,
+                  ),
+                  Icon(
+                    Icons.file_upload_outlined,
+                    color: Utils.primaryColor,
+                  ),
+                ],
+              ),
+            ),
+            left: AppUIConst.safeBlockHorizontal * 3,
+            right: AppUIConst.safeBlockHorizontal * 3,
+            top: AppUIConst.safeBlockVertical * 1.5,
           ),
           getWithPadding(
             getTextFormField(bookNameController, 'Book Name'),

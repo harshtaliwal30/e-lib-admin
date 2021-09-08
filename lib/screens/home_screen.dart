@@ -1,14 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/controllers/home_page_controller.dart';
 import 'package:e_lib_admin/screens/add_book_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  // const HomeScreen({Key? key}) : super(key: key);
+  final HomePageController _homePageController = Get.put(HomePageController());
 
   @override
   Widget build(BuildContext context) {
@@ -123,17 +124,20 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            getBookItem(),
-            getBookItem(),
-            getBookItem(),
-            getBookItem(),
+            Obx(
+              () => ListView.builder(
+                itemCount: _homePageController.booksDataList.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) => getBookItem(index),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget getBookItem() {
+  Widget getBookItem(int index) {
     return Container(
       margin: EdgeInsets.only(
         left: AppUIConst.safeBlockHorizontal * 2,
@@ -154,11 +158,11 @@ class HomeScreen extends StatelessWidget {
               right: AppUIConst.safeBlockHorizontal * 3.5,
             ),
             child: Container(
-              height: AppUIConst.screenHeight / 6,
+              height: AppUIConst.screenHeight / 5.5,
               child: Row(
                 children: [
                   Container(
-                    height: AppUIConst.screenHeight / 6,
+                    height: AppUIConst.screenHeight / 5.5,
                     width: AppUIConst.screenWidth / 4,
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
@@ -179,8 +183,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         getWithPadding(
                           getText(
-                            "Cracking the coding interview",
-                            // fontWeight: FontWeight.bold,
+                            _homePageController.booksDataList[index].bookName,
                             fontSize: AppUIConst.baseFontSize * 4,
                           ),
                           top: AppUIConst.safeBlockVertical * 1,
@@ -189,7 +192,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                         getWithPadding(
                           getText(
-                            "Author",
+                            _homePageController.booksDataList[index].authorName,
+                            color: Utils.grey,
                             fontSize: AppUIConst.baseFontSize * 3.5,
                           ),
                           left: AppUIConst.safeBlockHorizontal * 3,
@@ -198,7 +202,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Utils.primaryColor,
+                            color: Utils.amber,
                             borderRadius: BorderRadius.all(
                               Radius.circular(20),
                             ),
@@ -208,8 +212,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: getWithPadding(
                             getText(
-                              "Quantity: 100",
-                              color: Utils.amber,
+                              "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
+                              color: Utils.primaryColor,
                               fontWeight: FontWeight.bold,
                               fontSize: AppUIConst.baseFontSize * 3,
                             ),
@@ -224,7 +228,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             getWithPadding(
                               getText(
-                                "Rs. 1000",
+                                "₹" + _homePageController.booksDataList[index].price.toString(),
                                 color: Utils.green,
                                 fontWeight: FontWeight.bold,
                                 fontSize: AppUIConst.baseFontSize * 3.5,
@@ -235,7 +239,7 @@ class HomeScreen extends StatelessWidget {
                               color: Utils.primaryColor,
                               child: getWithPadding(
                                 getText(
-                                  "Security %",
+                                  "Security: " + _homePageController.booksDataList[index].percentSecurity.toString() + "%",
                                   color: Utils.white,
                                   fontSize: AppUIConst.baseFontSize * 3.5,
                                 ),
@@ -248,13 +252,29 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         Spacer(),
-                        getWithPadding(
-                          getText(
-                            "Category",
-                            fontSize: AppUIConst.baseFontSize * 3.5,
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Utils.primaryColor,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
                           ),
-                          bottom: AppUIConst.safeBlockVertical * 1,
-                          left: AppUIConst.safeBlockHorizontal * 3,
+                          margin: EdgeInsets.only(
+                            left: AppUIConst.safeBlockHorizontal * 3,
+                            bottom: AppUIConst.safeBlockVertical * 1,
+                          ),
+                          child: getWithPadding(
+                            getText(
+                              _homePageController.booksDataList[index].category,
+                              fontSize: AppUIConst.baseFontSize * 3.5,
+                            ),
+                            top: AppUIConst.safeBlockVertical * 0.5,
+                            bottom: AppUIConst.safeBlockVertical * 0.5,
+                            left: AppUIConst.safeBlockHorizontal * 3,
+                            right: AppUIConst.safeBlockHorizontal * 3,
+                          ),
                         ),
                       ],
                     ),
