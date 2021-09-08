@@ -27,62 +27,62 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            InkWell(
-              onTap: () {
-                Get.bottomSheet(
-                  AddBookScreen(),
-                  backgroundColor: Utils.white,
-                  isDismissible: false,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 45,
+                    padding: EdgeInsets.only(
+                      left: AppUIConst.safeBlockHorizontal * 3,
                     ),
-                  ),
-                  elevation: 15,
-                );
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 45,
-                      padding: EdgeInsets.only(
-                        left: AppUIConst.safeBlockHorizontal * 3,
-                      ),
-                      child: TextFormField(
-                        autofocus: false,
-                        cursorColor: Utils.primaryColor,
-                        decoration: InputDecoration(
-                          filled: false,
-                          suffixIcon: Icon(
-                            Icons.search,
+                    child: TextFormField(
+                      autofocus: false,
+                      cursorColor: Utils.primaryColor,
+                      decoration: InputDecoration(
+                        filled: false,
+                        suffixIcon: Icon(
+                          Icons.search,
+                          color: Utils.grey,
+                        ),
+                        hintText: 'Search for libraries',
+                        hintStyle: TextStyle(
+                          fontSize: AppUIConst.baseFontSize * 3.5,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
                             color: Utils.grey,
                           ),
-                          hintText: 'Search for libraries',
-                          hintStyle: TextStyle(
-                            fontSize: AppUIConst.baseFontSize * 3.5,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Utils.grey,
                           ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Utils.grey,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Utils.grey,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Utils.grey,
-                            ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Utils.grey,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  Container(
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.bottomSheet(
+                      AddBookScreen(),
+                      backgroundColor: Utils.white,
+                      // isDismissible: false,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      elevation: 15,
+                    );
+                  },
+                  child: Container(
                     decoration: BoxDecoration(
                       color: Utils.crimson,
                       borderRadius: BorderRadius.only(
@@ -117,8 +117,8 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             SizedBox(
               height: 20,
