@@ -25,114 +25,118 @@ class HomeScreen extends StatelessWidget {
           fontSize: AppUIConst.baseFontSize * 4.5,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 45,
-                    padding: EdgeInsets.only(
-                      left: AppUIConst.safeBlockHorizontal * 3,
-                    ),
-                    child: TextFormField(
-                      autofocus: false,
-                      cursorColor: Utils.primaryColor,
-                      decoration: InputDecoration(
-                        filled: false,
-                        suffixIcon: Icon(
-                          Icons.search,
-                          color: Utils.grey,
-                        ),
-                        hintText: 'Search for libraries',
-                        hintStyle: TextStyle(
-                          fontSize: AppUIConst.baseFontSize * 3.5,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Utils.grey,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Utils.grey,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Utils.grey,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.bottomSheet(
-                      AddBookScreen(),
-                      backgroundColor: Utils.white,
-                      // isDismissible: false,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      elevation: 15,
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Utils.crimson,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                      left: AppUIConst.safeBlockHorizontal * 3,
-                    ),
-                    child: Row(
+      body: Obx(
+        () => _homePageController.isLoading.isTrue
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        getWithPadding(
-                          Icon(
-                            Icons.add,
-                            color: Utils.white,
-                            size: AppUIConst.baseFontSize * 4.5,
+                        Expanded(
+                          child: Container(
+                            height: 45,
+                            padding: EdgeInsets.only(
+                              left: AppUIConst.safeBlockHorizontal * 3,
+                            ),
+                            child: TextFormField(
+                              autofocus: false,
+                              cursorColor: Utils.primaryColor,
+                              decoration: InputDecoration(
+                                filled: false,
+                                suffixIcon: Icon(
+                                  Icons.search,
+                                  color: Utils.grey,
+                                ),
+                                hintText: 'Search for libraries',
+                                hintStyle: TextStyle(
+                                  fontSize: AppUIConst.baseFontSize * 3.5,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Utils.grey,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Utils.grey,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Utils.grey,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                          left: AppUIConst.safeBlockHorizontal * 3,
                         ),
-                        getWithPadding(
-                          getText(
-                            "Add Book",
-                            color: Utils.white,
-                            fontSize: AppUIConst.baseFontSize * 3.5,
+                        InkWell(
+                          onTap: () {
+                            Get.bottomSheet(
+                              AddBookScreen(),
+                              backgroundColor: Utils.white,
+                              // isDismissible: false,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              elevation: 15,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Utils.crimson,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                              ),
+                            ),
+                            margin: EdgeInsets.only(
+                              left: AppUIConst.safeBlockHorizontal * 3,
+                            ),
+                            child: Row(
+                              children: [
+                                getWithPadding(
+                                  Icon(
+                                    Icons.add,
+                                    color: Utils.white,
+                                    size: AppUIConst.baseFontSize * 4.5,
+                                  ),
+                                  left: AppUIConst.safeBlockHorizontal * 3,
+                                ),
+                                getWithPadding(
+                                  getText(
+                                    "Add Book",
+                                    color: Utils.white,
+                                    fontSize: AppUIConst.baseFontSize * 3.5,
+                                  ),
+                                  top: AppUIConst.safeBlockVertical * 1,
+                                  bottom: AppUIConst.safeBlockVertical * 1,
+                                  left: AppUIConst.safeBlockHorizontal * 2,
+                                  right: AppUIConst.safeBlockHorizontal * 5,
+                                ),
+                              ],
+                            ),
                           ),
-                          top: AppUIConst.safeBlockVertical * 1,
-                          bottom: AppUIConst.safeBlockVertical * 1,
-                          left: AppUIConst.safeBlockHorizontal * 2,
-                          right: AppUIConst.safeBlockHorizontal * 5,
                         ),
                       ],
                     ),
-                  ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ListView.builder(
+                      itemCount: _homePageController.booksDataList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => getBookItem(index),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Obx(
-              () => ListView.builder(
-                itemCount: _homePageController.booksDataList.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) => getBookItem(index),
               ),
-            ),
-          ],
-        ),
       ),
     );
   }

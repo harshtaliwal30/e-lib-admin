@@ -1,15 +1,12 @@
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/controllers/add_book_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddBookScreen extends StatelessWidget {
   // const AddBookScreen({Key? key}) : super(key: key);
-
-  final TextEditingController bookNameController = TextEditingController();
-  final TextEditingController authorNameController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
-  final TextEditingController securityPercentController = TextEditingController();
-  final TextEditingController quantityController = TextEditingController();
+  final AddBookController _addBookController = Get.put(AddBookController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +45,13 @@ class AddBookScreen extends StatelessWidget {
             top: AppUIConst.safeBlockVertical * 1.5,
           ),
           getWithPadding(
-            getTextFormField(bookNameController, 'Book Name'),
+            getTextFormField(_addBookController.bookNameController, 'Book Name'),
             left: AppUIConst.safeBlockHorizontal * 3,
             right: AppUIConst.safeBlockHorizontal * 3,
             top: AppUIConst.safeBlockHorizontal * 3,
           ),
           getWithPadding(
-            getTextFormField(authorNameController, 'Author Name'),
+            getTextFormField(_addBookController.authorNameController, 'Author Name'),
             left: AppUIConst.safeBlockHorizontal * 3,
             right: AppUIConst.safeBlockHorizontal * 3,
             top: AppUIConst.safeBlockVertical * 1.5,
@@ -63,10 +60,7 @@ class AddBookScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: getWithPadding(
-                  getTextFormField(
-                    priceController,
-                    'Price',
-                  ),
+                  getTextFormField(_addBookController.priceController, 'Price'),
                   left: AppUIConst.safeBlockHorizontal * 3,
                   right: AppUIConst.safeBlockHorizontal * 3,
                   top: AppUIConst.safeBlockVertical * 1.5,
@@ -74,10 +68,7 @@ class AddBookScreen extends StatelessWidget {
               ),
               Expanded(
                 child: getWithPadding(
-                  getTextFormField(
-                    securityPercentController,
-                    'Security % of Price',
-                  ),
+                  getTextFormField(_addBookController.securityPercentController, 'Security % of Price'),
                   left: AppUIConst.safeBlockHorizontal * 3,
                   right: AppUIConst.safeBlockHorizontal * 3,
                   top: AppUIConst.safeBlockVertical * 1.5,
@@ -86,7 +77,7 @@ class AddBookScreen extends StatelessWidget {
             ],
           ),
           getWithPadding(
-            getTextFormField(quantityController, 'Quantity'),
+            getTextFormField(_addBookController.quantityController, 'Quantity'),
             left: AppUIConst.safeBlockHorizontal * 3,
             right: AppUIConst.safeBlockHorizontal * 3,
             top: AppUIConst.safeBlockVertical * 1.5,
@@ -127,6 +118,9 @@ class AddBookScreen extends StatelessWidget {
       autofocus: false,
       controller: controller,
       cursorColor: Utils.primaryColor,
+      style: TextStyle(
+        fontSize: AppUIConst.baseFontSize * 4.0,
+      ),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
         filled: false,
