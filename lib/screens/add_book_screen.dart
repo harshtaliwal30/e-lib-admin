@@ -5,122 +5,231 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddBookScreen extends StatelessWidget {
-  // const AddBookScreen({Key? key}) : super(key: key);
   final AddBookController _addBookController = Get.put(AddBookController());
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          getWithPadding(
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(
-                vertical: AppUIConst.safeBlockVertical * 0.5,
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Utils.primaryColor,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            getWithPadding(
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  vertical: AppUIConst.safeBlockVertical * 0.5,
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  getText(
-                    "Upload Image   ",
-                    fontSize: AppUIConst.baseFontSize * 3.0,
-                  ),
-                  Icon(
-                    Icons.file_upload_outlined,
+                decoration: BoxDecoration(
+                  border: Border.all(
                     color: Utils.primaryColor,
                   ),
-                ],
-              ),
-            ),
-            left: AppUIConst.safeBlockHorizontal * 3,
-            right: AppUIConst.safeBlockHorizontal * 3,
-            top: AppUIConst.safeBlockVertical * 1.5,
-          ),
-          getWithPadding(
-            getTextFormField(_addBookController.bookNameController, 'Book Name'),
-            left: AppUIConst.safeBlockHorizontal * 3,
-            right: AppUIConst.safeBlockHorizontal * 3,
-            top: AppUIConst.safeBlockHorizontal * 3,
-          ),
-          getWithPadding(
-            getTextFormField(_addBookController.authorNameController, 'Author Name'),
-            left: AppUIConst.safeBlockHorizontal * 3,
-            right: AppUIConst.safeBlockHorizontal * 3,
-            top: AppUIConst.safeBlockVertical * 1.5,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: getWithPadding(
-                  getTextFormField(_addBookController.priceController, 'Price'),
-                  left: AppUIConst.safeBlockHorizontal * 3,
-                  right: AppUIConst.safeBlockHorizontal * 3,
-                  top: AppUIConst.safeBlockVertical * 1.5,
                 ),
-              ),
-              Expanded(
-                child: getWithPadding(
-                  getTextFormField(_addBookController.securityPercentController, 'Security % of Price'),
-                  left: AppUIConst.safeBlockHorizontal * 3,
-                  right: AppUIConst.safeBlockHorizontal * 3,
-                  top: AppUIConst.safeBlockVertical * 1.5,
-                ),
-              ),
-            ],
-          ),
-          getWithPadding(
-            getTextFormField(_addBookController.quantityController, 'Quantity'),
-            left: AppUIConst.safeBlockHorizontal * 3,
-            right: AppUIConst.safeBlockHorizontal * 3,
-            top: AppUIConst.safeBlockVertical * 1.5,
-            bottom: AppUIConst.safeBlockVertical * 1.5,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: getWithPadding(
-                  MaterialButton(
-                    padding: EdgeInsets.symmetric(
-                      vertical: AppUIConst.safeBlockVertical * 1.5,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    getText(
+                      "Upload Image   ",
+                      fontSize: AppUIConst.baseFontSize * 3.0,
                     ),
-                    color: Utils.primaryColor,
-                    onPressed: () {},
-                    child: Text(
-                      'Add Book',
-                      style: TextStyle(
-                        color: Utils.white,
+                    Icon(
+                      Icons.file_upload_outlined,
+                      color: Utils.primaryColor,
+                    ),
+                  ],
+                ),
+              ),
+              left: AppUIConst.safeBlockHorizontal * 3,
+              right: AppUIConst.safeBlockHorizontal * 3,
+              top: AppUIConst.safeBlockVertical * 1.5,
+            ),
+            getWithPadding(
+              getTextFormField(
+                _addBookController.bookNameController,
+                'Book Name',
+                (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter book name";
+                  } else
+                    return null;
+                },
+              ),
+              left: AppUIConst.safeBlockHorizontal * 3,
+              right: AppUIConst.safeBlockHorizontal * 3,
+              top: AppUIConst.safeBlockHorizontal * 3,
+            ),
+            getWithPadding(
+              getTextFormField(
+                _addBookController.authorNameController,
+                'Author Name',
+                (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter author name";
+                  } else
+                    return null;
+                },
+              ),
+              left: AppUIConst.safeBlockHorizontal * 3,
+              right: AppUIConst.safeBlockHorizontal * 3,
+              top: AppUIConst.safeBlockVertical * 1.5,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: getWithPadding(
+                    getTextFormField(
+                      _addBookController.priceController,
+                      'Price',
+                      (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter price";
+                        } else
+                          return null;
+                      },
+                      textInputType: TextInputType.number,
+                    ),
+                    left: AppUIConst.safeBlockHorizontal * 3,
+                    right: AppUIConst.safeBlockHorizontal * 3,
+                    top: AppUIConst.safeBlockVertical * 1.5,
+                  ),
+                ),
+                Expanded(
+                  child: getWithPadding(
+                    getTextFormField(
+                      _addBookController.securityPercentController,
+                      '% Security',
+                      (value) {
+                        if (!value!.isEmpty && (double.parse(value) > 100 || double.parse(value) < 0)) {
+                          return "0 < % < 100";
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChange: (value) {
+                        var value = _addBookController.securityPercentController.text;
+                        if (_addBookController.priceController.text.isEmpty) {
+                          Get.snackbar(
+                            "Warning",
+                            "Enter price first.",
+                            backgroundColor: Utils.whip,
+                            duration: Duration(milliseconds: 1000),
+                            icon: Icon(Icons.warning_amber_rounded),
+                            snackPosition: SnackPosition.BOTTOM,
+                            margin: EdgeInsets.only(
+                              bottom: AppUIConst.safeBlockVertical * 2,
+                              left: AppUIConst.safeBlockHorizontal * 3,
+                              right: AppUIConst.safeBlockHorizontal * 3,
+                            ),
+                          );
+                        } else if (value.isNotEmpty && double.parse(value) <= 100.0 && double.parse(value) >= 0) {
+                          _addBookController.securityMoneyController.text =
+                              (double.parse(_addBookController.securityPercentController.text) * double.parse(_addBookController.priceController.text) / 100.0).round().toString();
+                        }
+                      },
+                      textInputType: TextInputType.number,
+                    ),
+                    left: AppUIConst.safeBlockHorizontal * 3,
+                    right: AppUIConst.safeBlockHorizontal * 3,
+                    top: AppUIConst.safeBlockVertical * 1.5,
+                  ),
+                ),
+                Expanded(
+                  child: getWithPadding(
+                    getTextFormField(
+                      _addBookController.securityMoneyController,
+                      'Security Money',
+                      (value) {
+                        return null;
+                      },
+                      enabled: false,
+                      textInputType: TextInputType.number,
+                    ),
+                    left: AppUIConst.safeBlockHorizontal * 3,
+                    right: AppUIConst.safeBlockHorizontal * 3,
+                    top: AppUIConst.safeBlockVertical * 1.5,
+                  ),
+                ),
+              ],
+            ),
+            getWithPadding(
+              getTextFormField(
+                _addBookController.quantityController,
+                'Quantity',
+                (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter quantity of book";
+                  } else if (int.parse(value) < 0) {
+                    return "Please enter valid value";
+                  } else if (int.parse(value) == 0) {
+                    return "Please add available books";
+                  } else {
+                    return null;
+                  }
+                },
+                textInputType: TextInputType.number,
+              ),
+              left: AppUIConst.safeBlockHorizontal * 3,
+              right: AppUIConst.safeBlockHorizontal * 3,
+              top: AppUIConst.safeBlockVertical * 1.5,
+              bottom: AppUIConst.safeBlockVertical * 1.5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: getWithPadding(
+                    MaterialButton(
+                      padding: EdgeInsets.symmetric(
+                        vertical: AppUIConst.safeBlockVertical * 1.5,
+                      ),
+                      color: Utils.primaryColor,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _addBookController.addBook();
+                        }
+                      },
+                      child: Text(
+                        'Add Book',
+                        style: TextStyle(
+                          color: Utils.white,
+                        ),
                       ),
                     ),
+                    left: AppUIConst.safeBlockHorizontal * 3,
+                    right: AppUIConst.safeBlockHorizontal * 3,
+                    bottom: AppUIConst.safeBlockVertical * 1.5,
                   ),
-                  left: AppUIConst.safeBlockHorizontal * 3,
-                  right: AppUIConst.safeBlockHorizontal * 3,
-                  bottom: AppUIConst.safeBlockVertical * 1.5,
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 
-  TextFormField getTextFormField(TextEditingController controller, String labelText) {
+  TextFormField getTextFormField(
+    TextEditingController controller,
+    String labelText,
+    var validator, {
+    bool enabled = true,
+    TextInputType textInputType = TextInputType.text,
+    var onChange,
+  }) {
     return TextFormField(
+      enabled: enabled,
       autofocus: false,
       controller: controller,
+      keyboardType: textInputType,
       cursorColor: Utils.primaryColor,
       style: TextStyle(
         fontSize: AppUIConst.baseFontSize * 4.0,
       ),
+      validator: validator,
+      onChanged: onChange,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),
         filled: false,

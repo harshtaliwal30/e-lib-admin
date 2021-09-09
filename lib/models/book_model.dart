@@ -1,9 +1,9 @@
 class BookModel {
   String? bookName;
   String? authorName;
-  int? price;
+  double? price;
   String? bookImage;
-  int? percentSecurity;
+  double? percentSecurity;
   int? quantity;
   String? category;
 
@@ -20,9 +20,9 @@ class BookModel {
   BookModel.fromJson(Map<String, dynamic> json) {
     bookName = json['bookName'];
     authorName = json['authorName'];
-    price = json['price'];
+    price = json['price'].toDouble();
     bookImage = json['bookImage'];
-    percentSecurity = json['percentSecurity'];
+    percentSecurity = json['percentSecurity'].toDouble();
     quantity = json['quantity'];
     category = json['category'];
   }
