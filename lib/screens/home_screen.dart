@@ -75,8 +75,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         InkWell(
-                          onTap: () {
-                            Get.bottomSheet(
+                          onTap: () async {
+                            var result = await Get.bottomSheet(
                               AddBookScreen(),
                               backgroundColor: Utils.white,
                               // isDismissible: false,
@@ -87,6 +87,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                               elevation: 15,
                             );
+                            if (result == "bookAdded ") {
+                              _homePageController.fetchBooks();
+                            }
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -132,6 +135,7 @@ class HomeScreen extends StatelessWidget {
                     ListView.builder(
                       itemCount: _homePageController.booksDataList.length,
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => getBookItem(index),
                     ),
                   ],
@@ -271,7 +275,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: getWithPadding(
                             getText(
-                              _homePageController.booksDataList[index].category,
+                              _homePageController.booksDataList[index].category ?? "Category",
                               fontSize: AppUIConst.baseFontSize * 3.5,
                             ),
                             top: AppUIConst.safeBlockVertical * 0.5,

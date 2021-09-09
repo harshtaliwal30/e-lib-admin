@@ -1,4 +1,6 @@
+import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Utils {
   static const white = Colors.white;
@@ -44,4 +46,20 @@ class Utils {
   // static const primarySecondColor = Colors.black;
   // static const primaryDarkColor = Colors.black;
   // static const errorColor = Color(0xFFFF0000);
+
+  void showWarningSnackbar(String msg) {
+    Get.snackbar(
+      "Warning",
+      msg,
+      backgroundColor: Utils.whip,
+      duration: Duration(milliseconds: 1000),
+      icon: Icon(Icons.warning_amber_rounded),
+      snackPosition: SnackPosition.BOTTOM,
+      margin: EdgeInsets.only(
+        bottom: AppUIConst.safeBlockVertical * 2,
+        left: AppUIConst.safeBlockHorizontal * 3,
+        right: AppUIConst.safeBlockHorizontal * 3,
+      ),
+    );
+  }
 }

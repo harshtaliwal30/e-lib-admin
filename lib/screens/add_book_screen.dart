@@ -111,22 +111,12 @@ class AddBookScreen extends StatelessWidget {
                       onChange: (value) {
                         var value = _addBookController.securityPercentController.text;
                         if (_addBookController.priceController.text.isEmpty) {
-                          Get.snackbar(
-                            "Warning",
-                            "Enter price first.",
-                            backgroundColor: Utils.whip,
-                            duration: Duration(milliseconds: 1000),
-                            icon: Icon(Icons.warning_amber_rounded),
-                            snackPosition: SnackPosition.BOTTOM,
-                            margin: EdgeInsets.only(
-                              bottom: AppUIConst.safeBlockVertical * 2,
-                              left: AppUIConst.safeBlockHorizontal * 3,
-                              right: AppUIConst.safeBlockHorizontal * 3,
-                            ),
-                          );
-                        } else if (value.isNotEmpty && double.parse(value) <= 100.0 && double.parse(value) >= 0) {
+                          Utils().showWarningSnackbar("Enter price first");
+                        } else if (value.isNotEmpty && !value.contains('-') && double.parse(value) <= 100.0 && double.parse(value) >= 0) {
                           _addBookController.securityMoneyController.text =
                               (double.parse(_addBookController.securityPercentController.text) * double.parse(_addBookController.priceController.text) / 100.0).round().toString();
+                        } else {
+                          Utils().showWarningSnackbar("Enter value between 0 and 100");
                         }
                       },
                       textInputType: TextInputType.number,

@@ -6,16 +6,9 @@ class BookModel {
   double? percentSecurity;
   int? quantity;
   String? category;
+  String? libraryID;
 
-  BookModel({
-    this.bookName,
-    this.authorName,
-    this.price,
-    this.bookImage,
-    this.percentSecurity,
-    this.quantity,
-    this.category,
-  });
+  BookModel({this.bookName, this.authorName, this.price, this.bookImage, this.percentSecurity, this.quantity, this.category, this.libraryID});
 
   BookModel.fromJson(Map<String, dynamic> json) {
     bookName = json['bookName'];
@@ -25,6 +18,7 @@ class BookModel {
     percentSecurity = json['percentSecurity'].toDouble();
     quantity = json['quantity'];
     category = json['category'];
+    libraryID = json['libraryID'];
   }
 
   Map<String, dynamic> toJson() {
@@ -36,6 +30,7 @@ class BookModel {
     data['percentSecurity'] = this.percentSecurity;
     data['quantity'] = this.quantity;
     data['category'] = this.category;
+    data['libraryID'] = this.libraryID;
     return data;
   }
 }
