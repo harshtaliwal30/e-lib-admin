@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/controllers/add_book_controller.dart';
 import 'package:e_lib_admin/controllers/home_page_controller.dart';
 import 'package:e_lib_admin/screens/add_book_screen.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               elevation: 15,
                             );
+                            Get.delete<AddBookController>();
                             if (result == "bookAdded ") {
                               _homePageController.fetchBooks();
                             }
@@ -253,8 +255,8 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 top: AppUIConst.safeBlockVertical * 0.5,
                                 bottom: AppUIConst.safeBlockVertical * 0.5,
-                                left: AppUIConst.safeBlockHorizontal * 6,
-                                right: AppUIConst.safeBlockHorizontal * 6,
+                                left: AppUIConst.safeBlockHorizontal * 3,
+                                right: AppUIConst.safeBlockHorizontal * 2,
                               ),
                             ),
                           ],
@@ -294,17 +296,49 @@ class HomeScreen extends StatelessWidget {
           Positioned(
             right: 0,
             top: 0,
-            child: Opacity(
-              opacity: 1,
-              child: CircleAvatar(
-                radius: 15,
-                backgroundColor: Utils.primaryColor,
-                child: Icon(
-                  Icons.edit,
-                  size: AppUIConst.iconExamHeightAndWidth * 0.6,
-                  color: Utils.white,
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: () async {
+                    var result = await Get.bottomSheet(
+                      AddBookScreen(bookDataList: _homePageController.booksDataList[index]),
+                      backgroundColor: Utils.white,
+                      // isDismissible: false,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      elevation: 15,
+                    );
+                    Get.delete<AddBookController>();
+                    if (result == "bookAdded ") {
+                      _homePageController.fetchBooks();
+                    }
+                  },
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: Utils.primaryColor,
+                    child: Icon(
+                      Icons.edit,
+                      size: AppUIConst.iconExamHeightAndWidth * 0.6,
+                      color: Utils.white,
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(
+                  height: 5,
+                ),
+                CircleAvatar(
+                  radius: 15,
+                  backgroundColor: Utils.red,
+                  child: Icon(
+                    Icons.delete,
+                    size: AppUIConst.iconExamHeightAndWidth * 0.6,
+                    color: Utils.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

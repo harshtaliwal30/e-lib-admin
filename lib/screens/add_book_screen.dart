@@ -7,9 +7,19 @@ import 'package:get/get.dart';
 class AddBookScreen extends StatelessWidget {
   final AddBookController _addBookController = Get.put(AddBookController());
   final _formKey = GlobalKey<FormState>();
+  final bookDataList;
+  AddBookScreen({this.bookDataList});
 
   @override
   Widget build(BuildContext context) {
+    if (bookDataList != null) {
+      _addBookController.bookNameController.text = bookDataList.bookName;
+      _addBookController.authorNameController.text = bookDataList.authorName;
+      _addBookController.priceController.text = bookDataList.price.toString();
+      _addBookController.securityPercentController.text = bookDataList.percentSecurity.toString();
+      // _addBookController.securityPercentController.text = bookDataList.
+      _addBookController.quantityController.text = bookDataList.quantity.toString();
+    }
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
