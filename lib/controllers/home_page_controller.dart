@@ -25,4 +25,8 @@ class HomePageController extends GetxController {
       });
     });
   }
+
+  void deleteBook(String id) async {
+    await DatabaseHandler().deleteBook(id);
+  }
 }

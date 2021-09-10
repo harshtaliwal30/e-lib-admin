@@ -311,7 +311,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       elevation: 15,
                     );
-                    // Get.delete<AddBookController>();
+                    Get.delete<AddBookController>();
                     if (result == "bookUpdated") {
                       _homePageController.fetchBooks();
                     }
@@ -329,13 +329,39 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Utils.red,
-                  child: Icon(
-                    Icons.delete,
-                    size: AppUIConst.iconExamHeightAndWidth * 0.6,
-                    color: Utils.white,
+                InkWell(
+                  onTap: () async {
+                    var result = await Get.defaultDialog(
+                      title: "Alert",
+                      middleText: "Are you sure you want to delete the book?",
+                      barrierDismissible: false,
+                      radius: 10,
+                      buttonColor: Utils.primaryColor,
+                      onCancel: () {
+                        Get.back();
+                      },
+                      onConfirm: () {
+                        _homePageController.deleteBook(_homePageController.booksDataList[index].bookDocId);
+                        Get.back(result: "deleted");
+                      },
+                      textCancel: "No",
+                      textConfirm: "Yes",
+                      cancelTextColor: Utils.primaryColor,
+                      confirmTextColor: Utils.white,
+                    );
+                    if (result == "deleted") {
+                      Utils().showConfirmSnackbar("Book deleted successfully");
+                      _homePageController.fetchBooks();
+                    }
+                  },
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: Utils.red,
+                    child: Icon(
+                      Icons.delete,
+                      size: AppUIConst.iconExamHeightAndWidth * 0.6,
+                      color: Utils.white,
+                    ),
                   ),
                 ),
               ],

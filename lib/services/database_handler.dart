@@ -14,4 +14,8 @@ class DatabaseHandler {
   Future<void> updateBook(var data, String? id) async {
     await databaseReference.collection('books').doc(id).update(data);
   }
+
+  Future<void> deleteBook(String? id) async {
+    await databaseReference.collection('books').doc(id).delete();
+  }
 }

@@ -52,8 +52,36 @@ class Utils {
       "Warning",
       msg,
       backgroundColor: Utils.whip,
+      borderRadius: 5.0,
+      padding: EdgeInsets.symmetric(
+        vertical: AppUIConst.safeBlockVertical * 1,
+      ),
       duration: Duration(milliseconds: 1000),
       icon: Icon(Icons.warning_amber_rounded),
+      snackPosition: SnackPosition.BOTTOM,
+      margin: EdgeInsets.only(
+        bottom: AppUIConst.safeBlockVertical * 2,
+        left: AppUIConst.safeBlockHorizontal * 3,
+        right: AppUIConst.safeBlockHorizontal * 3,
+      ),
+    );
+  }
+
+  void showConfirmSnackbar(String msg) {
+    Get.snackbar(
+      "Success",
+      msg,
+      backgroundColor: Utils.green,
+      borderRadius: 5.0,
+      padding: EdgeInsets.symmetric(
+        vertical: AppUIConst.safeBlockVertical * 1,
+      ),
+      colorText: Utils.white,
+      duration: Duration(milliseconds: 1000),
+      icon: Icon(
+        Icons.emoji_emotions_rounded,
+        color: Utils.white,
+      ),
       snackPosition: SnackPosition.BOTTOM,
       margin: EdgeInsets.only(
         bottom: AppUIConst.safeBlockVertical * 2,
