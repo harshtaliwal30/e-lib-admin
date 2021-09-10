@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                               elevation: 15,
                             );
                             Get.delete<AddBookController>();
-                            if (result == "bookAdded ") {
+                            if (result == "bookAdded") {
                               _homePageController.fetchBooks();
                             }
                           },
@@ -311,8 +311,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                       elevation: 15,
                     );
-                    Get.delete<AddBookController>();
-                    if (result == "bookAdded ") {
+                    // Get.delete<AddBookController>();
+                    if (result == "bookUpdated") {
                       _homePageController.fetchBooks();
                     }
                   },

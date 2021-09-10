@@ -14,13 +14,15 @@ class HomePageController extends GetxController {
   }
 
   void fetchBooks() async {
+    booksDataList.clear();
     await DatabaseHandler().fetchBooks().then((value) {
       value.docs.forEach((element) {
-        BookModel bookModel = BookModel.fromJson(element.data() as dynamic);
+        Map<String, dynamic> docData = element.data() as dynamic;
+        docData["bookDocId"] = element.id;
+        BookModel bookModel = BookModel.fromJson(docData);
         booksDataList.add(bookModel);
         isLoading(false);
       });
-      // Get.back();
     });
   }
 }

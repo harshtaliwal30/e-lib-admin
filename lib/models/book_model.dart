@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class BookModel {
+  String? bookDocId;
   String? bookName;
   String? authorName;
   double? price;
@@ -7,10 +10,23 @@ class BookModel {
   int? quantity;
   String? category;
   String? libraryID;
+  String? timestamp;
 
-  BookModel({this.bookName, this.authorName, this.price, this.bookImage, this.percentSecurity, this.quantity, this.category, this.libraryID});
+  BookModel({
+    this.bookDocId,
+    this.bookName,
+    this.authorName,
+    this.price,
+    this.bookImage,
+    this.percentSecurity,
+    this.quantity,
+    this.category,
+    this.libraryID,
+    this.timestamp,
+  });
 
   BookModel.fromJson(Map<String, dynamic> json) {
+    bookDocId = json['bookDocId'];
     bookName = json['bookName'];
     authorName = json['authorName'];
     price = json['price'].toDouble();
@@ -19,6 +35,7 @@ class BookModel {
     quantity = json['quantity'];
     category = json['category'];
     libraryID = json['libraryID'];
+    timestamp = json['timestamp'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +48,7 @@ class BookModel {
     data['quantity'] = this.quantity;
     data['category'] = this.category;
     data['libraryID'] = this.libraryID;
+    data['timestamp'] = this.timestamp;
     return data;
   }
 }

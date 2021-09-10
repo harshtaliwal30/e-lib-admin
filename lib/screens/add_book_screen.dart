@@ -99,6 +99,9 @@ class AddBookScreen extends StatelessWidget {
                         } else
                           return null;
                       },
+                      onChange: (value) {
+                        _addBookController.securityPercentController.text = "";
+                      },
                       textInputType: TextInputType.number,
                     ),
                     left: AppUIConst.safeBlockHorizontal * 3,
@@ -112,7 +115,9 @@ class AddBookScreen extends StatelessWidget {
                       _addBookController.securityPercentController,
                       '% Security',
                       (value) {
-                        if (!value!.isEmpty && (double.parse(value) > 100 || double.parse(value) < 0)) {
+                        if (value!.isEmpty) {
+                          return "Enter 0 < % < 100";
+                        } else if (!value!.isEmpty && (double.parse(value) > 100 || double.parse(value) < 0)) {
                           return "0 < % < 100";
                         } else {
                           return null;
@@ -188,11 +193,15 @@ class AddBookScreen extends StatelessWidget {
                       color: Utils.primaryColor,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          _addBookController.addBook();
+                          if (bookDataList != null) {
+                            _addBookController.updateBook(bookDataList);
+                          } else {
+                            _addBookController.addBook();
+                          }
                         }
                       },
                       child: Text(
-                        'Add Book',
+                        bookDataList != null ? 'Update' : 'Add Book',
                         style: TextStyle(
                           color: Utils.white,
                         ),

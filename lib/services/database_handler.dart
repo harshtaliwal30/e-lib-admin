@@ -10,4 +10,8 @@ class DatabaseHandler {
   Future<void> addBook(var data) async {
     await databaseReference.collection('books').add(data);
   }
+
+  Future<void> updateBook(var data, String? id) async {
+    await databaseReference.collection('books').doc(id).update(data);
+  }
 }
