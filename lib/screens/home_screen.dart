@@ -90,6 +90,7 @@ class HomeScreen extends StatelessWidget {
                             );
                             Get.delete<AddBookController>();
                             if (result == "bookAdded") {
+                              Utils().showConfirmSnackbar("Book added successfully");
                               _homePageController.fetchBooks();
                             }
                           },
@@ -313,6 +314,7 @@ class HomeScreen extends StatelessWidget {
                     );
                     Get.delete<AddBookController>();
                     if (result == "bookUpdated") {
+                      Utils().showConfirmSnackbar("Book details updated");
                       _homePageController.fetchBooks();
                     }
                   },

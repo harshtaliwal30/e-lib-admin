@@ -77,7 +77,7 @@ class Utils {
         vertical: AppUIConst.safeBlockVertical * 1,
       ),
       colorText: Utils.white,
-      duration: Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 2000),
       icon: Icon(
         Icons.emoji_emotions_rounded,
         color: Utils.white,
