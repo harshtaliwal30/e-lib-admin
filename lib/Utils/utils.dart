@@ -84,4 +84,40 @@ class Utils {
       ),
     );
   }
+
+  Padding getWithPadding(
+    Widget child, {
+    double left = 0.0,
+    right = 0.0,
+    top = 0.0,
+    bottom = 0.0,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: left,
+        right: right,
+        top: top,
+        bottom: bottom,
+      ),
+      child: child,
+    );
+  }
+
+  Text getText(
+    String content, {
+    Color color = Utils.primaryColor,
+    double fontSize = 16.0,
+    FontWeight fontWeight = FontWeight.normal,
+  }) {
+    return Text(
+      content,
+      overflow: TextOverflow.ellipsis,
+      softWrap: true,
+      style: TextStyle(
+        color: color,
+        fontWeight: fontWeight,
+        fontSize: fontSize,
+      ),
+    );
+  }
 }

@@ -28,7 +28,7 @@ class AddBookScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            getWithPadding(
+            Utils().getWithPadding(
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(
@@ -42,7 +42,7 @@ class AddBookScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    getText(
+                    Utils().getText(
                       "Upload Image   ",
                       fontSize: AppUIConst.baseFontSize * 3.0,
                     ),
@@ -57,7 +57,7 @@ class AddBookScreen extends StatelessWidget {
               right: AppUIConst.safeBlockHorizontal * 3,
               top: AppUIConst.safeBlockVertical * 1.5,
             ),
-            getWithPadding(
+            Utils().getWithPadding(
               getTextFormField(
                 _addBookController.bookNameController,
                 'Book Name',
@@ -72,7 +72,7 @@ class AddBookScreen extends StatelessWidget {
               right: AppUIConst.safeBlockHorizontal * 3,
               top: AppUIConst.safeBlockHorizontal * 3,
             ),
-            getWithPadding(
+            Utils().getWithPadding(
               getTextFormField(
                 _addBookController.authorNameController,
                 'Author Name',
@@ -90,7 +90,7 @@ class AddBookScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: getWithPadding(
+                  child: Utils().getWithPadding(
                     getTextFormField(
                       _addBookController.priceController,
                       'Price',
@@ -111,7 +111,7 @@ class AddBookScreen extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: getWithPadding(
+                  child: Utils().getWithPadding(
                     getTextFormField(
                       _addBookController.securityPercentController,
                       '% Security',
@@ -143,7 +143,7 @@ class AddBookScreen extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: getWithPadding(
+                  child: Utils().getWithPadding(
                     getTextFormField(
                       _addBookController.securityMoneyController,
                       'Security Money',
@@ -160,7 +160,7 @@ class AddBookScreen extends StatelessWidget {
                 ),
               ],
             ),
-            getWithPadding(
+            Utils().getWithPadding(
               getTextFormField(
                 _addBookController.quantityController,
                 'Quantity',
@@ -186,7 +186,7 @@ class AddBookScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: getWithPadding(
+                  child: Utils().getWithPadding(
                     MaterialButton(
                       padding: EdgeInsets.symmetric(
                         vertical: AppUIConst.safeBlockVertical * 1.5,
@@ -267,42 +267,6 @@ class AddBookScreen extends StatelessWidget {
             color: Utils.grey,
           ),
         ),
-      ),
-    );
-  }
-
-  Padding getWithPadding(
-    Widget child, {
-    double left = 0.0,
-    right = 0.0,
-    top = 0.0,
-    bottom = 0.0,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: left,
-        right: right,
-        top: top,
-        bottom: bottom,
-      ),
-      child: child,
-    );
-  }
-
-  Text getText(
-    String content, {
-    Color color = Utils.primaryColor,
-    double fontSize = 16.0,
-    FontWeight fontWeight = FontWeight.normal,
-  }) {
-    return Text(
-      content,
-      overflow: TextOverflow.ellipsis,
-      softWrap: true,
-      style: TextStyle(
-        color: color,
-        fontWeight: fontWeight,
-        fontSize: fontSize,
       ),
     );
   }

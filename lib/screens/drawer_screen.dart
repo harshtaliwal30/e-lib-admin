@@ -28,15 +28,15 @@ class DrawerScreen extends StatelessWidget {
                     ),
                     // child:
                   ),
-                  getWithPadding(
-                    getText(
+                  Utils().getWithPadding(
+                    Utils().getText(
                       "Maulana Azad",
                       fontWeight: FontWeight.bold,
                       fontSize: AppUIConst.baseFontSize * 4,
                     ),
                     top: AppUIConst.safeBlockVertical * 1,
                   ),
-                  getText(
+                  Utils().getText(
                     "Aligarh",
                     color: Utils.grey,
                     fontWeight: FontWeight.bold,
@@ -90,14 +90,14 @@ class DrawerScreen extends StatelessWidget {
   }
 
   Widget getDrawerItem(String title, IconData leadingIcon, String route, Function()? onTap) {
-    return getWithPadding(
+    return Utils().getWithPadding(
       ListTile(
         leading: Icon(
           leadingIcon,
           color: Get.currentRoute == route ? Utils.white : Utils.grey,
         ),
         horizontalTitleGap: 0.0,
-        title: getText(
+        title: Utils().getText(
           title,
           color: Get.currentRoute == route ? Utils.white : Utils.grey,
           fontWeight: Get.currentRoute == route ? FontWeight.bold : FontWeight.normal,
@@ -116,42 +116,6 @@ class DrawerScreen extends StatelessWidget {
       ),
       left: AppUIConst.safeBlockHorizontal * 3,
       right: AppUIConst.safeBlockHorizontal * 3,
-    );
-  }
-
-  Padding getWithPadding(
-    Widget child, {
-    double left = 0.0,
-    right = 0.0,
-    top = 0.0,
-    bottom = 0.0,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: left,
-        right: right,
-        top: top,
-        bottom: bottom,
-      ),
-      child: child,
-    );
-  }
-
-  Text getText(
-    String content, {
-    Color color = Utils.primaryColor,
-    double fontSize = 16.0,
-    FontWeight fontWeight = FontWeight.normal,
-  }) {
-    return Text(
-      content,
-      overflow: TextOverflow.ellipsis,
-      softWrap: true,
-      style: TextStyle(
-        color: color,
-        fontWeight: fontWeight,
-        fontSize: fontSize,
-      ),
     );
   }
 }

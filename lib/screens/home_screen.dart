@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Utils.white,
-        title: getText(
+        title: Utils().getText(
           "Library Name",
           color: Utils.primaryColor,
           fontSize: AppUIConst.baseFontSize * 4.5,
@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                getWithPadding(
+                                Utils().getWithPadding(
                                   Icon(
                                     Icons.add,
                                     color: Utils.white,
@@ -108,8 +108,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   left: AppUIConst.safeBlockHorizontal * 3,
                                 ),
-                                getWithPadding(
-                                  getText(
+                                Utils().getWithPadding(
+                                  Utils().getText(
                                     "Add Book",
                                     color: Utils.white,
                                     fontSize: AppUIConst.baseFontSize * 3.5,
@@ -186,8 +186,8 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        getWithPadding(
-                          getText(
+                        Utils().getWithPadding(
+                          Utils().getText(
                             _homePageController.booksDataList[index].bookName,
                             fontSize: AppUIConst.baseFontSize * 4,
                           ),
@@ -195,8 +195,8 @@ class HomeScreen extends StatelessWidget {
                           right: AppUIConst.safeBlockHorizontal * 5,
                           left: AppUIConst.safeBlockHorizontal * 3,
                         ),
-                        getWithPadding(
-                          getText(
+                        Utils().getWithPadding(
+                          Utils().getText(
                             _homePageController.booksDataList[index].authorName,
                             color: Utils.grey,
                             fontSize: AppUIConst.baseFontSize * 3.2,
@@ -215,8 +215,8 @@ class HomeScreen extends StatelessWidget {
                           margin: EdgeInsets.only(
                             left: AppUIConst.safeBlockHorizontal * 3,
                           ),
-                          child: getWithPadding(
-                            getText(
+                          child: Utils().getWithPadding(
+                            Utils().getText(
                               "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
                               color: Utils.white,
                               fontWeight: FontWeight.bold,
@@ -231,8 +231,8 @@ class HomeScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            getWithPadding(
-                              getText(
+                            Utils().getWithPadding(
+                              Utils().getText(
                                 "₹" + _homePageController.booksDataList[index].price.toString(),
                                 color: Utils.green,
                                 fontWeight: FontWeight.bold,
@@ -241,8 +241,8 @@ class HomeScreen extends StatelessWidget {
                               top: AppUIConst.safeBlockVertical * 1,
                               left: AppUIConst.safeBlockHorizontal * 3,
                             ),
-                            getWithPadding(
-                              getText(
+                            Utils().getWithPadding(
+                              Utils().getText(
                                 "Security: " + _homePageController.booksDataList[index].percentSecurity.toString() + "%",
                                 color: Utils.primaryColor,
                                 fontSize: AppUIConst.baseFontSize * 3.2,
@@ -266,8 +266,8 @@ class HomeScreen extends StatelessWidget {
                             left: AppUIConst.safeBlockHorizontal * 3,
                             bottom: AppUIConst.safeBlockVertical * 1,
                           ),
-                          child: getWithPadding(
-                            getText(
+                          child: Utils().getWithPadding(
+                            Utils().getText(
                               _homePageController.booksDataList[index].category ?? "Category",
                               fontSize: AppUIConst.baseFontSize * 3.0,
                             ),
@@ -350,42 +350,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Padding getWithPadding(
-    Widget child, {
-    double left = 0.0,
-    right = 0.0,
-    top = 0.0,
-    bottom = 0.0,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: left,
-        right: right,
-        top: top,
-        bottom: bottom,
-      ),
-      child: child,
-    );
-  }
-
-  Text getText(
-    String content, {
-    Color color = Utils.primaryColor,
-    double fontSize = 16.0,
-    FontWeight fontWeight = FontWeight.normal,
-  }) {
-    return Text(
-      content,
-      overflow: TextOverflow.ellipsis,
-      softWrap: true,
-      style: TextStyle(
-        color: color,
-        fontWeight: fontWeight,
-        fontSize: fontSize,
       ),
     );
   }
