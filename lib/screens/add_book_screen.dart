@@ -7,18 +7,19 @@ import 'package:get/get.dart';
 class AddBookScreen extends StatelessWidget {
   final AddBookController _addBookController = Get.put(AddBookController());
   final _formKey = GlobalKey<FormState>();
-  final bookDataList;
-  AddBookScreen({this.bookDataList});
+  final bookData;
+  AddBookScreen({this.bookData});
 
   @override
   Widget build(BuildContext context) {
-    if (bookDataList != null) {
-      _addBookController.bookNameController.text = bookDataList.bookName;
-      _addBookController.authorNameController.text = bookDataList.authorName;
-      _addBookController.priceController.text = bookDataList.price.toString();
-      _addBookController.securityPercentController.text = bookDataList.percentSecurity.toString();
-      // _addBookController.securityPercentController.text = bookDataList.
-      _addBookController.quantityController.text = bookDataList.quantity.toString();
+    if (bookData != null) {
+      _addBookController.bookNameController.text = bookData.bookName;
+      _addBookController.authorNameController.text = bookData.authorName;
+      _addBookController.priceController.text = bookData.price.toString();
+      _addBookController.securityPercentController.text = bookData.percentSecurity.toString();
+      _addBookController.securityMoneyController.text =
+          (double.parse(_addBookController.securityPercentController.text) * double.parse(_addBookController.priceController.text) / 100.0).round().toString();
+      _addBookController.quantityController.text = bookData.quantity.toString();
     }
     return SingleChildScrollView(
       child: Form(
@@ -193,15 +194,15 @@ class AddBookScreen extends StatelessWidget {
                       color: Utils.primaryColor,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          if (bookDataList != null) {
-                            _addBookController.updateBook(bookDataList);
+                          if (bookData != null) {
+                            _addBookController.updateBook(bookData);
                           } else {
                             _addBookController.addBook();
                           }
                         }
                       },
                       child: Text(
-                        bookDataList != null ? 'Update' : 'Add Book',
+                        bookData != null ? 'Update' : 'Add Book',
                         style: TextStyle(
                           color: Utils.white,
                         ),

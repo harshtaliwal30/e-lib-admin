@@ -199,11 +199,11 @@ class HomeScreen extends StatelessWidget {
                           getText(
                             _homePageController.booksDataList[index].authorName,
                             color: Utils.grey,
-                            fontSize: AppUIConst.baseFontSize * 3.5,
+                            fontSize: AppUIConst.baseFontSize * 3.2,
                           ),
                           left: AppUIConst.safeBlockHorizontal * 3,
                           right: AppUIConst.safeBlockHorizontal * 3,
-                          bottom: AppUIConst.safeBlockHorizontal * 1,
+                          bottom: AppUIConst.safeBlockHorizontal * 2,
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -220,12 +220,12 @@ class HomeScreen extends StatelessWidget {
                               "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
                               color: Utils.primaryColor,
                               fontWeight: FontWeight.bold,
-                              fontSize: AppUIConst.baseFontSize * 3,
+                              fontSize: AppUIConst.baseFontSize * 2.9,
                             ),
-                            top: AppUIConst.safeBlockVertical * 0.7,
-                            bottom: AppUIConst.safeBlockVertical * 0.7,
-                            left: AppUIConst.safeBlockHorizontal * 5,
-                            right: AppUIConst.safeBlockHorizontal * 5,
+                            top: AppUIConst.safeBlockVertical * 0.2,
+                            bottom: AppUIConst.safeBlockVertical * 0.2,
+                            left: AppUIConst.safeBlockHorizontal * 3,
+                            right: AppUIConst.safeBlockHorizontal * 3,
                           ),
                         ),
                         Row(
@@ -236,23 +236,19 @@ class HomeScreen extends StatelessWidget {
                                 "₹" + _homePageController.booksDataList[index].price.toString(),
                                 color: Utils.green,
                                 fontWeight: FontWeight.bold,
-                                fontSize: AppUIConst.baseFontSize * 3.5,
+                                fontSize: AppUIConst.baseFontSize * 3.2,
                               ),
+                              top: AppUIConst.safeBlockVertical * 1,
                               left: AppUIConst.safeBlockHorizontal * 3,
                             ),
-                            Container(
-                              color: Utils.primaryColor,
-                              child: getWithPadding(
-                                getText(
-                                  "Security: " + _homePageController.booksDataList[index].percentSecurity.toString() + "%",
-                                  color: Utils.white,
-                                  fontSize: AppUIConst.baseFontSize * 3.5,
-                                ),
-                                top: AppUIConst.safeBlockVertical * 0.5,
-                                bottom: AppUIConst.safeBlockVertical * 0.5,
-                                left: AppUIConst.safeBlockHorizontal * 3,
-                                right: AppUIConst.safeBlockHorizontal * 2,
+                            getWithPadding(
+                              getText(
+                                "Security: " + _homePageController.booksDataList[index].percentSecurity.toString() + "%",
+                                color: Utils.primaryColor,
+                                fontSize: AppUIConst.baseFontSize * 3.2,
                               ),
+                              top: AppUIConst.safeBlockVertical * 1,
+                              right: AppUIConst.safeBlockHorizontal * 2,
                             ),
                           ],
                         ),
@@ -273,12 +269,12 @@ class HomeScreen extends StatelessWidget {
                           child: getWithPadding(
                             getText(
                               _homePageController.booksDataList[index].category ?? "Category",
-                              fontSize: AppUIConst.baseFontSize * 3.5,
+                              fontSize: AppUIConst.baseFontSize * 3.0,
                             ),
-                            top: AppUIConst.safeBlockVertical * 0.5,
-                            bottom: AppUIConst.safeBlockVertical * 0.5,
-                            left: AppUIConst.safeBlockHorizontal * 3,
-                            right: AppUIConst.safeBlockHorizontal * 3,
+                            top: AppUIConst.safeBlockVertical * 0.2,
+                            bottom: AppUIConst.safeBlockVertical * 0.2,
+                            left: AppUIConst.safeBlockHorizontal * 2,
+                            right: AppUIConst.safeBlockHorizontal * 2,
                           ),
                         ),
                       ],
@@ -295,17 +291,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () async {
-                    var result = await Get.bottomSheet(
-                      AddBookScreen(bookDataList: _homePageController.booksDataList[index]),
-                      backgroundColor: Utils.white,
-                      // isDismissible: false,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      elevation: 15,
-                    );
+                    var result = await AppRoutes.openAddBookBottomSheet(bookData: _homePageController.booksDataList[index]);
                     Get.delete<AddBookController>();
                     if (result == "bookUpdated") {
                       Utils().showConfirmSnackbar("Book details updated");

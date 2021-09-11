@@ -1,4 +1,5 @@
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/models/book_model.dart';
 import 'package:e_lib_admin/screens/add_book_screen.dart';
 import 'package:e_lib_admin/screens/home_screen.dart';
 import 'package:e_lib_admin/screens/splash_screen.dart';
@@ -40,9 +41,11 @@ class AppRoutes {
     Get.offAll(routeName, arguments: arguments);
   }
 
-  static Future<dynamic> openAddBookBottomSheet() {
+  static Future<dynamic> openAddBookBottomSheet({BookModel? bookData}) {
     return Get.bottomSheet(
-      AddBookScreen(),
+      AddBookScreen(
+        bookData: bookData,
+      ),
       backgroundColor: Utils.white,
       // isDismissible: false,
       shape: RoundedRectangleBorder(
