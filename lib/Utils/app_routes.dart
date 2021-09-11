@@ -1,3 +1,5 @@
+import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/screens/add_book_screen.dart';
 import 'package:e_lib_admin/screens/home_screen.dart';
 import 'package:e_lib_admin/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,5 +38,19 @@ class AppRoutes {
 
   static void moveOffAllScreenWithArguments(String routeName, {@required var arguments}) {
     Get.offAll(routeName, arguments: arguments);
+  }
+
+  static Future<dynamic> openAddBookBottomSheet() {
+    return Get.bottomSheet(
+      AddBookScreen(),
+      backgroundColor: Utils.white,
+      // isDismissible: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      elevation: 15,
+    );
   }
 }

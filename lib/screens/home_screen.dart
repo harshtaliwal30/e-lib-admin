@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/add_book_controller.dart';
 import 'package:e_lib_admin/controllers/home_page_controller.dart';
 import 'package:e_lib_admin/screens/add_book_screen.dart';
+import 'package:e_lib_admin/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -17,6 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Utils.white,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Utils.primaryColor),
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Utils.white,
@@ -77,17 +80,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () async {
-                            var result = await Get.bottomSheet(
-                              AddBookScreen(),
-                              backgroundColor: Utils.white,
-                              // isDismissible: false,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              elevation: 15,
-                            );
+                            var result = await AppRoutes.openAddBookBottomSheet();
                             Get.delete<AddBookController>();
                             if (result == "bookAdded") {
                               Utils().showConfirmSnackbar("Book added successfully");
@@ -145,6 +138,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
       ),
+      drawer: DrawerScreen(),
     );
   }
 
