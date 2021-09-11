@@ -28,7 +28,7 @@ class SplashScreen extends StatelessWidget {
                   child: Text(
                     "Welcome\nto E-Lib Admin",
                     style: TextStyle(
-                      color: Utils.darkBlue,
+                      color: Utils.primaryColor,
                       fontSize: AppUIConst.baseFontSize * 12,
                       fontFamily: "OpenSans-Bold",
                     ),

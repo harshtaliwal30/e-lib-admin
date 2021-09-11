@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Utils.crimson,
+                              color: Utils.blue,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(5),
                                 bottomLeft: Radius.circular(5),
@@ -207,7 +207,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Utils.amber,
+                            color: Utils.blue,
                             borderRadius: BorderRadius.all(
                               Radius.circular(20),
                             ),
@@ -218,14 +218,14 @@ class HomeScreen extends StatelessWidget {
                           child: getWithPadding(
                             getText(
                               "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
-                              color: Utils.primaryColor,
+                              color: Utils.white,
                               fontWeight: FontWeight.bold,
                               fontSize: AppUIConst.baseFontSize * 2.9,
                             ),
-                            top: AppUIConst.safeBlockVertical * 0.2,
-                            bottom: AppUIConst.safeBlockVertical * 0.2,
-                            left: AppUIConst.safeBlockHorizontal * 3,
-                            right: AppUIConst.safeBlockHorizontal * 3,
+                            top: AppUIConst.safeBlockVertical * 0.3,
+                            bottom: AppUIConst.safeBlockVertical * 0.3,
+                            left: AppUIConst.safeBlockHorizontal * 2,
+                            right: AppUIConst.safeBlockHorizontal * 2,
                           ),
                         ),
                         Row(
@@ -300,7 +300,7 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: CircleAvatar(
                     radius: 15,
-                    backgroundColor: Utils.primaryColor,
+                    backgroundColor: Utils.blue,
                     child: Icon(
                       Icons.edit,
                       size: AppUIConst.iconExamHeightAndWidth * 0.6,
