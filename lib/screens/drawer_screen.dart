@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
@@ -22,11 +21,10 @@ class DrawerScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    // backgroundColor: Utils.blue,
+                    backgroundColor: Utils.blue,
                     backgroundImage: NetworkImage(
                       "https://firebasestorage.googleapis.com/v0/b/e-lib-e53d6.appspot.com/o/28828394_950086555154619_9137006216337597187_o.jpg?alt=media&token=dd2c5145-1e19-43d6-ace7-6bede86f7a7d",
                     ),
-                    // child:
                   ),
                   Utils().getWithPadding(
                     Utils().getText(
@@ -59,28 +57,14 @@ class DrawerScreen extends StatelessWidget {
               },
             ),
             getDrawerItem(
-              "Add Book",
-              Icons.add,
-              "/homeRoutefd",
+              "Issue Requests",
+              Icons.notifications_on_outlined,
+              "/issueRequestsScreen",
               () => {
                 Get.back(),
-                AppRoutes.openAddBookBottomSheet(),
-              },
-            ),
-            getDrawerItem(
-              "Add Book",
-              Icons.add,
-              "/homeRoutefd",
-              () => {
-                AppRoutes.openAddBookBottomSheet(),
-              },
-            ),
-            getDrawerItem(
-              "Add Book",
-              Icons.add,
-              "/homeRoutfdfdse",
-              () => {
-                AppRoutes.openAddBookBottomSheet(),
+                AppRoutes.moveToScreen(
+                  "/issueRequestsScreen",
+                )
               },
             ),
           ],
