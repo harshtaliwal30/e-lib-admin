@@ -66,6 +66,7 @@ class DrawerScreen extends StatelessWidget {
                   "/issueRequestsScreen",
                 )
               },
+              isTrailing: true,
             ),
           ],
         ),
@@ -73,13 +74,39 @@ class DrawerScreen extends StatelessWidget {
     );
   }
 
-  Widget getDrawerItem(String title, IconData leadingIcon, String route, Function()? onTap) {
+  Widget getDrawerItem(
+    String title,
+    IconData leadingIcon,
+    String route,
+    Function()? onTap, {
+    bool isTrailing = false,
+  }) {
     return Utils().getWithPadding(
       ListTile(
         leading: Icon(
           leadingIcon,
           color: Get.currentRoute == route ? Utils.white : Utils.grey,
         ),
+        trailing: isTrailing
+            ? Container(
+                decoration: BoxDecoration(
+                  color: Utils.red.withOpacity(0.2),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppUIConst.safeBlockHorizontal * 2,
+                  vertical: AppUIConst.safeBlockVertical * 0.1,
+                ),
+                child: Utils().getText(
+                  "23",
+                  color: Utils.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: AppUIConst.baseFontSize * 2.9,
+                ),
+              )
+            : null,
         horizontalTitleGap: 0.0,
         title: Utils().getText(
           title,
@@ -92,10 +119,6 @@ class DrawerScreen extends StatelessWidget {
             Radius.circular(15),
           ),
         ),
-        // onTap: () {
-        //   Get.back();
-        //   Get.offNamed('/home');
-        // },
         onTap: onTap,
       ),
       left: AppUIConst.safeBlockHorizontal * 3,
