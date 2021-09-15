@@ -6,6 +6,7 @@ class Utils {
   static const white = Colors.white;
   static const black = Colors.black;
   static const grey = Colors.grey;
+  static const lightBgColor = Color(0XFFEFF3F6);
   static const red = Colors.red;
   static const green = Color(0xFF66B032);
   static const lightGrey = Color(0xFFE0E0E0);
@@ -15,6 +16,8 @@ class Utils {
   static const primaryColor = Color(0XFF2F3044);
   static const whip = Color(0XFFF8E8CF);
   static const amber = Color(0XFFFFC500);
+
+  static const String KEY_ISLOGIN = "isLogin";
 
   // static const primaryColor = Color(0XFF085078);
   // static const secondaryColor = Color(0XFFEFF3F6);
@@ -82,6 +85,26 @@ class Utils {
         left: AppUIConst.safeBlockHorizontal * 3,
         right: AppUIConst.safeBlockHorizontal * 3,
       ),
+    );
+  }
+
+  Future<dynamic> showDialog(
+    String title,
+    String msg,
+    Function()? onConfirm,
+  ) async {
+    return await Get.defaultDialog(
+      title: "Alert",
+      middleText: "Are you sure you want to delete the book?",
+      barrierDismissible: false,
+      radius: 10,
+      buttonColor: Utils.primaryColor,
+      onCancel: null,
+      onConfirm: onConfirm,
+      textCancel: "No",
+      textConfirm: "Yes",
+      cancelTextColor: Utils.primaryColor,
+      confirmTextColor: Utils.white,
     );
   }
 

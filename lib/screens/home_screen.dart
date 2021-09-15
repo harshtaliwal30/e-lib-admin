@@ -311,23 +311,13 @@ class HomeScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () async {
-                    var result = await Get.defaultDialog(
-                      title: "Alert",
-                      middleText: "Are you sure you want to delete the book?",
-                      barrierDismissible: false,
-                      radius: 10,
-                      buttonColor: Utils.primaryColor,
-                      onCancel: () {
-                        Get.back();
-                      },
-                      onConfirm: () {
+                    var result = await Utils().showDialog(
+                      "Alert",
+                      "Are you sure you want to delete the book?",
+                      () {
                         _homePageController.deleteBook(_homePageController.booksDataList[index].bookDocId);
                         Get.back(result: "deleted");
                       },
-                      textCancel: "No",
-                      textConfirm: "Yes",
-                      cancelTextColor: Utils.primaryColor,
-                      confirmTextColor: Utils.white,
                     );
                     if (result == "deleted") {
                       Utils().showConfirmSnackbar("Book deleted successfully");

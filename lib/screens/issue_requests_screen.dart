@@ -58,14 +58,41 @@ class IssueRequestsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Utils().getWithPadding(
-              Utils().getText(
-                _homePageController.booksDataList[index].bookName,
-                fontSize: AppUIConst.baseFontSize * 4,
-              ),
-              top: AppUIConst.safeBlockVertical * 1,
-              right: AppUIConst.safeBlockHorizontal * 3,
-              left: AppUIConst.safeBlockHorizontal * 3,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Utils().getWithPadding(
+                  Utils().getText(
+                    _homePageController.booksDataList[index].bookName,
+                    fontSize: AppUIConst.baseFontSize * 4,
+                  ),
+                  top: AppUIConst.safeBlockVertical * 1,
+                  right: AppUIConst.safeBlockHorizontal * 3,
+                  left: AppUIConst.safeBlockHorizontal * 3,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Utils.green.withOpacity(0.2),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppUIConst.safeBlockHorizontal * 2,
+                    vertical: AppUIConst.safeBlockVertical * 0.1,
+                  ),
+                  margin: EdgeInsets.only(
+                    right: AppUIConst.safeBlockHorizontal * 3,
+                    top: AppUIConst.safeBlockVertical * 1,
+                  ),
+                  child: Utils().getText(
+                    "₹" + _homePageController.booksDataList[index].price.toString(),
+                    color: Utils.green,
+                    fontWeight: FontWeight.bold,
+                    fontSize: AppUIConst.baseFontSize * 3.2,
+                  ),
+                ),
+              ],
             ),
             Utils().getWithPadding(
               Utils().getText(
@@ -76,26 +103,16 @@ class IssueRequestsScreen extends StatelessWidget {
               right: AppUIConst.safeBlockHorizontal * 3,
               left: AppUIConst.safeBlockHorizontal * 3,
             ),
-            Utils().getWithPadding(
-              Utils().getText(
-                "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
-                color: Utils.primaryColor,
-                fontSize: AppUIConst.baseFontSize * 3,
-              ),
-              top: AppUIConst.safeBlockVertical * 0.3,
-              bottom: AppUIConst.safeBlockVertical * 0.3,
-              left: AppUIConst.safeBlockHorizontal * 3,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Utils().getWithPadding(
                   Utils().getText(
-                    "₹" + _homePageController.booksDataList[index].price.toString(),
-                    color: Utils.green,
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppUIConst.baseFontSize * 3.2,
+                    "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
+                    color: Utils.primaryColor,
+                    fontSize: AppUIConst.baseFontSize * 3,
                   ),
+                  top: AppUIConst.safeBlockVertical * 0.3,
                   left: AppUIConst.safeBlockHorizontal * 3,
                 ),
                 Utils().getWithPadding(
@@ -145,7 +162,18 @@ class IssueRequestsScreen extends StatelessWidget {
                       Radius.circular(20),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    var result = await Utils().showDialog(
+                      "Alert",
+                      "Are you sure you want to decline the request",
+                      // () {
+                      //   // Get.back();
+                      // },
+                      () {
+                        // Get.back();
+                      },
+                    );
+                  },
                   child: Utils().getText(
                     "Decline",
                     color: Utils.red,
@@ -166,9 +194,17 @@ class IssueRequestsScreen extends StatelessWidget {
                     ),
                   ),
                   color: Utils.blue,
-                  onPressed: () {},
+                  onPressed: () async {
+                    var result = await Utils().showDialog(
+                      "Alert",
+                      "Are you sure you want to approve the request",
+                      () {
+                        Get.back();
+                      },
+                    );
+                  },
                   child: Utils().getText(
-                    "Accept",
+                    "Approve",
                     color: Utils.white,
                     fontSize: AppUIConst.baseFontSize * 3.5,
                   ),
