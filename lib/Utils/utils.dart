@@ -131,9 +131,11 @@ class Utils {
     Color color = Utils.primaryColor,
     double fontSize = 16.0,
     FontWeight fontWeight = FontWeight.normal,
+    TextAlign textAlign = TextAlign.start,
   }) {
     return Text(
       content,
+      textAlign: textAlign,
       overflow: TextOverflow.ellipsis,
       softWrap: true,
       style: TextStyle(
