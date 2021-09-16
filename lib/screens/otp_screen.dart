@@ -1,10 +1,11 @@
-import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  final TextEditingController phoneController = new TextEditingController();
+class OTPScreen extends StatelessWidget {
+  final TextEditingController otpController = new TextEditingController();
+  final phoneNumber;
+  OTPScreen({@required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +20,26 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
             child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Utils().getWithPadding(
                   Utils().getText(
-                    "Please enter your Phone Number",
+                    "Verify Phone",
                     fontSize: AppUIConst.baseFontSize * 4.5,
                   ),
                   left: AppUIConst.safeBlockHorizontal * 4,
                   right: AppUIConst.safeBlockHorizontal * 4,
                   top: AppUIConst.safeBlockVertical * 8,
+                  bottom: AppUIConst.safeBlockVertical * 4,
+                ),
+                Utils().getWithPadding(
+                  Utils().getText(
+                    "Code is sent to " + phoneNumber,
+                    color: Utils.darkGrey,
+                    textAlign: TextAlign.center,
+                    fontSize: AppUIConst.baseFontSize * 4,
+                  ),
+                  left: AppUIConst.safeBlockHorizontal * 4,
+                  right: AppUIConst.safeBlockHorizontal * 4,
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(
@@ -42,28 +53,14 @@ class LoginScreen extends StatelessWidget {
                 ),
                 Utils().getWithPadding(
                   Utils().getText(
-                    "You'll recieve a 6 digit code\nto verify next.",
+                    "Didn't recieve code? Request again",
                     color: Utils.darkGrey,
                     textAlign: TextAlign.center,
                     fontSize: AppUIConst.baseFontSize * 4,
                   ),
                   left: AppUIConst.safeBlockHorizontal * 4,
                   right: AppUIConst.safeBlockHorizontal * 4,
-                ),
-                Row(
-                  children: [
-                    Utils().getWithPadding(
-                      Utils().getText(
-                        "Enter your phone",
-                        color: Utils.darkGrey,
-                        fontSize: AppUIConst.baseFontSize * 3.6,
-                      ),
-                      left: AppUIConst.safeBlockHorizontal * 4,
-                      right: AppUIConst.safeBlockHorizontal * 4,
-                      top: AppUIConst.safeBlockVertical * 2,
-                      bottom: AppUIConst.safeBlockVertical * 1,
-                    ),
-                  ],
+                  bottom: AppUIConst.safeBlockVertical * 4,
                 ),
                 Utils().getWithPadding(
                   phoneField(),
@@ -73,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                 Utils().getWithPadding(
                   getButton(),
                   top: AppUIConst.safeBlockVertical * 4,
-                  left: AppUIConst.screenWidth / 2.5,
+                  left: AppUIConst.screenWidth / 3.5,
                   right: AppUIConst.safeBlockHorizontal * 4,
                 ),
               ],
@@ -89,17 +86,16 @@ class LoginScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Utils().getText(
-          "+91",
+          "Enter OTP:  ",
           color: Utils.grey,
-          fontSize: AppUIConst.baseFontSize * 5,
+          fontSize: AppUIConst.baseFontSize * 4.5,
         ),
-        SizedBox(width: 10),
         Expanded(
           child: TextField(
-            controller: phoneController,
+            controller: otpController,
             cursorColor: Utils.primaryColor,
             keyboardType: TextInputType.phone,
-            maxLength: 10,
+            maxLength: 6,
             style: TextStyle(
               color: Utils.primaryColor,
               fontSize: AppUIConst.baseFontSize * 5.0,
@@ -126,11 +122,11 @@ class LoginScreen extends StatelessWidget {
   Widget getButton() {
     return InkWell(
       onTap: () async {
-        if (phoneController.text.length == 10) {
-          AppRoutes.moveToScreenWithArguments("/otpScreen", arguments: phoneController.text.toString());
-        } else {
-          Utils().showWarningSnackbar("Please enter valid phone number");
-        }
+        // if (phoneController.text.length == 10) {
+        //   AppRoutes.moveToScreenWithArguments("/otpScreen", arguments: phoneController.text);
+        // } else {
+        //   Utils().showWarningSnackbar("Please enter valid phone number");
+        // }
       },
       child: Container(
         alignment: Alignment.center,
@@ -145,7 +141,7 @@ class LoginScreen extends StatelessWidget {
           vertical: AppUIConst.safeBlockVertical * 1,
         ),
         child: Utils().getText(
-          "Get OTP",
+          "Verify and Create Account",
           color: Utils.white,
           fontWeight: FontWeight.bold,
           fontSize: AppUIConst.baseFontSize * 4.5,
