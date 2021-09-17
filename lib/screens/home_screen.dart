@@ -3,14 +3,14 @@ import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/add_book_controller.dart';
-import 'package:e_lib_admin/controllers/home_page_controller.dart';
+import 'package:e_lib_admin/controllers/home_screen_controller.dart';
 import 'package:e_lib_admin/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class HomeScreen extends StatelessWidget {
-  final HomePageController _homePageController = Get.put(HomePageController());
+  final HomeScreenController _homePageController = Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {

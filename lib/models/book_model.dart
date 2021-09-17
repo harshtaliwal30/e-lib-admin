@@ -8,7 +8,7 @@ class BookModel {
   int? quantity;
   String? category;
   String? libraryID;
-  String? timestamp;
+  DateTime? createdAt;
 
   BookModel({
     this.bookDocId,
@@ -20,7 +20,7 @@ class BookModel {
     this.quantity,
     this.category,
     this.libraryID,
-    this.timestamp,
+    this.createdAt,
   });
 
   BookModel.fromJson(Map<String, dynamic> json) {
@@ -33,7 +33,7 @@ class BookModel {
     quantity = json['quantity'];
     category = json['category'];
     libraryID = json['libraryID'];
-    timestamp = json['timestamp'];
+    createdAt = json['timestamp'];
   }
 
   Map<String, dynamic> toJson() {
@@ -46,7 +46,7 @@ class BookModel {
     data['quantity'] = this.quantity;
     data['category'] = this.category;
     data['libraryID'] = this.libraryID;
-    data['timestamp'] = this.timestamp;
+    data['timestamp'] = this.createdAt;
     return data;
   }
 }
