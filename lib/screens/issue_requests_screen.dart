@@ -1,13 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
-import 'package:e_lib_admin/controllers/home_page_controller.dart';
+import 'package:e_lib_admin/controllers/home_screen_controller.dart';
 import 'package:e_lib_admin/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class IssueRequestsScreen extends StatelessWidget {
-  final HomePageController _homePageController = Get.find();
+  final HomeScreenController _homePageController = Get.find();
 
   @override
   Widget build(BuildContext context) {

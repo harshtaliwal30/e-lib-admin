@@ -24,7 +24,7 @@ class AppRoutes {
     return [
       _page(splashScreenRoute, () => SplashScreen()),
       _page(loginScreenRoute, () => LoginScreen()),
-      _page(otpScreenRoute, () => OTPScreen(phoneNumber: Get.arguments)),
+      _page(otpScreenRoute, () => OTPScreen()),
       _page(homeScreenRoute, () => HomeScreen()),
       _page(issueRequestsScreenRoute, () => IssueRequestsScreen()),
       // GetPage(name: loginRoute, page: () => LoginScreen()),

@@ -25,7 +25,7 @@ class AddBookController extends GetxController {
       percentSecurity: double.parse(securityPercentController.text),
       quantity: int.parse(quantityController.text),
       libraryID: "m6PGEiB3niFyQi75uRHI",
-      timestamp: DateTime.now().toIso8601String(),
+      createdAt: DateTime.now(),
     );
 
     var data = bookModel.toJson();
@@ -49,7 +49,7 @@ class AddBookController extends GetxController {
       percentSecurity: double.parse(securityPercentController.text),
       quantity: int.parse(quantityController.text),
       libraryID: "m6PGEiB3niFyQi75uRHI",
-      timestamp: bookData.timestamp,
+      createdAt: bookData.createdAt,
     );
 
     var data = bookModel.toJson();

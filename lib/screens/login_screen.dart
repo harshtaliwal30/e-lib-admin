@@ -1,11 +1,12 @@
 import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController phoneController = new TextEditingController();
-
+  final LoginController _loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -91,18 +92,18 @@ class LoginScreen extends StatelessWidget {
         Utils().getText(
           "+91",
           color: Utils.grey,
-          fontSize: AppUIConst.baseFontSize * 5,
+          fontSize: AppUIConst.baseFontSize * 4.5,
         ),
         SizedBox(width: 10),
         Expanded(
           child: TextField(
-            controller: phoneController,
+            controller: _loginController.phoneController,
             cursorColor: Utils.primaryColor,
             keyboardType: TextInputType.phone,
             maxLength: 10,
             style: TextStyle(
               color: Utils.primaryColor,
-              fontSize: AppUIConst.baseFontSize * 5.0,
+              fontSize: AppUIConst.baseFontSize * 4.5,
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(
@@ -126,8 +127,9 @@ class LoginScreen extends StatelessWidget {
   Widget getButton() {
     return InkWell(
       onTap: () async {
-        if (phoneController.text.length == 10) {
-          AppRoutes.moveToScreenWithArguments("/otpScreen", arguments: phoneController.text.toString());
+        if (_loginController.phoneController.text.length == 10) {
+          AppRoutes.moveToScreen("/otpScreen");
+          _loginController.sendOTPMsg();
         } else {
           Utils().showWarningSnackbar("Please enter valid phone number");
         }
