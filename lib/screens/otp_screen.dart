@@ -168,12 +168,8 @@ class OTPScreen extends StatelessWidget {
 
   Widget getButton() {
     return InkWell(
-      onTap: () async {
-        // if (phoneController.text.length == 10) {
-        //   AppRoutes.moveToScreenWithArguments("/otpScreen", arguments: phoneController.text);
-        // } else {
-        //   Utils().showWarningSnackbar("Please enter valid phone number");
-        // }
+      onTap: () {
+        _loginController.checkOTP();
       },
       child: Container(
         alignment: Alignment.center,

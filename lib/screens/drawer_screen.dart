@@ -1,8 +1,11 @@
 import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -67,6 +70,19 @@ class DrawerScreen extends StatelessWidget {
                 )
               },
               isTrailing: true,
+            ),
+            getDrawerItem(
+              "Logout",
+              Icons.logout_rounded,
+              "/loginScreen",
+              () => {
+                Get.back(),
+                SharedPreferences.getInstance().then((onValue) {
+                  onValue.setBool(Utils.KEY_ISLOGIN, false);
+                  FirebaseAuth.instance.signOut();
+                  AppRoutes.moveOffAllScreen(AppRoutes.loginScreenRoute);
+                }),
+              },
             ),
           ],
         ),

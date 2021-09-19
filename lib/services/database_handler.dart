@@ -3,6 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DatabaseHandler {
   final databaseReference = FirebaseFirestore.instance;
 
+  Future<QuerySnapshot> checkUserAvailableUsingPhone(String phoneNumber) {
+    return databaseReference.collection("libraries").where("userPhone", isEqualTo: phoneNumber).get();
+  }
+
+  Future<String?> addUser(var data) async {
+    String? libraryId;
+    await databaseReference.collection('libraries').add(data).then((value) {
+      libraryId = value.id;
+    });
+    return libraryId;
+  }
+
   Future<QuerySnapshot> fetchBooks() {
     return databaseReference.collection('books').where('libraryID', isEqualTo: 'm6PGEiB3niFyQi75uRHI').get();
   }

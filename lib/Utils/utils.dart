@@ -18,6 +18,11 @@ class Utils {
   static const amber = Color(0XFFFFC500);
 
   static const String KEY_ISLOGIN = "isLogin";
+  static const String KEY_LIBRARYID = "libraryId";
+  static const String KEY_LIBRARYNAME = "libraryName";
+  static const String KEY_LIBRARYEMAIL = "libraryEmail";
+  static const String KEY_LIBRARYPHONE = "libraryPhone";
+  static const String KEY_LIBRARYIMAGE = "libraryImage";
 
   // static const primaryColor = Color(0XFF085078);
   // static const secondaryColor = Color(0XFFEFF3F6);
