@@ -192,12 +192,12 @@ class AddBookScreen extends StatelessWidget {
                         vertical: AppUIConst.safeBlockVertical * 1.5,
                       ),
                       color: Utils.primaryColor,
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           if (bookData != null) {
-                            _addBookController.updateBook(bookData);
+                            await _addBookController.updateBook(bookData);
                           } else {
-                            _addBookController.addBook();
+                            await _addBookController.addBook();
                           }
                         }
                       },

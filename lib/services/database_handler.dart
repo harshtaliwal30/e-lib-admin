@@ -19,8 +19,12 @@ class DatabaseHandler {
     return databaseReference.collection('books').where('libraryID', isEqualTo: libraryId).orderBy("createdAt", descending: true).get();
   }
 
-  Future<void> addBook(var data) async {
-    await databaseReference.collection('books').add(data);
+  Future<String?> addBook(var data) async {
+    String? bookDocId;
+    await databaseReference.collection('books').add(data).then((value) {
+      bookDocId = value.id;
+    });
+    return bookDocId;
   }
 
   Future<void> updateBook(var data, String? id) async {
