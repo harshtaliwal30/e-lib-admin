@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                           onTap: () async {
                             var result = await AppRoutes.openAddBookBottomSheet();
                             Get.delete<AddBookController>();
-                            if (result['status'] == "bookAdded") {
+                            if (result != null && result['status'] == "bookAdded") {
                               Utils().showConfirmSnackbar("Book added successfully");
                               _homePageController.booksDataList.insert(0, result['bookData']);
                             }
@@ -291,17 +291,17 @@ class HomeScreen extends StatelessWidget {
                   onTap: () async {
                     var result = await AppRoutes.openAddBookBottomSheet(bookData: _homePageController.booksDataList[index]);
                     Get.delete<AddBookController>();
-                    if (result['status'] == "bookUpdated") {
+                    if (result != null && result['status'] == "bookUpdated") {
                       Utils().showConfirmSnackbar("Book details updated");
                       _homePageController.booksDataList[index] = result['bookData'];
                     }
                   },
                   child: CircleAvatar(
                     radius: 15,
-                    backgroundColor: Utils.blue,
+                    backgroundColor: Utils.blue.withOpacity(0.7),
                     child: Icon(
                       Icons.edit,
-                      size: AppUIConst.iconExamHeightAndWidth * 0.6,
+                      size: AppUIConst.iconExamHeightAndWidth * 0.5,
                       color: Utils.white,
                     ),
                   ),
@@ -321,15 +321,15 @@ class HomeScreen extends StatelessWidget {
                     );
                     if (result == "deleted") {
                       Utils().showConfirmSnackbar("Book deleted successfully");
-                      _homePageController.fetchBooks();
+                      _homePageController.booksDataList.removeAt(index);
                     }
                   },
                   child: CircleAvatar(
                     radius: 15,
-                    backgroundColor: Utils.red,
+                    backgroundColor: Utils.red.withOpacity(0.7),
                     child: Icon(
                       Icons.delete,
-                      size: AppUIConst.iconExamHeightAndWidth * 0.6,
+                      size: AppUIConst.iconExamHeightAndWidth * 0.5,
                       color: Utils.white,
                     ),
                   ),
