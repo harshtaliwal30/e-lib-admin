@@ -80,9 +80,9 @@ class HomeScreen extends StatelessWidget {
                           onTap: () async {
                             var result = await AppRoutes.openAddBookBottomSheet();
                             Get.delete<AddBookController>();
-                            if (result == "bookAdded") {
+                            if (result['status'] == "bookAdded") {
                               Utils().showConfirmSnackbar("Book added successfully");
-                              _homePageController.fetchBooks();
+                              _homePageController.booksDataList.insert(0, result['bookData']);
                             }
                           },
                           child: Container(
@@ -291,9 +291,9 @@ class HomeScreen extends StatelessWidget {
                   onTap: () async {
                     var result = await AppRoutes.openAddBookBottomSheet(bookData: _homePageController.booksDataList[index]);
                     Get.delete<AddBookController>();
-                    if (result == "bookUpdated") {
+                    if (result['status'] == "bookUpdated") {
                       Utils().showConfirmSnackbar("Book details updated");
-                      _homePageController.fetchBooks();
+                      _homePageController.booksDataList[index] = result['bookData'];
                     }
                   },
                   child: CircleAvatar(

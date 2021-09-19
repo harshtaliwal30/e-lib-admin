@@ -31,7 +31,10 @@ class AddBookController extends GetxController {
     var data = bookModel.toJson();
     DatabaseHandler().addBook(data).then((value) {
       Get.back();
-      Get.back(result: "bookAdded");
+      Get.back(result: {
+        "status": "bookAdded",
+        "bookData": bookModel,
+      });
     });
   }
 
@@ -55,7 +58,10 @@ class AddBookController extends GetxController {
     var data = bookModel.toJson();
     DatabaseHandler().updateBook(data, bookData.bookDocId).then((value) {
       Get.back();
-      Get.back(result: "bookUpdated");
+      Get.back(result: {
+        "status": "bookUpdated",
+        "bookData": bookModel,
+      });
     });
   }
 }

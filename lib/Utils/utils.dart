@@ -113,6 +113,16 @@ class Utils {
     );
   }
 
+  Future<dynamic> showLoader() async {
+    return await Get.defaultDialog(
+      title: "Loading...",
+      titleStyle: TextStyle(fontSize: AppUIConst.baseFontSize * 4),
+      radius: 10,
+      content: Container(height: 30, width: 30, child: CircularProgressIndicator()),
+      barrierDismissible: false,
+    );
+  }
+
   Padding getWithPadding(
     Widget child, {
     double left = 0.0,

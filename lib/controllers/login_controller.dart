@@ -27,8 +27,7 @@ class LoginController extends GetxController {
   }
 
   sendOTPMsg() async {
-    Get.defaultDialog(content: CircularProgressIndicator(), barrierDismissible: false);
-
+    Utils().showLoader();
     _auth.verifyPhoneNumber(
       phoneNumber: "+91" + phoneController.text,
       timeout: Duration(seconds: 60),
@@ -66,7 +65,7 @@ class LoginController extends GetxController {
   checkOTP() async {
     if (otpController.text.length == 6) {
       if (verificationID != null) {
-        Get.defaultDialog(content: CircularProgressIndicator(), barrierDismissible: false);
+        Utils().showLoader();
         AuthCredential credential = PhoneAuthProvider.credential(
           verificationId: this.verificationID!,
           smsCode: otpController.text,
@@ -96,21 +95,15 @@ class LoginController extends GetxController {
       if (value.docs.length > 0) {
         ///If the user has registered
         value.docs.forEach((docSnap) async {
-          var userDocument = docSnap.data() as dynamic;
+          var libraryData = docSnap.data() as dynamic;
+          LibraryModel libraryModel = LibraryModel.fromJson(libraryData);
           SharedPreferences.getInstance().then((pref) {
-            pref.setString(Utils.KEY_LIBRARYNAME, userDocument["libraryName"]);
-            pref.setString(Utils.KEY_LIBRARYIMAGE, userDocument["libraryImage"]);
-            pref.setString(Utils.KEY_LIBRARYEMAIL, userDocument["libraryEmail"]);
-            pref.setString(Utils.KEY_LIBRARYPHONE, userDocument["libraryPhone"]);
+            pref.setString(Utils.KEY_LIBRARYNAME, libraryModel.libraryName!);
+            pref.setString(Utils.KEY_LIBRARYIMAGE, libraryModel.libraryImage!);
+            pref.setString(Utils.KEY_LIBRARYEMAIL, libraryModel.libraryEmail!);
+            pref.setString(Utils.KEY_LIBRARYPHONE, libraryModel.libraryPhone!);
             pref.setString(Utils.KEY_LIBRARYID, docSnap.id);
             pref.setBool(Utils.KEY_ISLOGIN, true);
-            LibraryModel _libraryModel = LibraryModel(
-              libraryName: null,
-              libraryImage: null,
-              libraryEmail: null,
-              libraryPhone: "+91" + phoneController.text,
-            );
-            var data = _libraryModel.toJson();
             Get.back();
             AppRoutes.moveOffAllScreen(AppRoutes.homeScreenRoute);
           });

@@ -16,7 +16,7 @@ class DatabaseHandler {
   }
 
   Future<QuerySnapshot> fetchBooks() {
-    return databaseReference.collection('books').where('libraryID', isEqualTo: 'm6PGEiB3niFyQi75uRHI').get();
+    return databaseReference.collection('books').where('libraryID', isEqualTo: 'm6PGEiB3niFyQi75uRHI').orderBy("createdAt", descending: true).get();
   }
 
   Future<void> addBook(var data) async {
