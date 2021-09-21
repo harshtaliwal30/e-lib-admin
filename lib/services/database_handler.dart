@@ -4,7 +4,7 @@ class DatabaseHandler {
   final databaseReference = FirebaseFirestore.instance;
 
   Future<QuerySnapshot> checkUserAvailableUsingPhone(String phoneNumber) {
-    return databaseReference.collection("libraries").where("userPhone", isEqualTo: phoneNumber).get();
+    return databaseReference.collection("libraries").where("libraryPhone", isEqualTo: phoneNumber).get();
   }
 
   Future<String?> addUser(var data) async {

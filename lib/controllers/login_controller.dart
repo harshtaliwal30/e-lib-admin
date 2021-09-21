@@ -56,6 +56,7 @@ class LoginController extends GetxController {
       codeAutoRetrievalTimeout: (String verId) {
         Get.back();
         startTimer();
+        otpController.clear();
         Utils().showWarningSnackbar("Something went wrong. Check your internet connection");
         print("Exception - TIMEOUT");
       },
@@ -98,10 +99,10 @@ class LoginController extends GetxController {
           var libraryData = docSnap.data() as dynamic;
           LibraryModel libraryModel = LibraryModel.fromJson(libraryData);
           SharedPreferences.getInstance().then((pref) {
-            pref.setString(Utils.KEY_LIBRARYNAME, libraryModel.libraryName!);
-            pref.setString(Utils.KEY_LIBRARYIMAGE, libraryModel.libraryImage!);
-            pref.setString(Utils.KEY_LIBRARYEMAIL, libraryModel.libraryEmail!);
-            pref.setString(Utils.KEY_LIBRARYPHONE, libraryModel.libraryPhone!);
+            pref.setString(Utils.KEY_LIBRARYNAME, libraryModel.libraryName == null ? "" : libraryModel.libraryName!);
+            pref.setString(Utils.KEY_LIBRARYIMAGE, libraryModel.libraryImage == null ? "" : libraryModel.libraryImage!);
+            pref.setString(Utils.KEY_LIBRARYEMAIL, libraryModel.libraryEmail == null ? "" : libraryModel.libraryEmail!);
+            pref.setString(Utils.KEY_LIBRARYPHONE, libraryModel.libraryPhone == null ? "" : libraryModel.libraryPhone!);
             pref.setString(Utils.KEY_LIBRARYID, docSnap.id);
             pref.setBool(Utils.KEY_ISLOGIN, true);
             Get.back();
