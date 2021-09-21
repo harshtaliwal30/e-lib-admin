@@ -300,7 +300,7 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: CircleAvatar(
                     radius: 15,
-                    backgroundColor: Utils.blue.withOpacity(0.7),
+                    backgroundColor: Utils.blue,
                     child: Icon(
                       Icons.edit,
                       size: AppUIConst.iconExamHeightAndWidth * 0.5,
@@ -328,7 +328,7 @@ class HomeScreen extends StatelessWidget {
                   },
                   child: CircleAvatar(
                     radius: 15,
-                    backgroundColor: Utils.red.withOpacity(0.7),
+                    backgroundColor: Utils.red,
                     child: Icon(
                       Icons.delete,
                       size: AppUIConst.iconExamHeightAndWidth * 0.5,
