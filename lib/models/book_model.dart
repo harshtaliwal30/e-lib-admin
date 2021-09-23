@@ -7,7 +7,7 @@ class BookModel {
   double? percentSecurity;
   int? quantity;
   String? category;
-  String? libraryID;
+  String? libraryId;
   DateTime? createdAt;
 
   BookModel({
@@ -19,7 +19,7 @@ class BookModel {
     this.percentSecurity,
     this.quantity,
     this.category,
-    this.libraryID,
+    this.libraryId,
     this.createdAt,
   });
 
@@ -32,7 +32,7 @@ class BookModel {
     percentSecurity = json['percentSecurity'].toDouble();
     quantity = json['quantity'];
     category = json['category'];
-    libraryID = json['libraryID'];
+    libraryId = json['libraryID'];
     createdAt = json['createdAt'].toDate();
   }
 
@@ -45,7 +45,7 @@ class BookModel {
     data['percentSecurity'] = this.percentSecurity;
     data['quantity'] = this.quantity;
     data['category'] = this.category;
-    data['libraryID'] = this.libraryID;
+    data['libraryID'] = this.libraryId;
     data['createdAt'] = this.createdAt;
     return data;
   }

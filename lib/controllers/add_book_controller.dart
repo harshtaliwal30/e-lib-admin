@@ -27,7 +27,7 @@ class AddBookController extends GetxController {
         price: double.parse(priceController.text),
         percentSecurity: double.parse(securityPercentController.text),
         quantity: int.parse(quantityController.text),
-        libraryID: pref.getString(Utils.KEY_LIBRARYID),
+        libraryId: pref.getString(Utils.KEY_LIBRARYID),
         createdAt: DateTime.now(),
       );
       var data = bookModel.toJson();
@@ -54,7 +54,7 @@ class AddBookController extends GetxController {
       price: double.parse(priceController.text),
       percentSecurity: double.parse(securityPercentController.text),
       quantity: int.parse(quantityController.text),
-      libraryID: bookData.libraryID,
+      libraryId: bookData.libraryId,
       createdAt: bookData.createdAt,
     );
 
