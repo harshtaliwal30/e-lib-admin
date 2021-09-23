@@ -120,9 +120,6 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // SizedBox(
-                        //   height: 20,
-                        // ),
                         Container(
                           decoration: BoxDecoration(
                             color: Utils.primaryColor,
@@ -135,23 +132,59 @@ class HomeScreen extends StatelessWidget {
                             vertical: AppUIConst.safeBlockVertical * 1.5,
                           ),
                           padding: EdgeInsets.all(
-                            AppUIConst.safeBlockHorizontal * 2,
+                            AppUIConst.safeBlockHorizontal * 4,
                           ),
                           height: AppUIConst.screenHeight / 7,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Utils().getText(
-                                "Add Book\nIssue Request",
-                                color: Utils.grey,
-                                fontSize: AppUIConst.baseFontSize * 4,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      _homePageController.addBookBottomSheet();
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Utils().getChipView("+", color: Colors.purple.shade300),
+                                        SizedBox(width: 5),
+                                        Utils().getText(
+                                          "Add Book",
+                                          color: Colors.purple.shade300,
+                                          fontSize: AppUIConst.baseFontSize * 4,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  InkWell(
+                                    onTap: () {
+                                      AppRoutes.moveToScreen(
+                                        "/issueRequestsScreen",
+                                      );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Utils().getChipView("22", color: Colors.blue.shade300),
+                                        SizedBox(width: 5),
+                                        Utils().getText(
+                                          "Issue Requests",
+                                          color: Colors.blue,
+                                          fontSize: AppUIConst.baseFontSize * 4,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                               ClipRRect(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                                 ),
                                 child: Image.asset(
-                                  "assets/images/home.jpeg",
+                                  "assets/images/home.png",
                                   height: AppUIConst.screenHeight / 10,
                                 ),
                               ),

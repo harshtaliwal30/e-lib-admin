@@ -102,26 +102,7 @@ class DrawerScreen extends StatelessWidget {
           leadingIcon,
           color: Get.currentRoute == route ? Utils.white : Utils.grey,
         ),
-        trailing: isTrailing
-            ? Container(
-                decoration: BoxDecoration(
-                  color: Utils.red.withOpacity(0.2),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppUIConst.safeBlockHorizontal * 2,
-                  vertical: AppUIConst.safeBlockVertical * 0.1,
-                ),
-                child: Utils().getText(
-                  "23",
-                  color: Utils.red,
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppUIConst.baseFontSize * 2.9,
-                ),
-              )
-            : null,
+        trailing: isTrailing ? Utils().getChipView("22") : null,
         horizontalTitleGap: 0.0,
         title: Utils().getText(
           title,

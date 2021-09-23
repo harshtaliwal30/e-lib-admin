@@ -160,4 +160,28 @@ class Utils {
       ),
     );
   }
+
+  Widget getChipView(
+    String value, {
+    Color color = Utils.red,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.2),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppUIConst.safeBlockHorizontal * 2,
+        vertical: AppUIConst.safeBlockVertical * 0.1,
+      ),
+      child: Utils().getText(
+        value,
+        color: color,
+        fontWeight: FontWeight.bold,
+        fontSize: AppUIConst.baseFontSize * 2.9,
+      ),
+    );
+  }
 }
