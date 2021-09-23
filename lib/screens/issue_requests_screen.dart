@@ -4,6 +4,7 @@ import 'package:e_lib_admin/controllers/issue_request_controller.dart';
 import 'package:e_lib_admin/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class IssueRequestsScreen extends StatelessWidget {
   final IssueRequestController _issueRequestController = Get.put(IssueRequestController());
@@ -59,48 +60,47 @@ class IssueRequestsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Utils().getWithPadding(
-                Utils().getText(
-                  _issueRequestController.issueRequestList[index].bookName,
-                  color: Utils.white,
-                  fontSize: AppUIConst.baseFontSize * 3.7,
-                ),
-                top: AppUIConst.safeBlockVertical * 1,
-                right: AppUIConst.safeBlockHorizontal * 3,
-                left: AppUIConst.safeBlockHorizontal * 3,
-                bottom: AppUIConst.safeBlockVertical * 1,
-              ),
-              Utils().getWithPadding(
-                Utils().getText(
-                  _issueRequestController.issueRequestList[index].authorName,
-                  color: Utils.grey,
-                  fontSize: AppUIConst.baseFontSize * 3.2,
-                ),
-                top: AppUIConst.safeBlockVertical * 1,
-                right: AppUIConst.safeBlockHorizontal * 3,
-                bottom: AppUIConst.safeBlockVertical * 1,
-              ),
-            ],
+          Utils().getWithPadding(
+            Utils().getText(
+              _issueRequestController.issueRequestList[index].bookName,
+              color: Utils.white,
+              fontSize: AppUIConst.baseFontSize * 3.7,
+            ),
+            top: AppUIConst.safeBlockVertical * 1,
+            right: AppUIConst.safeBlockHorizontal * 3,
+            left: AppUIConst.safeBlockHorizontal * 3,
           ),
-          if (_issueRequestController.issueRequestList[index].status == "Pending") getStatusView("Pending"),
-          if (_issueRequestController.issueRequestList[index].status == "Confirmed") ...[
-            getStatusView("Pending"),
-            getStatusView("Approved"),
+          Utils().getWithPadding(
+            Utils().getText(
+              _issueRequestController.issueRequestList[index].authorName,
+              color: Utils.grey,
+              fontSize: AppUIConst.baseFontSize * 3.2,
+            ),
+            right: AppUIConst.safeBlockHorizontal * 3,
+            left: AppUIConst.safeBlockHorizontal * 3,
+            bottom: AppUIConst.safeBlockVertical * 1,
+          ),
+          if (_issueRequestController.issueRequestList[index].status == "Pending") ...[
+            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
+          ],
+          if (_issueRequestController.issueRequestList[index].status == "Approved") ...[
+            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
+            getStatusView("Approved", _issueRequestController.issueRequestList[index].approvedAt),
           ],
           if (_issueRequestController.issueRequestList[index].status == "Issued") ...[
-            getStatusView("Pending"),
-            getStatusView("Approved"),
-            getStatusView("Issued"),
+            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
+            getStatusView("Approved", _issueRequestController.issueRequestList[index].approvedAt),
+            getStatusView("Issued", _issueRequestController.issueRequestList[index].issuedAt),
           ],
           if (_issueRequestController.issueRequestList[index].status == "Returned") ...[
-            getStatusView("Pending"),
-            getStatusView("Approved"),
-            getStatusView("Issued"),
-            getStatusView("Returned"),
+            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
+            getStatusView("Approved", _issueRequestController.issueRequestList[index].approvedAt),
+            getStatusView("Issued", _issueRequestController.issueRequestList[index].issuedAt),
+            getStatusView("Returned", _issueRequestController.issueRequestList[index].returnedAt),
           ],
+          SizedBox(
+            height: 5,
+          ),
           Divider(
             height: 0,
             color: Utils.grey,
@@ -169,20 +169,33 @@ class IssueRequestsScreen extends StatelessWidget {
     );
   }
 
-  Widget getStatusView(String status) {
+  Widget getStatusView(String status, DateTime date) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Utils().getWithPadding(
-          Utils().getChipView("◉", color: Utils.green),
+          Column(
+            children: [
+              Utils().getChipView("◉", color: Utils.green),
+              Container(
+                color: Utils.green.withOpacity(0.6),
+                width: 0.5,
+                height: 8,
+              ),
+            ],
+          ),
           left: AppUIConst.safeBlockHorizontal * 3,
           right: AppUIConst.safeBlockHorizontal * 1,
-          bottom: AppUIConst.safeBlockVertical * 1,
         ),
         Utils().getText(
-          status,
+          status + " - ",
           color: Utils.green,
           fontSize: AppUIConst.baseFontSize * 3,
+        ),
+        Utils().getText(
+          DateFormat.yMMMEd().format(date).toString(),
+          color: Utils.green,
+          fontSize: AppUIConst.baseFontSize * 2.9,
         ),
       ],
     );

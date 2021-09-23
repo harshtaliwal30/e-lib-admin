@@ -5,7 +5,8 @@ class IssueRequestModel {
   String? status;
   String? userId;
   DateTime? createdAt;
-  DateTime? confirmedAt;
+  DateTime? approvedAt;
+  DateTime? issuedAt;
   DateTime? returnedAt;
 
   IssueRequestModel({
@@ -15,7 +16,8 @@ class IssueRequestModel {
     this.status,
     this.userId,
     this.createdAt,
-    this.confirmedAt,
+    this.approvedAt,
+    this.issuedAt,
     this.returnedAt,
   });
 
@@ -26,7 +28,8 @@ class IssueRequestModel {
     status = json['status'];
     userId = json['userId'];
     createdAt = json['createdAt'].toDate();
-    confirmedAt = json['confirmedAt'].toDate();
+    approvedAt = json['approvedAt'].toDate();
+    issuedAt = json['issuedAt'].toDate();
     returnedAt = json['returnedAt'].toDate();
   }
 
@@ -38,7 +41,8 @@ class IssueRequestModel {
     data['status'] = this.status;
     data['userId'] = this.userId;
     data['createdAt'] = this.createdAt;
-    data['confirmedAt'] = this.confirmedAt;
+    data['approvedAt'] = this.approvedAt;
+    data['issuedAt'] = this.issuedAt;
     data['returnedAt'] = this.returnedAt;
     return data;
   }
