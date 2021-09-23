@@ -80,12 +80,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () async {
-                                var result = await AppRoutes.openAddBookBottomSheet();
-                                Get.delete<AddBookController>();
-                                if (result != null && result['status'] == "bookAdded") {
-                                  Utils().showConfirmSnackbar("Book added successfully");
-                                  _homePageController.booksDataList.insert(0, result['bookData']);
-                                }
+                                _homePageController.addBookBottomSheet();
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -125,8 +120,43 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
+                        // SizedBox(
+                        //   height: 20,
+                        // ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Utils.primaryColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          margin: EdgeInsets.symmetric(
+                            horizontal: AppUIConst.safeBlockHorizontal * 2,
+                            vertical: AppUIConst.safeBlockVertical * 1.5,
+                          ),
+                          padding: EdgeInsets.all(
+                            AppUIConst.safeBlockHorizontal * 2,
+                          ),
+                          height: AppUIConst.screenHeight / 7,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Utils().getText(
+                                "Add Book\nIssue Request",
+                                color: Utils.grey,
+                                fontSize: AppUIConst.baseFontSize * 4,
+                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                child: Image.asset(
+                                  "assets/images/home.jpeg",
+                                  height: AppUIConst.screenHeight / 10,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         ListView.builder(
                           itemCount: _homePageController.booksDataList.length,
@@ -291,12 +321,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () async {
-                    var result = await AppRoutes.openAddBookBottomSheet(bookData: _homePageController.booksDataList[index]);
-                    Get.delete<AddBookController>();
-                    if (result != null && result['status'] == "bookUpdated") {
-                      Utils().showConfirmSnackbar("Book details updated");
-                      _homePageController.booksDataList[index] = result['bookData'];
-                    }
+                    _homePageController.editBookBottomSheet(index);
                   },
                   child: CircleAvatar(
                     radius: 15,
@@ -367,12 +392,7 @@ class NoBooksView extends HomeScreen {
           ),
           InkWell(
             onTap: () async {
-              var result = await AppRoutes.openAddBookBottomSheet();
-              Get.delete<AddBookController>();
-              if (result != null && result['status'] == "bookAdded") {
-                Utils().showConfirmSnackbar("Book added successfully");
-                _homePageController.booksDataList.insert(0, result['bookData']);
-              }
+              _homePageController.addBookBottomSheet();
             },
             child: CircleAvatar(
               radius: 30,

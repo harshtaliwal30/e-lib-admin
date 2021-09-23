@@ -1,4 +1,6 @@
+import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/controllers/add_book_controller.dart';
 import 'package:e_lib_admin/models/book_model.dart';
 import 'package:e_lib_admin/services/database_handler.dart';
 import 'package:get/get.dart';
@@ -28,6 +30,24 @@ class HomeScreenController extends GetxController {
         isLoading(false);
       });
     });
+  }
+
+  void addBookBottomSheet() async {
+    var result = await AppRoutes.openAddBookBottomSheet();
+    Get.delete<AddBookController>();
+    if (result != null && result['status'] == "bookAdded") {
+      Utils().showConfirmSnackbar("Book added successfully");
+      booksDataList.insert(0, result['bookData']);
+    }
+  }
+
+  void editBookBottomSheet(int index) async {
+    var result = await AppRoutes.openAddBookBottomSheet(bookData: booksDataList[index]);
+    Get.delete<AddBookController>();
+    if (result != null && result['status'] == "bookUpdated") {
+      Utils().showConfirmSnackbar("Book details updated");
+      booksDataList[index] = result['bookData'];
+    }
   }
 
   void deleteBook(String id) async {

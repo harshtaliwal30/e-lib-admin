@@ -13,7 +13,7 @@ class Utils {
   static const darkGrey = Color(0XFF5b5b5b);
   static const errorColor = Color(0xFFFF0000);
   static const blue = Color(0xFF7894FF);
-  static const primaryColor = Color(0XFF2F3044);
+  static const primaryColor = Color(0XFF2C3848);
   static const whip = Color(0XFFF8E8CF);
   static const amber = Color(0XFFFFC500);
 
