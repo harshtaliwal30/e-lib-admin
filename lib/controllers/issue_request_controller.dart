@@ -10,11 +10,11 @@ class IssueRequestController extends GetxController {
 
   @override
   void onInit() {
-    fetchBooks();
+    fetchIssueRequests();
     super.onInit();
   }
 
-  void fetchBooks() {
+  void fetchIssueRequests() {
     issueRequestList.clear();
     SharedPreferences.getInstance().then((pref) {
       DatabaseHandler().fetchIssueRequests(pref.getString(Utils.KEY_LIBRARYID)).then((value) {

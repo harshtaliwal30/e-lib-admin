@@ -6,6 +6,7 @@ class Utils {
   static const white = Colors.white;
   static const black = Colors.black;
   static const grey = Colors.grey;
+  static const purple = Colors.purple;
   static const lightBgColor = Color(0XFFEFF3F6);
   static const red = Colors.red;
   static const green = Color(0xFF66B032);
@@ -174,7 +175,7 @@ class Utils {
       ),
       padding: EdgeInsets.symmetric(
         horizontal: AppUIConst.safeBlockHorizontal * 2,
-        vertical: AppUIConst.safeBlockVertical * 0.1,
+        vertical: AppUIConst.safeBlockVertical * 0.05,
       ),
       child: Utils().getText(
         value,
