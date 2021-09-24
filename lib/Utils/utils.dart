@@ -100,8 +100,8 @@ class Utils {
     Function()? onConfirm,
   ) async {
     return await Get.defaultDialog(
-      title: "Alert",
-      middleText: "Are you sure you want to delete the book?",
+      title: title,
+      middleText: msg,
       barrierDismissible: false,
       radius: 10,
       buttonColor: Utils.primaryColor,

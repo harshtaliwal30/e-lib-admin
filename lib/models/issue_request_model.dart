@@ -1,4 +1,5 @@
 class IssueRequestModel {
+  String? docId;
   String? authorName;
   String? bookName;
   String? libraryId;
@@ -10,6 +11,7 @@ class IssueRequestModel {
   DateTime? returnedAt;
 
   IssueRequestModel({
+    this.docId,
     this.authorName,
     this.bookName,
     this.libraryId,
@@ -22,6 +24,7 @@ class IssueRequestModel {
   });
 
   IssueRequestModel.fromJson(Map<String, dynamic> json) {
+    docId = json['docId'];
     authorName = json['authorName'];
     bookName = json['bookName'];
     libraryId = json['libraryId'];
@@ -35,6 +38,7 @@ class IssueRequestModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['docId'] = this.docId;
     data['authorName'] = this.authorName;
     data['bookName'] = this.bookName;
     data['libraryId'] = this.libraryId;

@@ -23,6 +23,10 @@ class DatabaseHandler {
     return databaseReference.collection('issueRequests').where('libraryId', isEqualTo: libraryId).orderBy("createdAt", descending: true).get();
   }
 
+  Future<void> updateIssueRequest(var data) async {
+    return databaseReference.collection('issueRequests').doc(data['docId']).update(data);
+  }
+
   Future<String?> addBook(var data) async {
     String? bookDocId;
     await databaseReference.collection('books').add(data).then((value) {

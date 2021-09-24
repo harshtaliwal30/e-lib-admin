@@ -109,54 +109,52 @@ class IssueRequestsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+              if (_issueRequestController.issueRequestList[index].status == "Pending") ...[
+                MaterialButton(
+                  onPressed: () async {
+                    var result = await Utils().showDialog(
+                      "Alert",
+                      "Are you sure you want to decline the request",
+                      // () {
+                      //   // Get.back();
+                      // },
+                      () {
+                        // Get.back();
+                      },
+                    );
+                  },
+                  child: Utils().getText(
+                    "Decline",
+                    color: Utils.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: AppUIConst.baseFontSize * 3.5,
                   ),
                 ),
-                onPressed: () async {
-                  var result = await Utils().showDialog(
-                    "Alert",
-                    "Are you sure you want to decline the request",
-                    // () {
-                    //   // Get.back();
-                    // },
-                    () {
-                      // Get.back();
-                    },
-                  );
-                },
-                child: Utils().getText(
-                  "Decline",
-                  color: Utils.red,
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppUIConst.baseFontSize * 3.5,
+                Container(
+                  color: Utils.grey,
+                  width: 0.5,
+                  height: 25,
                 ),
-              ),
-              Container(
-                color: Utils.grey,
-                width: 0.5,
-                height: 25,
-              ),
+              ],
               MaterialButton(
-                elevation: 0.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                ),
                 onPressed: () async {
+                  String status = _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status);
+
                   var result = await Utils().showDialog(
                     "Alert",
-                    "Are you sure you want to approve the request",
+                    "Are you sure you want to mark the book as \"$status\"",
                     () {
-                      Get.back();
+                      _issueRequestController.issueRequestList[index].status = status;
+                      Get.back(result: "statusUpdated");
                     },
                   );
+                  if (result != null && result == "statusUpdated") {
+                    await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
+                    Utils().showConfirmSnackbar("Status updated successfully");
+                  }
                 },
                 child: Utils().getText(
-                  "Approve",
+                  "Mark as " + _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status),
                   color: Utils.green,
                   fontWeight: FontWeight.bold,
                   fontSize: AppUIConst.baseFontSize * 3.5,

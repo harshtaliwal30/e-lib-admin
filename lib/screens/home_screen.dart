@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
-import 'package:e_lib_admin/controllers/add_book_controller.dart';
 import 'package:e_lib_admin/controllers/home_screen_controller.dart';
 import 'package:e_lib_admin/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
@@ -380,7 +379,7 @@ class HomeScreen extends StatelessWidget {
                         Get.back(result: "deleted");
                       },
                     );
-                    if (result == "deleted") {
+                    if (result != null && result == "deleted") {
                       Utils().showConfirmSnackbar("Book deleted successfully");
                       _homePageController.booksDataList.removeAt(index);
                     }

@@ -1,7 +1,8 @@
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/models/issue_request_model.dart';
 import 'package:e_lib_admin/services/database_handler.dart';
-import 'package:get/state_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IssueRequestController extends GetxController {
@@ -20,7 +21,7 @@ class IssueRequestController extends GetxController {
       DatabaseHandler().fetchIssueRequests(pref.getString(Utils.KEY_LIBRARYID)).then((value) {
         value.docs.forEach((element) {
           Map<String, dynamic> docData = element.data() as dynamic;
-          docData["bookDocId"] = element.id;
+          docData["docId"] = element.id;
           IssueRequestModel issueRequestModel = IssueRequestModel.fromJson(docData);
           issueRequestList.add(issueRequestModel);
           isLoading(false);
@@ -28,5 +29,32 @@ class IssueRequestController extends GetxController {
         isLoading(false);
       });
     });
+  }
+
+  Future<void> updateIssueRequest(IssueRequestModel issueRequestModel, index) async {
+    Get.dialog(
+      Center(
+        child: CircularProgressIndicator(),
+      ),
+      barrierDismissible: false,
+    );
+
+    var data = issueRequestModel.toJson();
+    issueRequestList[index] = issueRequestModel;
+    await DatabaseHandler().updateIssueRequest(data).then((value) {
+      Get.back();
+    });
+  }
+
+  String getBtnText(String status) {
+    if (status == "Pending") {
+      return "Approved";
+    } else if (status == "Approved") {
+      return "Issued";
+    } else if (status == "Issued") {
+      return "Returned";
+    } else {
+      return "Book Returned";
+    }
   }
 }
