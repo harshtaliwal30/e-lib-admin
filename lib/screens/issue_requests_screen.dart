@@ -80,6 +80,9 @@ class IssueRequestsScreen extends StatelessWidget {
             left: AppUIConst.safeBlockHorizontal * 3,
             bottom: AppUIConst.safeBlockVertical * 1,
           ),
+          if (_issueRequestController.issueRequestList[index].status == "Declined") ...[
+            getStatusView("Declined", _issueRequestController.issueRequestList[index].declinedAt, color: Utils.red),
+          ],
           if (_issueRequestController.issueRequestList[index].status == "Pending") ...[
             getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
           ],
@@ -109,59 +112,68 @@ class IssueRequestsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              if (_issueRequestController.issueRequestList[index].status == "Pending") ...[
-                MaterialButton(
-                  onPressed: () async {
-                    var result = await Utils().showDialog(
-                      "Alert",
-                      "Are you sure you want to decline the request",
-                      // () {
-                      //   // Get.back();
-                      // },
-                      () {
-                        // Get.back();
-                      },
-                    );
-                  },
-                  child: Utils().getText(
-                    "Decline",
-                    color: Utils.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppUIConst.baseFontSize * 3.5,
+              if (_issueRequestController.issueRequestList[index].status == "Pending" || _issueRequestController.issueRequestList[index].status == "Declined") ...[
+                Expanded(
+                  child: MaterialButton(
+                    onPressed: () async {
+                      if (_issueRequestController.issueRequestList[index].status != "Declined") {
+                        var result = await Utils().showDialog(
+                          "Alert",
+                          "Are you sure you want to decline this request",
+                          () {
+                            _issueRequestController.issueRequestList[index].status = "Declined";
+                            Get.back(result: "statusUpdated");
+                          },
+                        );
+                        if (result != null && result == "statusUpdated") {
+                          await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
+                          Utils().showConfirmSnackbar("Status updated successfully");
+                        }
+                      }
+                    },
+                    child: Utils().getText(
+                      _issueRequestController.issueRequestList[index].status == "Declined" ? "Request Declined" : "Decline",
+                      color: Utils.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: AppUIConst.baseFontSize * 3.5,
+                    ),
                   ),
                 ),
-                Container(
-                  color: Utils.grey,
-                  width: 0.5,
-                  height: 25,
-                ),
+                if (_issueRequestController.issueRequestList[index].status == "Pending")
+                  Container(
+                    color: Utils.grey,
+                    width: 0.5,
+                    height: 25,
+                  ),
               ],
               if (_issueRequestController.issueRequestList[index].status != "Declined")
-                MaterialButton(
-                  onPressed: () async {
-                    if (_issueRequestController.issueRequestList[index].status != "Returned") {
-                      String status = _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status);
+                Expanded(
+                  child: MaterialButton(
+                    onPressed: () async {
+                      if (_issueRequestController.issueRequestList[index].status != "Returned") {
+                        String status = _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status);
 
-                      var result = await Utils().showDialog(
-                        "Alert",
-                        "Are you sure you want to mark the book as \"$status\"",
-                        () {
-                          _issueRequestController.issueRequestList[index].status = status;
-                          Get.back(result: "statusUpdated");
-                        },
-                      );
-                      if (result != null && result == "statusUpdated") {
-                        await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
-                        Utils().showConfirmSnackbar("Status updated successfully");
+                        var result = await Utils().showDialog(
+                          "Alert",
+                          "Are you sure you want to mark the book as \"$status\"",
+                          () {
+                            _issueRequestController.issueRequestList[index].status = status;
+                            Get.back(result: "statusUpdated");
+                          },
+                        );
+                        if (result != null && result == "statusUpdated") {
+                          await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
+                          Utils().showConfirmSnackbar("Status updated successfully");
+                        }
                       }
-                    }
-                  },
-                  child: Utils().getText(
-                    (_issueRequestController.issueRequestList[index].status != "Returned" ? "Mark as " : "Book ") +
-                        _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status),
-                    color: Utils.green,
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppUIConst.baseFontSize * 3.5,
+                    },
+                    child: Utils().getText(
+                      (_issueRequestController.issueRequestList[index].status != "Returned" ? "Mark as " : "Book ") +
+                          _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status),
+                      color: Utils.green,
+                      fontWeight: FontWeight.bold,
+                      fontSize: AppUIConst.baseFontSize * 3.5,
+                    ),
                   ),
                 ),
             ],
@@ -171,16 +183,20 @@ class IssueRequestsScreen extends StatelessWidget {
     );
   }
 
-  Widget getStatusView(String status, DateTime date) {
+  Widget getStatusView(
+    String status,
+    DateTime date, {
+    Color color = Utils.green,
+  }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Utils().getWithPadding(
           Column(
             children: [
-              Utils().getChipView("◉", color: Utils.green),
+              Utils().getChipView("◉", color: color),
               Container(
-                color: Utils.green.withOpacity(0.6),
+                color: color.withOpacity(0.6),
                 width: 0.5,
                 height: 8,
               ),
@@ -191,12 +207,12 @@ class IssueRequestsScreen extends StatelessWidget {
         ),
         Utils().getText(
           status + " - ",
-          color: Utils.green,
+          color: color,
           fontSize: AppUIConst.baseFontSize * 3,
         ),
         Utils().getText(
           DateFormat.yMMMEd().format(date).toString(),
-          color: Utils.green,
+          color: color,
           fontSize: AppUIConst.baseFontSize * 2.9,
         ),
       ],

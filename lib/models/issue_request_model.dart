@@ -9,6 +9,7 @@ class IssueRequestModel {
   DateTime? approvedAt;
   DateTime? issuedAt;
   DateTime? returnedAt;
+  DateTime? declinedAt;
 
   IssueRequestModel({
     this.docId,
@@ -21,6 +22,7 @@ class IssueRequestModel {
     this.approvedAt,
     this.issuedAt,
     this.returnedAt,
+    this.declinedAt,
   });
 
   IssueRequestModel.fromJson(Map<String, dynamic> json) {
@@ -34,6 +36,7 @@ class IssueRequestModel {
     approvedAt = json['approvedAt'].toDate();
     issuedAt = json['issuedAt'].toDate();
     returnedAt = json['returnedAt'].toDate();
+    declinedAt = json['declinedAt'].toDate();
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +51,7 @@ class IssueRequestModel {
     data['approvedAt'] = this.approvedAt;
     data['issuedAt'] = this.issuedAt;
     data['returnedAt'] = this.returnedAt;
+    data['declinedAt'] = this.declinedAt;
     return data;
   }
 }
