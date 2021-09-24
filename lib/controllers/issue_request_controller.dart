@@ -54,7 +54,7 @@ class IssueRequestController extends GetxController {
     } else if (status == "Issued") {
       return "Returned";
     } else {
-      return "Book Returned";
+      return "Returned";
     }
   }
 }

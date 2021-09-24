@@ -136,30 +136,34 @@ class IssueRequestsScreen extends StatelessWidget {
                   height: 25,
                 ),
               ],
-              MaterialButton(
-                onPressed: () async {
-                  String status = _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status);
+              if (_issueRequestController.issueRequestList[index].status != "Declined")
+                MaterialButton(
+                  onPressed: () async {
+                    if (_issueRequestController.issueRequestList[index].status != "Returned") {
+                      String status = _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status);
 
-                  var result = await Utils().showDialog(
-                    "Alert",
-                    "Are you sure you want to mark the book as \"$status\"",
-                    () {
-                      _issueRequestController.issueRequestList[index].status = status;
-                      Get.back(result: "statusUpdated");
-                    },
-                  );
-                  if (result != null && result == "statusUpdated") {
-                    await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
-                    Utils().showConfirmSnackbar("Status updated successfully");
-                  }
-                },
-                child: Utils().getText(
-                  "Mark as " + _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status),
-                  color: Utils.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppUIConst.baseFontSize * 3.5,
+                      var result = await Utils().showDialog(
+                        "Alert",
+                        "Are you sure you want to mark the book as \"$status\"",
+                        () {
+                          _issueRequestController.issueRequestList[index].status = status;
+                          Get.back(result: "statusUpdated");
+                        },
+                      );
+                      if (result != null && result == "statusUpdated") {
+                        await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
+                        Utils().showConfirmSnackbar("Status updated successfully");
+                      }
+                    }
+                  },
+                  child: Utils().getText(
+                    (_issueRequestController.issueRequestList[index].status != "Returned" ? "Mark as " : "Book ") +
+                        _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status),
+                    color: Utils.green,
+                    fontWeight: FontWeight.bold,
+                    fontSize: AppUIConst.baseFontSize * 3.5,
+                  ),
                 ),
-              ),
             ],
           )
         ],
