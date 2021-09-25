@@ -46,7 +46,7 @@ class IssueRequestController extends GetxController {
     });
   }
 
-  String getBtnText(String status) {
+  String getStatus(String status) {
     if (status == "Pending") {
       return "Approved";
     } else if (status == "Approved") {
@@ -54,7 +54,7 @@ class IssueRequestController extends GetxController {
     } else if (status == "Issued") {
       return "Returned";
     } else {
-      return "Returned";
+      return "Book Returned";
     }
   }
 }

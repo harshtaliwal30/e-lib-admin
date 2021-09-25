@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/issue_request_controller.dart';
@@ -122,6 +123,7 @@ class IssueRequestsScreen extends StatelessWidget {
                           "Are you sure you want to decline this request",
                           () {
                             _issueRequestController.issueRequestList[index].status = "Declined";
+                            _issueRequestController.issueRequestList[index].declinedAt = DateTime.now();
                             Get.back(result: "statusUpdated");
                           },
                         );
@@ -150,14 +152,18 @@ class IssueRequestsScreen extends StatelessWidget {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () async {
-                      if (_issueRequestController.issueRequestList[index].status != "Returned") {
-                        String status = _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status);
-
+                      String status = _issueRequestController.getStatus(_issueRequestController.issueRequestList[index].status);
+                      if (status != "Book Returned") {
                         var result = await Utils().showDialog(
                           "Alert",
                           "Are you sure you want to mark the book as \"$status\"",
                           () {
                             _issueRequestController.issueRequestList[index].status = status;
+                            if (status == "Approved")
+                              _issueRequestController.issueRequestList[index].approvedAt = DateTime.now();
+                            else if (status == "Issued")
+                              _issueRequestController.issueRequestList[index].issuedAt = DateTime.now();
+                            else if (status == "Returned") _issueRequestController.issueRequestList[index].returnedAt = DateTime.now();
                             Get.back(result: "statusUpdated");
                           },
                         );
@@ -168,8 +174,8 @@ class IssueRequestsScreen extends StatelessWidget {
                       }
                     },
                     child: Utils().getText(
-                      (_issueRequestController.issueRequestList[index].status != "Returned" ? "Mark as " : "Book ") +
-                          _issueRequestController.getBtnText(_issueRequestController.issueRequestList[index].status),
+                      (_issueRequestController.issueRequestList[index].status != "Returned" ? "Mark as " : "") +
+                          _issueRequestController.getStatus(_issueRequestController.issueRequestList[index].status),
                       color: Utils.green,
                       fontWeight: FontWeight.bold,
                       fontSize: AppUIConst.baseFontSize * 3.5,
