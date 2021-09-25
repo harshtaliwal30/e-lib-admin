@@ -28,18 +28,20 @@ class IssueRequestsScreen extends StatelessWidget {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      itemCount: _issueRequestController.issueRequestList.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => getBookItem(index),
+            : _issueRequestController.issueRequestList.length == 0
+                ? NoIssueRequestsView()
+                : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          itemCount: _issueRequestController.issueRequestList.length,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) => getBookItem(index),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
+                  ),
       ),
     );
   }
@@ -223,6 +225,32 @@ class IssueRequestsScreen extends StatelessWidget {
           fontSize: AppUIConst.baseFontSize * 2.9,
         ),
       ],
+    );
+  }
+}
+
+class NoIssueRequestsView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Utils().getWithPadding(
+            Utils().getText(
+              "No issue Requests",
+              color: Utils.darkGrey,
+              fontWeight: FontWeight.bold,
+            ),
+            top: AppUIConst.safeBlockVertical * 2,
+            bottom: AppUIConst.safeBlockVertical * 2,
+          ),
+          Image.asset(
+            "assets/images/issue.png",
+            height: AppUIConst.screenWidth / 1.5,
+          ),
+        ],
+      ),
     );
   }
 }
