@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/issue_request_controller.dart';
-import 'package:e_lib_admin/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -26,20 +24,23 @@ class IssueRequestsScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        () => SingleChildScrollView(
-          child: Column(
-            children: [
-              ListView.builder(
-                itemCount: _issueRequestController.issueRequestList.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => getBookItem(index),
+        () => _issueRequestController.isLoading.isTrue
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      itemCount: _issueRequestController.issueRequestList.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => getBookItem(index),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
       ),
-      drawer: DrawerScreen(),
     );
   }
 
