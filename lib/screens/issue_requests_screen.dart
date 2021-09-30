@@ -48,18 +48,22 @@ class IssueRequestsScreen extends StatelessWidget {
 
   Widget getBookItem(int index) {
     return Card(
-      color: Utils.primaryColor,
+      color: Utils.white,
       shadowColor: Utils.white,
-      elevation: 15,
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(10),
+        ),
+        side: BorderSide(
+          color: Utils.grey,
+          width: 0.3,
         ),
       ),
       margin: EdgeInsets.only(
         left: AppUIConst.safeBlockHorizontal * 2,
         right: AppUIConst.safeBlockHorizontal * 2,
-        bottom: AppUIConst.safeBlockVertical * 0.5,
+        top: AppUIConst.safeBlockVertical * 2,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +71,8 @@ class IssueRequestsScreen extends StatelessWidget {
           Utils().getWithPadding(
             Utils().getText(
               _issueRequestController.issueRequestList[index].bookName,
-              color: Utils.white,
+              color: Utils.primaryColor,
+              fontWeight: FontWeight.bold,
               fontSize: AppUIConst.baseFontSize * 3.7,
             ),
             top: AppUIConst.safeBlockVertical * 1,
@@ -78,6 +83,7 @@ class IssueRequestsScreen extends StatelessWidget {
             Utils().getText(
               _issueRequestController.issueRequestList[index].authorName,
               color: Utils.grey,
+              fontWeight: FontWeight.bold,
               fontSize: AppUIConst.baseFontSize * 3.2,
             ),
             right: AppUIConst.safeBlockHorizontal * 3,
@@ -217,11 +223,13 @@ class IssueRequestsScreen extends StatelessWidget {
         Utils().getText(
           status + " - ",
           color: color,
+          fontWeight: FontWeight.bold,
           fontSize: AppUIConst.baseFontSize * 3,
         ),
         Utils().getText(
           DateFormat.yMMMEd().format(date).toString(),
           color: color,
+          fontWeight: FontWeight.bold,
           fontSize: AppUIConst.baseFontSize * 2.9,
         ),
       ],
