@@ -82,6 +82,7 @@ class DrawerScreen extends StatelessWidget {
                   AppRoutes.moveOffAllScreen(AppRoutes.loginScreenRoute);
                 }),
               },
+              color: Utils.red,
             ),
           ],
         ),
@@ -95,18 +96,19 @@ class DrawerScreen extends StatelessWidget {
     String route,
     Function()? onTap, {
     bool isTrailing = false,
+    Color color = Utils.grey,
   }) {
     return Utils().getWithPadding(
       ListTile(
         leading: Icon(
           leadingIcon,
-          color: Get.currentRoute == route ? Utils.white : Utils.grey,
+          color: Get.currentRoute == route ? Utils.white : color,
         ),
         trailing: isTrailing ? Utils().getChipView("22") : null,
         horizontalTitleGap: 0.0,
         title: Utils().getText(
           title,
-          color: Get.currentRoute == route ? Utils.white : Utils.grey,
+          color: Get.currentRoute == route ? Utils.white : color,
           fontWeight: Get.currentRoute == route ? FontWeight.bold : FontWeight.normal,
         ),
         tileColor: Get.currentRoute == route ? Utils.blue : null,
