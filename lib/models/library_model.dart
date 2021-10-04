@@ -32,7 +32,6 @@ class LibraryModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['libraryId'] = this.libraryId;
     data['libraryName'] = this.libraryName;
     data['libraryEmail'] = this.libraryEmail;
     data['libraryPhone'] = this.libraryPhone;

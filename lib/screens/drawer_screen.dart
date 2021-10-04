@@ -71,6 +71,17 @@ class DrawerScreen extends StatelessWidget {
               isTrailing: true,
             ),
             getDrawerItem(
+              "Profile",
+              Icons.person,
+              "/profileScreen",
+              () => {
+                Get.back(),
+                AppRoutes.moveToScreen(
+                  "/profileScreen",
+                )
+              },
+            ),
+            getDrawerItem(
               "Logout",
               Icons.logout_rounded,
               "/loginScreen",
@@ -109,7 +120,8 @@ class DrawerScreen extends StatelessWidget {
         title: Utils().getText(
           title,
           color: Get.currentRoute == route ? Utils.white : color,
-          fontWeight: Get.currentRoute == route ? FontWeight.bold : FontWeight.normal,
+          fontWeight:
+              Get.currentRoute == route ? FontWeight.bold : FontWeight.normal,
         ),
         tileColor: Get.currentRoute == route ? Utils.blue : null,
         shape: RoundedRectangleBorder(

@@ -5,6 +5,7 @@ import 'package:e_lib_admin/screens/home_screen.dart';
 import 'package:e_lib_admin/screens/issue_requests_screen.dart';
 import 'package:e_lib_admin/screens/login_screen.dart';
 import 'package:e_lib_admin/screens/otp_screen.dart';
+import 'package:e_lib_admin/screens/profile_screen.dart';
 import 'package:e_lib_admin/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class AppRoutes {
   static const String otpScreenRoute = "/otpScreen";
   static const String homeScreenRoute = "/homeScreen";
   static const String issueRequestsScreenRoute = "/issueRequestsScreen";
+  static const String profileScreenRoute = "/profileScreen";
 
   static routes() {
     GetPage<dynamic> _page(String route, var page) {
@@ -27,6 +29,7 @@ class AppRoutes {
       _page(otpScreenRoute, () => OTPScreen()),
       _page(homeScreenRoute, () => HomeScreen()),
       _page(issueRequestsScreenRoute, () => IssueRequestsScreen()),
+      _page(profileScreenRoute, () => ProfileScreen()),
       // GetPage(name: loginRoute, page: () => LoginScreen()),
       // GetPage(
       //     name: homeitemviewRoute,
@@ -38,7 +41,8 @@ class AppRoutes {
     Get.toNamed(routeName);
   }
 
-  static void moveToScreenWithArguments(String routeName, {@required var arguments}) {
+  static void moveToScreenWithArguments(String routeName,
+      {@required var arguments}) {
     Get.toNamed(routeName, arguments: arguments);
   }
 
@@ -50,7 +54,8 @@ class AppRoutes {
     Get.offAllNamed(routeName);
   }
 
-  static void moveOffAllScreenWithArguments(String routeName, {@required var arguments}) {
+  static void moveOffAllScreenWithArguments(String routeName,
+      {@required var arguments}) {
     Get.offAll(routeName, arguments: arguments);
   }
 

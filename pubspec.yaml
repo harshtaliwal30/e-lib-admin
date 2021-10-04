@@ -37,6 +37,7 @@ dependencies:
   shared_preferences: ^2.0.7
   fluttertoast: ^8.0.8
   intl: ^0.17.0
+  csc_picker: ^0.2.6
 
 dev_dependencies:
   flutter_test:
