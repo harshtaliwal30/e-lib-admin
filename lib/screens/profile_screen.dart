@@ -108,6 +108,25 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 Text(_profileController.countryValue.value + _profileController.stateValue.value + _profileController.cityValue.value),
+                Align(
+                  alignment: Alignment.center,
+                  child: MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppUIConst.safeBlockHorizontal * 20,
+                    ),
+                    color: Utils.blue,
+                    elevation: 0,
+                    onPressed: () {},
+                    child: Utils().getText(
+                      "Save",
+                      color: Utils.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
               ],
             ),
           ),
