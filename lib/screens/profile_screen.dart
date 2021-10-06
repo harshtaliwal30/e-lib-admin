@@ -4,6 +4,7 @@ import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatelessWidget {
   final ProfileController _profileController = Get.put(ProfileController());
@@ -33,19 +34,25 @@ class ProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20),
-                Container(
-                  height: AppUIConst.screenHeight / 5,
-                  width: AppUIConst.screenWidth / 2.5,
-                  decoration: BoxDecoration(
-                    color: Utils.lightBgColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
+                InkWell(
+                  onTap: () async {
+                    // XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                    _showPicker(context);
+                  },
+                  child: Container(
+                    height: AppUIConst.screenHeight / 5,
+                    width: AppUIConst.screenWidth / 2.5,
+                    decoration: BoxDecoration(
+                      color: Utils.lightBgColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
                     ),
-                  ),
-                  child: Icon(
-                    Icons.image,
-                    color: Utils.amber,
-                    size: AppUIConst.iconGeneralHeightAndWidth * 2,
+                    child: Icon(
+                      Icons.image,
+                      color: Utils.amber,
+                      size: AppUIConst.iconGeneralHeightAndWidth * 2,
+                    ),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -201,5 +208,35 @@ class ProfileScreen extends StatelessWidget {
         isSelected: _profileController.isSelected,
       ),
     );
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        // _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      // _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
