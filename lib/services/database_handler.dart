@@ -19,6 +19,10 @@ class DatabaseHandler {
     return databaseReference.collection('books').where('libraryId', isEqualTo: libraryId).orderBy("createdAt", descending: true).get();
   }
 
+  Future<DocumentSnapshot> fetchLibraryData(String? libraryId) {
+    return databaseReference.collection('libraries').doc(libraryId).get();
+  }
+
   Future<QuerySnapshot> fetchIssueRequests(String? libraryId) async {
     return databaseReference.collection('issueRequests').where('libraryId', isEqualTo: libraryId).orderBy("createdAt", descending: true).get();
   }
