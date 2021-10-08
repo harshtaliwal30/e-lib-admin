@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'package:dio/dio.dart' as dio;
 import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/cloudinary_manager.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController {
@@ -17,6 +20,23 @@ class ProfileController extends GetxController {
   var cityValue = "".obs;
   var address = "".obs;
   var image = File("").obs;
+
+  uploadProfileImage() async {
+    if (image.value.path.length > 0) {
+      dio.FormData formData = new dio.FormData.fromMap({
+        "file": await dio.MultipartFile.fromFile(
+          image.value.path,
+          contentType: new MediaType("image", "jpeg"),
+        ),
+        "upload_preset": "upload_preset",
+        "folder": "Profile_Images",
+        "cloud_name": "dciyee0g5",
+      });
+      CloudinaryManager().uploadImage(formData);
+    } else {
+      Utils().showWarningSnackbar("Please select library image");
+    }
+  }
 
   _imgFromCamera() async {
     XFile? file = await ImagePicker().pickImage(

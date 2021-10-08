@@ -34,30 +34,38 @@ class ProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20),
-                InkWell(
-                  onTap: () async {
-                    _profileController.openPickerOptions();
-                  },
-                  child: Container(
-                    height: AppUIConst.screenHeight / 5,
-                    width: AppUIConst.screenWidth / 2.5,
-                    decoration: BoxDecoration(
-                      color: Utils.lightBgColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        _profileController.openPickerOptions();
+                      },
+                      child: Container(
+                        height: AppUIConst.screenHeight / 5,
+                        width: AppUIConst.screenWidth / 2.5,
+                        decoration: BoxDecoration(
+                          color: Utils.lightBgColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: _profileController.image.value.path.length > 0
+                            ? Image.file(
+                                _profileController.image.value,
+                                fit: BoxFit.fill,
+                              )
+                            : Icon(
+                                Icons.image,
+                                color: Utils.amber,
+                                size: AppUIConst.iconGeneralHeightAndWidth * 2,
+                              ),
                       ),
                     ),
-                    child: _profileController.image.value.path.length > 0
-                        ? Image.file(
-                            _profileController.image.value,
-                            fit: BoxFit.fill,
-                          )
-                        : Icon(
-                            Icons.image,
-                            color: Utils.amber,
-                            size: AppUIConst.iconGeneralHeightAndWidth * 2,
-                          ),
-                  ),
+                    Image.asset(
+                      "assets/images/profile.png",
+                      width: AppUIConst.screenWidth / 2,
+                    ),
+                  ],
                 ),
                 SizedBox(height: 15),
                 getTextFormField(_profileController.libraryNameController, "Library Name *"),
@@ -130,7 +138,9 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     color: Utils.blue,
                     elevation: 0,
-                    onPressed: () {},
+                    onPressed: () {
+                      _profileController.uploadProfileImage();
+                    },
                     child: Utils().getText(
                       "Save",
                       color: Utils.white,
