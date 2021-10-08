@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                                   Radius.circular(10),
                                 ),
                               ),
-                              child: _profileController.libraryModel.libraryImage != null
+                              child: _profileController.imageUrl.value.length > 0
                                   ? Image.network(_profileController.libraryModel.libraryImage!)
                                   : _profileController.image.value.path.length > 0
                                       ? Image.file(
@@ -86,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                       CSCPicker(
                         showStates: true,
                         showCities: true,
-                        flagState: CountryFlag.SHOW_IN_DROP_DOWN_ONLY,
+                        flagState: CountryFlag.DISABLE,
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: Utils.lightBgColor,
@@ -103,7 +103,11 @@ class ProfileScreen extends StatelessWidget {
                         countryDropdownLabel: "*Country",
                         stateDropdownLabel: "*State",
                         cityDropdownLabel: "*City",
-                        defaultCountry: DefaultCountry.India,
+
+                        currentCountry: _profileController.countryValue.value,
+                        currentState: _profileController.stateValue.value,
+                        currentCity: _profileController.cityValue.value,
+
                         selectedItemStyle: TextStyle(
                           color: Utils.darkGrey,
                         ),
@@ -131,12 +135,12 @@ class ProfileScreen extends StatelessWidget {
                         },
                       ),
                       SizedBox(height: 15),
-                      Text(_profileController.countryValue.value + _profileController.stateValue.value + _profileController.cityValue.value),
                       Align(
                         alignment: Alignment.center,
                         child: MaterialButton(
+                          height: 50,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(50),
                           ),
                           padding: EdgeInsets.symmetric(
                             horizontal: AppUIConst.safeBlockHorizontal * 20,

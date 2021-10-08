@@ -119,7 +119,7 @@ class LoginController extends GetxController {
             libraryPhone: "+91" + phoneController.text,
           );
           var data = _libraryModel.toJson();
-          String? libraryId = await DatabaseHandler().addUser(data);
+          String? libraryId = await DatabaseHandler().addLibrary(data);
           pref.setBool(Utils.KEY_ISLOGIN, true);
           pref.setString(Utils.KEY_LIBRARYID, libraryId!);
           pref.setString(Utils.KEY_LIBRARYPHONE, phoneController.text);

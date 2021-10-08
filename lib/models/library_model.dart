@@ -5,6 +5,8 @@ class LibraryModel {
   String? libraryPhone;
   String? libraryImage;
   String? address;
+  String? country;
+  String? state;
   String? city;
   String? type;
 
@@ -15,6 +17,8 @@ class LibraryModel {
     this.libraryPhone,
     this.libraryImage,
     this.address,
+    this.country,
+    this.state,
     this.city,
     this.type,
   });
@@ -26,6 +30,8 @@ class LibraryModel {
     libraryPhone = json['libraryPhone'];
     libraryImage = json['libraryImage'];
     address = json['address'];
+    country = json['country'];
+    state = json['state'];
     city = json['city'];
     type = json['type'];
   }
@@ -37,6 +43,8 @@ class LibraryModel {
     data['libraryPhone'] = this.libraryPhone;
     data['libraryImage'] = this.libraryImage;
     data['address'] = this.address;
+    data['country'] = this.country;
+    data['state'] = this.state;
     data['city'] = this.city;
     data['type'] = this.type;
     return data;

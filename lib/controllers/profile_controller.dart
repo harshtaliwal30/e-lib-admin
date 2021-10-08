@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends GetxController {
   LibraryModel libraryModel = LibraryModel();
+  String? docId = "";
   TextEditingController libraryNameController = TextEditingController();
   TextEditingController libraryEmailController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -24,6 +25,7 @@ class ProfileController extends GetxController {
   var stateValue = "".obs;
   var cityValue = "".obs;
   var address = "".obs;
+  var imageUrl = "".obs;
   var image = File("").obs;
 
   @override
@@ -34,14 +36,18 @@ class ProfileController extends GetxController {
 
   void fetchLibraryData() {
     SharedPreferences.getInstance().then((pref) {
-      DatabaseHandler().fetchLibraryData(pref.getString(Utils.KEY_LIBRARYID)).then((value) {
+      docId = pref.getString(Utils.KEY_LIBRARYID);
+      DatabaseHandler().fetchLibraryData(docId).then((value) {
         Map<String, dynamic> docData = value.data() as dynamic;
         docData["libraryId"] = value.id;
         libraryModel = LibraryModel.fromJson(docData);
         libraryNameController.text = libraryModel.libraryName ?? "";
         libraryEmailController.text = libraryModel.libraryEmail ?? "";
         libraryPhoneController.text = libraryModel.libraryPhone!;
+        imageUrl.value = libraryModel.libraryImage ?? "";
         addressController.text = libraryModel.address ?? "";
+        countryValue.value = libraryModel.country ?? "";
+        stateValue.value = libraryModel.state ?? "";
         cityValue.value = libraryModel.city ?? "";
         if (libraryModel.type != null) {
           if (libraryModel.type == "Private") {
@@ -57,8 +63,32 @@ class ProfileController extends GetxController {
     });
   }
 
+  Future<void> updateLibraryData() async {
+    LibraryModel _libraryModel = new LibraryModel(
+        libraryName: libraryNameController.text,
+        libraryEmail: libraryEmailController.text,
+        libraryPhone: libraryPhoneController.text,
+        libraryImage: imageUrl.value,
+        address: addressController.text,
+        country: countryValue.value,
+        state: stateValue.value,
+        city: cityValue.value,
+        type: isSelected[0] ? "Private" : "Institutional");
+
+    var data = _libraryModel.toJson();
+    DatabaseHandler().updateLibrary(data, docId).then((value) {
+      Get.back();
+    });
+  }
+
   uploadProfileImage() async {
     if (image.value.path.length > 0) {
+      Get.dialog(
+        Center(
+          child: CircularProgressIndicator(),
+        ),
+        barrierDismissible: false,
+      );
       dio.FormData formData = new dio.FormData.fromMap({
         "file": await dio.MultipartFile.fromFile(
           image.value.path,
@@ -68,7 +98,13 @@ class ProfileController extends GetxController {
         "folder": "Profile_Images",
         "cloud_name": "dciyee0g5",
       });
-      CloudinaryManager().uploadImage(formData);
+      CloudinaryManager().uploadImage(formData).then((value) {
+        imageUrl.value = value;
+        Get.back();
+        updateLibraryData();
+      });
+    } else if (libraryModel.libraryImage != null) {
+      updateLibraryData();
     } else {
       Utils().showWarningSnackbar("Please select library image");
     }
@@ -79,6 +115,7 @@ class ProfileController extends GetxController {
       source: ImageSource.camera,
       imageQuality: 50,
     );
+    imageUrl.value = "";
     file != null ? image.value = File(file.path) : image.value = File("");
   }
 
@@ -87,7 +124,7 @@ class ProfileController extends GetxController {
       source: ImageSource.gallery,
       imageQuality: 50,
     );
-
+    imageUrl.value = "";
     file != null ? image.value = File(file.path) : image.value = File("");
   }
 

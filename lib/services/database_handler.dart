@@ -7,12 +7,16 @@ class DatabaseHandler {
     return databaseReference.collection("libraries").where("libraryPhone", isEqualTo: phoneNumber).get();
   }
 
-  Future<String?> addUser(var data) async {
+  Future<String?> addLibrary(var data) async {
     String? libraryId;
     await databaseReference.collection('libraries').add(data).then((value) {
       libraryId = value.id;
     });
     return libraryId;
+  }
+
+  Future<void> updateLibrary(var data, String? id) async {
+    await databaseReference.collection('libraries').doc(id).update(data);
   }
 
   Future<QuerySnapshot> fetchBooks(String? libraryId) {
