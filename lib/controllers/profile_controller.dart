@@ -192,4 +192,18 @@ class ProfileController extends GetxController {
       backgroundColor: Utils.primaryColor,
     );
   }
+
+  bool validate() {
+    if (countryValue.value.length == 0) {
+      Utils().showWarningSnackbar("Please select country");
+      return false;
+    } else if (stateValue.value.length == 0) {
+      Utils().showWarningSnackbar("Please select state");
+      return false;
+    } else if (cityValue.value.length == 0) {
+      Utils().showWarningSnackbar("Please select city");
+      return false;
+    }
+    return true;
+  }
 }

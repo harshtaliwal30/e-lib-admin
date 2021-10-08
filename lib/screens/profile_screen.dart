@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   final ProfileController _profileController = Get.put(ProfileController());
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,131 +34,176 @@ class ProfileScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: AppUIConst.safeBlockHorizontal * 4,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 20),
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              _profileController.openPickerOptions();
-                            },
-                            child: Container(
-                              height: AppUIConst.screenHeight / 5,
-                              width: AppUIConst.screenWidth / 2.5,
-                              decoration: BoxDecoration(
-                                color: Utils.lightBgColor,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 20),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                _profileController.openPickerOptions();
+                              },
+                              child: Container(
+                                height: AppUIConst.screenHeight / 5,
+                                width: AppUIConst.screenWidth / 2.5,
+                                decoration: BoxDecoration(
+                                  color: Utils.lightBgColor,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
                                 ),
+                                child: _profileController.imageUrl.value.length > 0
+                                    ? Image.network(_profileController.libraryModel.libraryImage!)
+                                    : _profileController.image.value.path.length > 0
+                                        ? Image.file(
+                                            _profileController.image.value,
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Icon(
+                                            Icons.image,
+                                            color: Utils.amber,
+                                            size: AppUIConst.iconGeneralHeightAndWidth * 2,
+                                          ),
                               ),
-                              child: _profileController.imageUrl.value.length > 0
-                                  ? Image.network(_profileController.libraryModel.libraryImage!)
-                                  : _profileController.image.value.path.length > 0
-                                      ? Image.file(
-                                          _profileController.image.value,
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Icon(
-                                          Icons.image,
-                                          color: Utils.amber,
-                                          size: AppUIConst.iconGeneralHeightAndWidth * 2,
-                                        ),
                             ),
-                          ),
-                          Image.asset(
-                            "assets/images/profile.png",
-                            width: AppUIConst.screenWidth / 2,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      getTextFormField(_profileController.libraryNameController, "Library Name *"),
-                      SizedBox(height: 15),
-                      getTextFormField(_profileController.libraryEmailController, "Email *", textInputType: TextInputType.emailAddress),
-                      SizedBox(height: 15),
-                      getTypeButton(),
-                      SizedBox(height: 15),
-                      getTextFormField(_profileController.libraryPhoneController, "Phone *", textInputType: TextInputType.phone),
-                      SizedBox(height: 15),
-                      getTextFormField(_profileController.addressController, "Address *"),
-                      SizedBox(height: 15),
-                      CSCPicker(
-                        showStates: true,
-                        showCities: true,
-                        flagState: CountryFlag.DISABLE,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Utils.lightBgColor,
+                            Image.asset(
+                              "assets/images/profile.png",
+                              width: AppUIConst.screenWidth / 2,
+                            ),
+                          ],
                         ),
-                        disabledDropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.grey.shade300,
-                        ),
-                        //placeholders for dropdown search field
-                        countrySearchPlaceholder: "Country",
-                        stateSearchPlaceholder: "State",
-                        citySearchPlaceholder: "City",
-                        //labels for dropdown
-                        countryDropdownLabel: "*Country",
-                        stateDropdownLabel: "*State",
-                        cityDropdownLabel: "*City",
-
-                        currentCountry: _profileController.countryValue.value,
-                        currentState: _profileController.stateValue.value,
-                        currentCity: _profileController.cityValue.value,
-
-                        selectedItemStyle: TextStyle(
-                          color: Utils.darkGrey,
-                        ),
-                        dropdownHeadingStyle: TextStyle(
-                          color: Utils.black,
-                          fontSize: AppUIConst.baseFontSize * 5,
-                          fontWeight: FontWeight.bold,
-                        ),
-
-                        dropdownItemStyle: TextStyle(
-                          color: Utils.black,
-                        ),
-                        dropdownDialogRadius: 10.0,
-                        searchBarRadius: 10.0,
-                        onCountryChanged: (value) {
-                          _profileController.countryValue.value = value;
-                        },
-
-                        onStateChanged: (value) {
-                          _profileController.stateValue.value = value ?? "";
-                        },
-
-                        onCityChanged: (value) {
-                          _profileController.cityValue.value = value ?? "";
-                        },
-                      ),
-                      SizedBox(height: 15),
-                      Align(
-                        alignment: Alignment.center,
-                        child: MaterialButton(
-                          height: 50,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppUIConst.safeBlockHorizontal * 20,
-                          ),
-                          color: Utils.blue,
-                          elevation: 0,
-                          onPressed: () {
-                            _profileController.uploadProfileImage();
+                        SizedBox(height: 15),
+                        getTextFormField(
+                          _profileController.libraryNameController,
+                          "Library Name *",
+                          (value) {
+                            if (value!.isEmpty) {
+                              return "Please enter library name";
+                            } else
+                              return null;
                           },
-                          child: Utils().getText(
-                            "Save",
-                            color: Utils.white,
+                        ),
+                        SizedBox(height: 15),
+                        getTextFormField(
+                          _profileController.libraryEmailController,
+                          "Email *",
+                          (value) {
+                            if (value!.isEmpty) {
+                              return "Please enter email id";
+                            } else
+                              return null;
+                          },
+                          textInputType: TextInputType.emailAddress,
+                        ),
+                        SizedBox(height: 15),
+                        getTypeButton(),
+                        SizedBox(height: 15),
+                        getTextFormField(
+                          _profileController.libraryPhoneController,
+                          "Phone *",
+                          (value) {
+                            if (value!.isEmpty) {
+                              return "Please enter phone number";
+                            } else
+                              return null;
+                          },
+                          textInputType: TextInputType.phone,
+                        ),
+                        SizedBox(height: 15),
+                        getTextFormField(
+                          _profileController.addressController,
+                          "Address *",
+                          (value) {
+                            if (value!.isEmpty) {
+                              return "Please enter address";
+                            } else
+                              return null;
+                          },
+                        ),
+                        SizedBox(height: 15),
+                        CSCPicker(
+                          showStates: true,
+                          showCities: true,
+                          flagState: CountryFlag.DISABLE,
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Utils.lightBgColor,
+                          ),
+                          disabledDropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Colors.grey.shade300,
+                          ),
+                          //placeholders for dropdown search field
+                          countrySearchPlaceholder: "Country",
+                          stateSearchPlaceholder: "State",
+                          citySearchPlaceholder: "City",
+                          //labels for dropdown
+                          countryDropdownLabel: "*Country",
+                          stateDropdownLabel: "*State",
+                          cityDropdownLabel: "*City",
+
+                          currentCountry: _profileController.countryValue.value,
+                          currentState: _profileController.stateValue.value,
+                          currentCity: _profileController.cityValue.value,
+
+                          selectedItemStyle: TextStyle(
+                            color: Utils.darkGrey,
+                          ),
+                          dropdownHeadingStyle: TextStyle(
+                            color: Utils.black,
+                            fontSize: AppUIConst.baseFontSize * 5,
                             fontWeight: FontWeight.bold,
                           ),
+
+                          dropdownItemStyle: TextStyle(
+                            color: Utils.black,
+                          ),
+                          dropdownDialogRadius: 10.0,
+                          searchBarRadius: 10.0,
+                          onCountryChanged: (value) {
+                            _profileController.countryValue.value = value;
+                          },
+
+                          onStateChanged: (value) {
+                            _profileController.stateValue.value = value ?? "";
+                          },
+
+                          onCityChanged: (value) {
+                            _profileController.cityValue.value = value ?? "";
+                          },
                         ),
-                      )
-                    ],
+                        SizedBox(height: 15),
+                        Align(
+                          alignment: Alignment.center,
+                          child: MaterialButton(
+                            height: 45,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: AppUIConst.safeBlockHorizontal * 20,
+                            ),
+                            color: Utils.blue,
+                            elevation: 0,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                if (_profileController.validate()) {
+                                  _profileController.uploadProfileImage();
+                                }
+                              }
+                            },
+                            child: Utils().getText(
+                              "Save",
+                              color: Utils.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -167,15 +213,16 @@ class ProfileScreen extends StatelessWidget {
 
   TextFormField getTextFormField(
     TextEditingController controller,
-    String labelText, {
+    String labelText,
+    var validator, {
     TextInputType textInputType = TextInputType.text,
-    var onChange,
   }) {
     return TextFormField(
       controller: controller,
       keyboardType: textInputType,
       style: TextStyle(color: Utils.darkGrey),
       cursorColor: Utils.darkGrey,
+      validator: validator,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
           horizontal: AppUIConst.safeBlockHorizontal * 4,
@@ -192,6 +239,18 @@ class ProfileScreen extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Utils.lightBgColor),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Utils.red),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Utils.red),
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
