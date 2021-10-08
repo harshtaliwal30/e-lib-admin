@@ -36,8 +36,7 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 InkWell(
                   onTap: () async {
-                    // XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-                    _showPicker(context);
+                    _profileController.openPickerOptions();
                   },
                   child: Container(
                     height: AppUIConst.screenHeight / 5,
@@ -48,11 +47,16 @@ class ProfileScreen extends StatelessWidget {
                         Radius.circular(10),
                       ),
                     ),
-                    child: Icon(
-                      Icons.image,
-                      color: Utils.amber,
-                      size: AppUIConst.iconGeneralHeightAndWidth * 2,
-                    ),
+                    child: _profileController.image.value.path.length > 0
+                        ? Image.file(
+                            _profileController.image.value,
+                            fit: BoxFit.fill,
+                          )
+                        : Icon(
+                            Icons.image,
+                            color: Utils.amber,
+                            size: AppUIConst.iconGeneralHeightAndWidth * 2,
+                          ),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -208,35 +212,5 @@ class ProfileScreen extends StatelessWidget {
         isSelected: _profileController.isSelected,
       ),
     );
-  }
-
-  void _showPicker(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              child: new Wrap(
-                children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
-                      onTap: () {
-                        // _imgFromGallery();
-                        Navigator.of(context).pop();
-                      }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
-                    onTap: () {
-                      // _imgFromCamera();
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
   }
 }
