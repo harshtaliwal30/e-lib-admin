@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
       title: 'E-Lib Admin',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        accentColor: Colors.white70,
+        colorScheme: ThemeData().colorScheme.copyWith(
+              secondary: Colors.white70,
+            ),
         fontFamily: "OpenSans",
       ),
       getPages: AppRoutes.routes(),
