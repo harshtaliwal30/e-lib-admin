@@ -63,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                                             fit: BoxFit.fill,
                                           )
                                         : Icon(
-                                            Icons.image,
+                                            Icons.photo_library,
                                             color: Utils.amber,
                                             size: AppUIConst.iconGeneralHeightAndWidth * 2,
                                           ),
@@ -124,57 +124,7 @@ class ProfileScreen extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: 15),
-                        CSCPicker(
-                          showStates: true,
-                          showCities: true,
-                          flagState: CountryFlag.DISABLE,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Utils.lightBgColor,
-                          ),
-                          disabledDropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.grey.shade300,
-                          ),
-                          //placeholders for dropdown search field
-                          countrySearchPlaceholder: "Country",
-                          stateSearchPlaceholder: "State",
-                          citySearchPlaceholder: "City",
-                          //labels for dropdown
-                          countryDropdownLabel: "*Country",
-                          stateDropdownLabel: "*State",
-                          cityDropdownLabel: "*City",
-
-                          currentCountry: _profileController.countryValue.value,
-                          currentState: _profileController.stateValue.value,
-                          currentCity: _profileController.cityValue.value,
-
-                          selectedItemStyle: TextStyle(
-                            color: Utils.darkGrey,
-                          ),
-                          dropdownHeadingStyle: TextStyle(
-                            color: Utils.black,
-                            fontSize: AppUIConst.baseFontSize * 5,
-                            fontWeight: FontWeight.bold,
-                          ),
-
-                          dropdownItemStyle: TextStyle(
-                            color: Utils.black,
-                          ),
-                          dropdownDialogRadius: 10.0,
-                          searchBarRadius: 10.0,
-                          onCountryChanged: (value) {
-                            _profileController.countryValue.value = value;
-                          },
-
-                          onStateChanged: (value) {
-                            _profileController.stateValue.value = value ?? "";
-                          },
-
-                          onCityChanged: (value) {
-                            _profileController.cityValue.value = value ?? "";
-                          },
-                        ),
+                        getCSCPicker(),
                         SizedBox(height: 15),
                         Align(
                           alignment: Alignment.center,
@@ -289,6 +239,60 @@ class ProfileScreen extends StatelessWidget {
         },
         isSelected: _profileController.isSelected,
       ),
+    );
+  }
+
+  Widget getCSCPicker() {
+    return CSCPicker(
+      showStates: true,
+      showCities: true,
+      flagState: CountryFlag.DISABLE,
+      dropdownDecoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Utils.lightBgColor,
+      ),
+      disabledDropdownDecoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Colors.grey.shade300,
+      ),
+      //placeholders for dropdown search field
+      countrySearchPlaceholder: "Country",
+      stateSearchPlaceholder: "State",
+      citySearchPlaceholder: "City",
+      //labels for dropdown
+      countryDropdownLabel: "*Country",
+      stateDropdownLabel: "*State",
+      cityDropdownLabel: "*City",
+
+      currentCountry: _profileController.countryValue.value,
+      currentState: _profileController.stateValue.value,
+      currentCity: _profileController.cityValue.value,
+
+      selectedItemStyle: TextStyle(
+        color: Utils.darkGrey,
+      ),
+      dropdownHeadingStyle: TextStyle(
+        color: Utils.black,
+        fontSize: AppUIConst.baseFontSize * 5,
+        fontWeight: FontWeight.bold,
+      ),
+
+      dropdownItemStyle: TextStyle(
+        color: Utils.black,
+      ),
+      dropdownDialogRadius: 10.0,
+      searchBarRadius: 10.0,
+      onCountryChanged: (value) {
+        _profileController.countryValue.value = value;
+      },
+
+      onStateChanged: (value) {
+        _profileController.stateValue.value = value ?? "";
+      },
+
+      onCityChanged: (value) {
+        _profileController.cityValue.value = value ?? "";
+      },
     );
   }
 }
