@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+enum SortBy { all, pending, approved, issued, returned, declined }
+
 class IssueRequestsScreen extends StatelessWidget {
   final IssueRequestController _issueRequestController = Get.put(IssueRequestController());
 
@@ -28,20 +30,87 @@ class IssueRequestsScreen extends StatelessWidget {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : _issueRequestController.issueRequestList.length == 0
-                ? NoIssueRequestsView()
-                : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ListView.builder(
-                          itemCount: _issueRequestController.issueRequestList.length,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) => getBookItem(index),
+            : SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppUIConst.safeBlockHorizontal * 2,
+                      ),
+                      child: PopupMenuButton(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Utils.primaryColor,
+                            width: 0.5,
+                          ),
                         ),
-                      ],
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Utils.primaryColor),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppUIConst.safeBlockHorizontal * 3,
+                            vertical: AppUIConst.safeBlockVertical * 0.5,
+                          ),
+                          child: Utils().getText("Sort by:"),
+                        ),
+                        onSelected: (result) {
+                          print(result);
+                          if (result == "All") {
+                            _issueRequestController.fetchIssueRequests();
+                          } else if (result == "Pending") {
+                            _issueRequestController.fetchIssueRequestsByStatus("Pending");
+                          } else if (result == "Approved") {
+                            _issueRequestController.fetchIssueRequestsByStatus("Approved");
+                          } else if (result == "Issued") {
+                            _issueRequestController.fetchIssueRequestsByStatus("Issued");
+                          } else if (result == "Returned") {
+                            _issueRequestController.fetchIssueRequestsByStatus("Returned");
+                          } else {
+                            _issueRequestController.fetchIssueRequestsByStatus("Declined");
+                          }
+                        },
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                          const PopupMenuItem(
+                            value: "All",
+                            child: Text('All'),
+                          ),
+                          const PopupMenuItem(
+                            value: "Pending",
+                            child: Text('Pending'),
+                          ),
+                          const PopupMenuItem(
+                            value: "Approved",
+                            child: Text('Approved'),
+                          ),
+                          const PopupMenuItem(
+                            value: "Issued",
+                            child: Text('Issued'),
+                          ),
+                          const PopupMenuItem(
+                            value: "Returned",
+                            child: Text('Returned'),
+                          ),
+                          const PopupMenuItem(
+                            value: "Declined",
+                            child: Text('Declined'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    _issueRequestController.issueRequestList.length == 0
+                        ? NoIssueRequestsView()
+                        : ListView.builder(
+                            itemCount: _issueRequestController.issueRequestList.length,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) => getBookItem(index),
+                          ),
+                  ],
+                ),
+              ),
       ),
     );
   }
@@ -56,8 +125,8 @@ class IssueRequestsScreen extends StatelessWidget {
           Radius.circular(10),
         ),
         side: BorderSide(
-          color: Utils.grey,
-          width: 0.3,
+          color: Utils.darkGrey,
+          width: 0.5,
         ),
       ),
       margin: EdgeInsets.only(
@@ -116,8 +185,8 @@ class IssueRequestsScreen extends StatelessWidget {
           ),
           Divider(
             height: 0,
-            color: Utils.grey,
-            thickness: 0.3,
+            color: Utils.darkGrey,
+            thickness: 0.5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -142,6 +211,7 @@ class IssueRequestsScreen extends StatelessWidget {
                         }
                       }
                     },
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     child: Utils().getText(
                       _issueRequestController.issueRequestList[index].status == "Declined" ? "Request Declined" : "Decline",
                       color: Utils.red,
@@ -182,6 +252,7 @@ class IssueRequestsScreen extends StatelessWidget {
                         }
                       }
                     },
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     child: Utils().getText(
                       (_issueRequestController.issueRequestList[index].status != "Returned" ? "Mark as " : "") +
                           _issueRequestController.getStatus(_issueRequestController.issueRequestList[index].status),

@@ -31,6 +31,10 @@ class DatabaseHandler {
     return databaseReference.collection('issueRequests').where('libraryId', isEqualTo: libraryId).orderBy("createdAt", descending: true).get();
   }
 
+  Future<QuerySnapshot> fetchIssueRequestsByStatus(String? libraryId, String status) async {
+    return databaseReference.collection('issueRequests').where('libraryId', isEqualTo: libraryId).orderBy("createdAt", descending: true).where("status", isEqualTo: status).get();
+  }
+
   Future<void> updateIssueRequest(var data) async {
     return databaseReference.collection('issueRequests').doc(data['docId']).update(data);
   }

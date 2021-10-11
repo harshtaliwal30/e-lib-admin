@@ -16,9 +16,27 @@ class IssueRequestController extends GetxController {
   }
 
   void fetchIssueRequests() {
+    isLoading(true);
     issueRequestList.clear();
     SharedPreferences.getInstance().then((pref) {
       DatabaseHandler().fetchIssueRequests(pref.getString(Utils.KEY_LIBRARYID)).then((value) {
+        value.docs.forEach((element) {
+          Map<String, dynamic> docData = element.data() as dynamic;
+          docData["docId"] = element.id;
+          IssueRequestModel issueRequestModel = IssueRequestModel.fromJson(docData);
+          issueRequestList.add(issueRequestModel);
+          isLoading(false);
+        });
+        isLoading(false);
+      });
+    });
+  }
+
+  void fetchIssueRequestsByStatus(String status) {
+    isLoading(true);
+    issueRequestList.clear();
+    SharedPreferences.getInstance().then((pref) {
+      DatabaseHandler().fetchIssueRequestsByStatus(pref.getString(Utils.KEY_LIBRARYID), status).then((value) {
         value.docs.forEach((element) {
           Map<String, dynamic> docData = element.data() as dynamic;
           docData["docId"] = element.id;
