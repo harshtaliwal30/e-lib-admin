@@ -52,12 +52,27 @@ class IssueRequestsScreen extends StatelessWidget {
                           ),
                           padding: EdgeInsets.symmetric(
                             horizontal: AppUIConst.safeBlockHorizontal * 3,
-                            vertical: AppUIConst.safeBlockVertical * 0.5,
+                            vertical: AppUIConst.safeBlockVertical * 1,
                           ),
-                          child: Utils().getText("Sort by:"),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Utils().getText(
+                                "Sort by: ",
+                                fontWeight: FontWeight.bold,
+                                fontSize: AppUIConst.baseFontSize * 3.8,
+                              ),
+                              Utils().getText(
+                                _issueRequestController.selectedStatus.value,
+                                // fontWeight: FontWeight.bold,
+                                fontSize: AppUIConst.baseFontSize * 3.8,
+                              ),
+                            ],
+                          ),
                         ),
                         onSelected: (result) {
                           print(result);
+                          _issueRequestController.selectedStatus.value = result.toString();
                           if (result == "All") {
                             _issueRequestController.fetchIssueRequests();
                           } else if (result == "Pending") {

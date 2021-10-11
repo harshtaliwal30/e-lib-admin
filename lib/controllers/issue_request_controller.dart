@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class IssueRequestController extends GetxController {
   var issueRequestList = [].obs;
   var isLoading = true.obs;
+  var selectedStatus = "All".obs;
 
   @override
   void onInit() {
