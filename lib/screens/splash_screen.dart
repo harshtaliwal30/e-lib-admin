@@ -1,4 +1,4 @@
-import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/splash_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +6,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
-  final SplashScreenController splashScreenController = Get.put(SplashScreenController());
+  final SplashScreenController splashScreenController =
+      Get.put(SplashScreenController());
 
   @override
   Widget build(BuildContext context) {
-    AppUIConst.initOnStartUp(context);
+    SizeConfig.initOnStartUp(context);
     return Scaffold(
       backgroundColor: Utils.white,
       body: Row(
@@ -22,14 +23,14 @@ class SplashScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                    top: AppUIConst.safeBlockVertical * 10,
-                    left: AppUIConst.safeBlockHorizontal * 4,
+                    top: SizeConfig.safeBlockVertical * 10,
+                    left: SizeConfig.safeBlockHorizontal * 4,
                   ),
                   child: Text(
                     "Welcome\nto E-Lib Admin",
                     style: TextStyle(
                       color: Utils.primaryColor,
-                      fontSize: AppUIConst.baseFontSize * 12,
+                      fontSize: SizeConfig.baseFontSize * 12,
                       fontFamily: "OpenSans-Bold",
                     ),
                   ),
@@ -37,18 +38,18 @@ class SplashScreen extends StatelessWidget {
                 Center(
                   child: SvgPicture.asset(
                     "assets/images/bookshelf.svg",
-                    height: AppUIConst.screenHeight / 4,
+                    height: SizeConfig.screenHeight / 4,
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(
-                    vertical: AppUIConst.safeBlockVertical * 4,
+                    vertical: SizeConfig.safeBlockVertical * 4,
                   ),
                   child: Image.asset(
                     "assets/images/splashBook.png",
                     fit: BoxFit.fill,
-                    height: AppUIConst.screenHeight / 5,
-                    width: AppUIConst.screenWidth,
+                    height: SizeConfig.screenHeight / 5,
+                    width: SizeConfig.screenWidth,
                   ),
                 ),
               ],

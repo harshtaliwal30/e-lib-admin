@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_lib_admin/Utils/app_routes.dart';
-import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/home_screen_controller.dart';
 import 'package:e_lib_admin/screens/drawer_screen.dart';
@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class HomeScreen extends StatelessWidget {
-  final HomeScreenController _homePageController = Get.put(HomeScreenController());
+  final HomeScreenController _homePageController =
+      Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         title: Utils().getText(
           "Library Name",
           color: Utils.primaryColor,
-          fontSize: AppUIConst.baseFontSize * 4.5,
+          fontSize: SizeConfig.baseFontSize * 4.5,
         ),
       ),
       body: Obx(
@@ -41,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                           child: Container(
                             height: 45,
                             padding: EdgeInsets.only(
-                              left: AppUIConst.safeBlockHorizontal * 3,
+                              left: SizeConfig.safeBlockHorizontal * 3,
                             ),
                             child: TextFormField(
                               autofocus: false,
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 hintText: 'Search for libraries',
                                 hintStyle: TextStyle(
-                                  fontSize: AppUIConst.baseFontSize * 3.5,
+                                  fontSize: SizeConfig.baseFontSize * 3.5,
                                 ),
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -88,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             margin: EdgeInsets.only(
-                              left: AppUIConst.safeBlockHorizontal * 3,
+                              left: SizeConfig.safeBlockHorizontal * 3,
                             ),
                             child: Row(
                               children: [
@@ -96,20 +97,20 @@ class HomeScreen extends StatelessWidget {
                                   Icon(
                                     Icons.add,
                                     color: Utils.white,
-                                    size: AppUIConst.baseFontSize * 4.5,
+                                    size: SizeConfig.baseFontSize * 4.5,
                                   ),
-                                  left: AppUIConst.safeBlockHorizontal * 3,
+                                  left: SizeConfig.safeBlockHorizontal * 3,
                                 ),
                                 Utils().getWithPadding(
                                   Utils().getText(
                                     "Add Book",
                                     color: Utils.white,
-                                    fontSize: AppUIConst.baseFontSize * 3.5,
+                                    fontSize: SizeConfig.baseFontSize * 3.5,
                                   ),
-                                  top: AppUIConst.safeBlockVertical * 1,
-                                  bottom: AppUIConst.safeBlockVertical * 1,
-                                  left: AppUIConst.safeBlockHorizontal * 2,
-                                  right: AppUIConst.safeBlockHorizontal * 5,
+                                  top: SizeConfig.safeBlockVertical * 1,
+                                  bottom: SizeConfig.safeBlockVertical * 1,
+                                  left: SizeConfig.safeBlockHorizontal * 2,
+                                  right: SizeConfig.safeBlockHorizontal * 5,
                                 ),
                               ],
                             ),
@@ -125,13 +126,13 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       margin: EdgeInsets.symmetric(
-                        horizontal: AppUIConst.safeBlockHorizontal * 2,
-                        vertical: AppUIConst.safeBlockVertical * 1.5,
+                        horizontal: SizeConfig.safeBlockHorizontal * 2,
+                        vertical: SizeConfig.safeBlockVertical * 1.5,
                       ),
                       padding: EdgeInsets.all(
-                        AppUIConst.safeBlockHorizontal * 4,
+                        SizeConfig.safeBlockHorizontal * 4,
                       ),
-                      height: AppUIConst.screenHeight / 7,
+                      height: SizeConfig.screenHeight / 7,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -145,12 +146,13 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: Row(
                                   children: [
-                                    Utils().getChipView("+", color: Colors.purple.shade300),
+                                    Utils().getChipView("+",
+                                        color: Colors.purple.shade300),
                                     SizedBox(width: 5),
                                     Utils().getText(
                                       "Add Book",
                                       color: Colors.purple.shade300,
-                                      fontSize: AppUIConst.baseFontSize * 4,
+                                      fontSize: SizeConfig.baseFontSize * 4,
                                     ),
                                   ],
                                 ),
@@ -164,12 +166,13 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: Row(
                                   children: [
-                                    Utils().getChipView("22", color: Colors.blue.shade300),
+                                    Utils().getChipView("22",
+                                        color: Colors.blue.shade300),
                                     SizedBox(width: 5),
                                     Utils().getText(
                                       "Issue Requests",
                                       color: Colors.blue,
-                                      fontSize: AppUIConst.baseFontSize * 4,
+                                      fontSize: SizeConfig.baseFontSize * 4,
                                     ),
                                   ],
                                 ),
@@ -182,7 +185,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             child: Image.asset(
                               "assets/images/home.png",
-                              height: AppUIConst.screenHeight / 10,
+                              height: SizeConfig.screenHeight / 10,
                             ),
                           ),
                         ],
@@ -208,9 +211,9 @@ class HomeScreen extends StatelessWidget {
   Widget getBookItem(int index) {
     return Container(
       margin: EdgeInsets.only(
-        left: AppUIConst.safeBlockHorizontal * 2,
-        right: AppUIConst.safeBlockHorizontal * 2,
-        bottom: AppUIConst.safeBlockHorizontal * 3,
+        left: SizeConfig.safeBlockHorizontal * 2,
+        right: SizeConfig.safeBlockHorizontal * 2,
+        bottom: SizeConfig.safeBlockHorizontal * 3,
       ),
       child: Stack(
         children: [
@@ -223,15 +226,15 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             margin: EdgeInsets.only(
-              right: AppUIConst.safeBlockHorizontal * 3.5,
+              right: SizeConfig.safeBlockHorizontal * 3.5,
             ),
             child: Container(
-              height: AppUIConst.screenHeight / 5.5,
+              height: SizeConfig.screenHeight / 5.5,
               child: Row(
                 children: [
                   Container(
-                    height: AppUIConst.screenHeight / 5.5,
-                    width: AppUIConst.screenWidth / 4,
+                    height: SizeConfig.screenHeight / 5.5,
+                    width: SizeConfig.screenWidth / 4,
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
@@ -252,21 +255,21 @@ class HomeScreen extends StatelessWidget {
                         Utils().getWithPadding(
                           Utils().getText(
                             _homePageController.booksDataList[index].bookName,
-                            fontSize: AppUIConst.baseFontSize * 4,
+                            fontSize: SizeConfig.baseFontSize * 4,
                           ),
-                          top: AppUIConst.safeBlockVertical * 1,
-                          right: AppUIConst.safeBlockHorizontal * 5,
-                          left: AppUIConst.safeBlockHorizontal * 3,
+                          top: SizeConfig.safeBlockVertical * 1,
+                          right: SizeConfig.safeBlockHorizontal * 5,
+                          left: SizeConfig.safeBlockHorizontal * 3,
                         ),
                         Utils().getWithPadding(
                           Utils().getText(
                             _homePageController.booksDataList[index].authorName,
                             color: Utils.grey,
-                            fontSize: AppUIConst.baseFontSize * 3.2,
+                            fontSize: SizeConfig.baseFontSize * 3.2,
                           ),
-                          left: AppUIConst.safeBlockHorizontal * 3,
-                          right: AppUIConst.safeBlockHorizontal * 3,
-                          bottom: AppUIConst.safeBlockHorizontal * 2,
+                          left: SizeConfig.safeBlockHorizontal * 3,
+                          right: SizeConfig.safeBlockHorizontal * 3,
+                          bottom: SizeConfig.safeBlockHorizontal * 2,
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -276,19 +279,22 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           margin: EdgeInsets.only(
-                            left: AppUIConst.safeBlockHorizontal * 3,
+                            left: SizeConfig.safeBlockHorizontal * 3,
                           ),
                           child: Utils().getWithPadding(
                             Utils().getText(
-                              "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
+                              "Quantity: " +
+                                  _homePageController
+                                      .booksDataList[index].quantity
+                                      .toString(),
                               color: Utils.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: AppUIConst.baseFontSize * 2.9,
+                              fontSize: SizeConfig.baseFontSize * 2.9,
                             ),
-                            top: AppUIConst.safeBlockVertical * 0.3,
-                            bottom: AppUIConst.safeBlockVertical * 0.3,
-                            left: AppUIConst.safeBlockHorizontal * 2,
-                            right: AppUIConst.safeBlockHorizontal * 2,
+                            top: SizeConfig.safeBlockVertical * 0.3,
+                            bottom: SizeConfig.safeBlockVertical * 0.3,
+                            left: SizeConfig.safeBlockHorizontal * 2,
+                            right: SizeConfig.safeBlockHorizontal * 2,
                           ),
                         ),
                         Row(
@@ -296,22 +302,29 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Utils().getWithPadding(
                               Utils().getText(
-                                "₹" + _homePageController.booksDataList[index].price.toString(),
+                                "₹" +
+                                    _homePageController
+                                        .booksDataList[index].price
+                                        .toString(),
                                 color: Utils.green,
                                 fontWeight: FontWeight.bold,
-                                fontSize: AppUIConst.baseFontSize * 3.2,
+                                fontSize: SizeConfig.baseFontSize * 3.2,
                               ),
-                              top: AppUIConst.safeBlockVertical * 1,
-                              left: AppUIConst.safeBlockHorizontal * 3,
+                              top: SizeConfig.safeBlockVertical * 1,
+                              left: SizeConfig.safeBlockHorizontal * 3,
                             ),
                             Utils().getWithPadding(
                               Utils().getText(
-                                "Security: " + _homePageController.booksDataList[index].percentSecurity.toString() + "%",
+                                "Security: " +
+                                    _homePageController
+                                        .booksDataList[index].percentSecurity
+                                        .toString() +
+                                    "%",
                                 color: Utils.primaryColor,
-                                fontSize: AppUIConst.baseFontSize * 3.2,
+                                fontSize: SizeConfig.baseFontSize * 3.2,
                               ),
-                              top: AppUIConst.safeBlockVertical * 1,
-                              right: AppUIConst.safeBlockHorizontal * 2,
+                              top: SizeConfig.safeBlockVertical * 1,
+                              right: SizeConfig.safeBlockHorizontal * 2,
                             ),
                           ],
                         ),
@@ -326,18 +339,20 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           margin: EdgeInsets.only(
-                            left: AppUIConst.safeBlockHorizontal * 3,
-                            bottom: AppUIConst.safeBlockVertical * 1,
+                            left: SizeConfig.safeBlockHorizontal * 3,
+                            bottom: SizeConfig.safeBlockVertical * 1,
                           ),
                           child: Utils().getWithPadding(
                             Utils().getText(
-                              _homePageController.booksDataList[index].category ?? "Category",
-                              fontSize: AppUIConst.baseFontSize * 3.0,
+                              _homePageController
+                                      .booksDataList[index].category ??
+                                  "Category",
+                              fontSize: SizeConfig.baseFontSize * 3.0,
                             ),
-                            top: AppUIConst.safeBlockVertical * 0.2,
-                            bottom: AppUIConst.safeBlockVertical * 0.2,
-                            left: AppUIConst.safeBlockHorizontal * 2,
-                            right: AppUIConst.safeBlockHorizontal * 2,
+                            top: SizeConfig.safeBlockVertical * 0.2,
+                            bottom: SizeConfig.safeBlockVertical * 0.2,
+                            left: SizeConfig.safeBlockHorizontal * 2,
+                            right: SizeConfig.safeBlockHorizontal * 2,
                           ),
                         ),
                       ],
@@ -361,7 +376,7 @@ class HomeScreen extends StatelessWidget {
                     backgroundColor: Utils.blue,
                     child: Icon(
                       Icons.edit,
-                      size: AppUIConst.iconExamHeightAndWidth * 0.5,
+                      size: SizeConfig.iconExamHeightAndWidth * 0.5,
                       color: Utils.white,
                     ),
                   ),
@@ -375,7 +390,8 @@ class HomeScreen extends StatelessWidget {
                       "Alert",
                       "Are you sure you want to delete the book?",
                       () {
-                        _homePageController.deleteBook(_homePageController.booksDataList[index].bookDocId);
+                        _homePageController.deleteBook(
+                            _homePageController.booksDataList[index].bookDocId);
                         Get.back(result: "deleted");
                       },
                     );
@@ -389,7 +405,7 @@ class HomeScreen extends StatelessWidget {
                     backgroundColor: Utils.red,
                     child: Icon(
                       Icons.delete,
-                      size: AppUIConst.iconExamHeightAndWidth * 0.5,
+                      size: SizeConfig.iconExamHeightAndWidth * 0.5,
                       color: Utils.white,
                     ),
                   ),
@@ -411,7 +427,7 @@ class NoBooksView extends HomeScreen {
       children: [
         Image.asset(
           "assets/images/noBookAdded.png",
-          height: AppUIConst.screenWidth / 1.5,
+          height: SizeConfig.screenWidth / 1.5,
         ),
         Utils().getWithPadding(
           Utils().getText(
@@ -419,8 +435,8 @@ class NoBooksView extends HomeScreen {
             color: Utils.darkGrey,
             fontWeight: FontWeight.bold,
           ),
-          top: AppUIConst.safeBlockVertical * 2,
-          bottom: AppUIConst.safeBlockVertical * 2,
+          top: SizeConfig.safeBlockVertical * 2,
+          bottom: SizeConfig.safeBlockVertical * 2,
         ),
         InkWell(
           onTap: () async {

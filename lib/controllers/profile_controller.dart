@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart' as dio;
-import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/cloudinary_manager.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/models/library_model.dart';
@@ -131,7 +131,7 @@ class ProfileController extends GetxController {
   Future<dynamic> openPickerOptions() {
     return Get.bottomSheet(
       Container(
-        padding: EdgeInsets.all(AppUIConst.safeBlockVertical * 2),
+        padding: EdgeInsets.all(SizeConfig.safeBlockVertical * 2),
         child: new Wrap(
           children: <Widget>[
             new ListTile(

@@ -1,5 +1,5 @@
 import 'package:csc_picker/csc_picker.dart';
-import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
         title: Utils().getText(
           "Profile",
           color: Utils.primaryColor,
-          fontSize: AppUIConst.baseFontSize * 4.5,
+          fontSize: SizeConfig.baseFontSize * 4.5,
         ),
       ),
       body: Obx(
@@ -32,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
             : SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: AppUIConst.safeBlockHorizontal * 4,
+                    horizontal: SizeConfig.safeBlockHorizontal * 4,
                   ),
                   child: Form(
                     key: _formKey,
@@ -47,31 +47,37 @@ class ProfileScreen extends StatelessWidget {
                                 _profileController.openPickerOptions();
                               },
                               child: Container(
-                                height: AppUIConst.screenHeight / 5,
-                                width: AppUIConst.screenWidth / 2.5,
+                                height: SizeConfig.screenHeight / 5,
+                                width: SizeConfig.screenWidth / 2.5,
                                 decoration: BoxDecoration(
                                   color: Utils.lightBgColor,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(10),
                                   ),
                                 ),
-                                child: _profileController.imageUrl.value.length > 0
-                                    ? Image.network(_profileController.libraryModel.libraryImage!)
-                                    : _profileController.image.value.path.length > 0
-                                        ? Image.file(
-                                            _profileController.image.value,
-                                            fit: BoxFit.fill,
-                                          )
-                                        : Icon(
-                                            Icons.photo_library,
-                                            color: Utils.amber,
-                                            size: AppUIConst.iconGeneralHeightAndWidth * 2,
-                                          ),
+                                child:
+                                    _profileController.imageUrl.value.length > 0
+                                        ? Image.network(_profileController
+                                            .libraryModel.libraryImage!)
+                                        : _profileController
+                                                    .image.value.path.length >
+                                                0
+                                            ? Image.file(
+                                                _profileController.image.value,
+                                                fit: BoxFit.fill,
+                                              )
+                                            : Icon(
+                                                Icons.photo_library,
+                                                color: Utils.amber,
+                                                size: SizeConfig
+                                                        .iconGeneralHeightAndWidth *
+                                                    2,
+                                              ),
                               ),
                             ),
                             Image.asset(
                               "assets/images/profile.png",
-                              width: AppUIConst.screenWidth / 2,
+                              width: SizeConfig.screenWidth / 2,
                             ),
                           ],
                         ),
@@ -134,7 +140,7 @@ class ProfileScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             padding: EdgeInsets.symmetric(
-                              horizontal: AppUIConst.safeBlockHorizontal * 20,
+                              horizontal: SizeConfig.safeBlockHorizontal * 20,
                             ),
                             color: Utils.blue,
                             elevation: 0,
@@ -175,8 +181,8 @@ class ProfileScreen extends StatelessWidget {
       validator: validator,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
-          horizontal: AppUIConst.safeBlockHorizontal * 4,
-          vertical: AppUIConst.safeBlockVertical * 2,
+          horizontal: SizeConfig.safeBlockHorizontal * 4,
+          vertical: SizeConfig.safeBlockVertical * 2,
         ),
         labelText: labelText,
         labelStyle: TextStyle(color: Utils.darkGrey),
@@ -215,8 +221,8 @@ class ProfileScreen extends StatelessWidget {
       alignment: Alignment.center,
       child: ToggleButtons(
         constraints: BoxConstraints(
-          minWidth: AppUIConst.screenWidth / 2.5,
-          minHeight: AppUIConst.screenHeight / 25,
+          minWidth: SizeConfig.screenWidth / 2.5,
+          minHeight: SizeConfig.screenHeight / 25,
         ),
         fillColor: Utils.blue,
         borderColor: Utils.blue,
@@ -228,7 +234,9 @@ class ProfileScreen extends StatelessWidget {
           Text("Institutional"),
         ],
         onPressed: (int index) {
-          for (int buttonIndex = 0; buttonIndex < _profileController.isSelected.length; buttonIndex++) {
+          for (int buttonIndex = 0;
+              buttonIndex < _profileController.isSelected.length;
+              buttonIndex++) {
             if (buttonIndex == index) {
               _profileController.isSelected[buttonIndex] = true;
             } else {
@@ -273,7 +281,7 @@ class ProfileScreen extends StatelessWidget {
       ),
       dropdownHeadingStyle: TextStyle(
         color: Utils.black,
-        fontSize: AppUIConst.baseFontSize * 5,
+        fontSize: SizeConfig.baseFontSize * 5,
         fontWeight: FontWeight.bold,
       ),
 

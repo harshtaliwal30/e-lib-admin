@@ -10,7 +10,7 @@ DT = DeviceType
 
 /// Helper class to manage the Dynamic padding, margin and font size value
 
-class AppUIConst {
+class SizeConfig {
   //initOnStartUp
   static MediaQueryData mediaQuery = MediaQueryData();
   static AppDeviceScreenType appDeviceScreenType = AppDeviceScreenType.MOBILE;
@@ -21,7 +21,8 @@ class AppUIConst {
 
   static bool get isTablet => appDeviceScreenType == AppDeviceScreenType.TABLET;
 
-  static bool get isDesktop => appDeviceScreenType == AppDeviceScreenType.DESKTOP;
+  static bool get isDesktop =>
+      appDeviceScreenType == AppDeviceScreenType.DESKTOP;
 
   static double portraitWidth = 0.0;
   static double portraitHeight = 0.0;
@@ -75,15 +76,20 @@ class AppUIConst {
 
   static double get blockSizeVertical => screenHeight / 100;
 
-  static double get safeBlockHorizontal => (screenWidth - _safeAreaHorizontal) / 100;
+  static double get safeBlockHorizontal =>
+      (screenWidth - _safeAreaHorizontal) / 100;
 
-  static double get safeBlockVertical => (screenHeight - _safeAreaVertical) / 100;
+  static double get safeBlockVertical =>
+      (screenHeight - _safeAreaVertical) / 100;
 
-  static double get baseFontSize => _getFontSize(mediaQuery, _safeAreaHorizontal, _safeAreaVertical);
+  static double get baseFontSize =>
+      _getFontSize(mediaQuery, _safeAreaHorizontal, _safeAreaVertical);
 
-  static double get kDefaultPadding => isMobile ? PADDING_MEDIUM : PADDING_MEDIUM_LARGE;
+  static double get kDefaultPadding =>
+      isMobile ? PADDING_MEDIUM : PADDING_MEDIUM_LARGE;
 
-  static double get kDefaultMargin => isMobile ? MARGIN_MEDIUM : MARGIN_MEDIUM_LARGE;
+  static double get kDefaultMargin =>
+      isMobile ? MARGIN_MEDIUM : MARGIN_MEDIUM_LARGE;
 
   static double get appBarHeight => isMobile ? kToolbarHeight : 90;
 
@@ -97,9 +103,11 @@ class AppUIConst {
 
   static double get iconGeneralHeightAndWidth => isMobile ? 30 : 60;
 
-  static double get _safeAreaHorizontal => mediaQuery.padding.left + mediaQuery.padding.right;
+  static double get _safeAreaHorizontal =>
+      mediaQuery.padding.left + mediaQuery.padding.right;
 
-  static double get _safeAreaVertical => mediaQuery.padding.top + mediaQuery.padding.bottom;
+  static double get _safeAreaVertical =>
+      mediaQuery.padding.top + mediaQuery.padding.bottom;
 
   // DT   //icon, margin padding,
   static double adjustByDT(double logicalPixels) {
@@ -122,7 +130,7 @@ class AppUIConst {
 }
 
 bool _defaultPortrait() {
-  return AppUIConst.isMobile;
+  return SizeConfig.isMobile;
 }
 
 AppDeviceScreenType _calculateDeviceScreenType(double portraitWidth) {
@@ -135,7 +143,8 @@ AppDeviceScreenType _calculateDeviceScreenType(double portraitWidth) {
   return AppDeviceScreenType.MOBILE;
 }
 
-double _getFontSize(MediaQueryData mq, double safeAreaHorizontal, double safeAreaVertical) {
+double _getFontSize(
+    MediaQueryData mq, double safeAreaHorizontal, double safeAreaVertical) {
   // if (ml.apt(mlTopic.CP)) ml.CP('${mq.orientation}');
   if (mq.orientation == Orientation.portrait) {
     if (mq.size.width > 600.0) {

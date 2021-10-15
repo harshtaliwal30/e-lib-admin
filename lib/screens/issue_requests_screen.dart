@@ -1,4 +1,4 @@
-import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/issue_request_controller.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,8 @@ import 'package:intl/intl.dart';
 enum SortBy { all, pending, approved, issued, returned, declined }
 
 class IssueRequestsScreen extends StatelessWidget {
-  final IssueRequestController _issueRequestController = Get.put(IssueRequestController());
+  final IssueRequestController _issueRequestController =
+      Get.put(IssueRequestController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class IssueRequestsScreen extends StatelessWidget {
         title: Utils().getText(
           "Issue Requests",
           color: Utils.primaryColor,
-          fontSize: AppUIConst.baseFontSize * 4.5,
+          fontSize: SizeConfig.baseFontSize * 4.5,
         ),
       ),
       body: Obx(
@@ -36,7 +37,7 @@ class IssueRequestsScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: AppUIConst.safeBlockHorizontal * 2,
+                        horizontal: SizeConfig.safeBlockHorizontal * 2,
                       ),
                       child: PopupMenuButton(
                         shape: RoundedRectangleBorder(
@@ -51,8 +52,8 @@ class IssueRequestsScreen extends StatelessWidget {
                             border: Border.all(color: Utils.primaryColor),
                           ),
                           padding: EdgeInsets.symmetric(
-                            horizontal: AppUIConst.safeBlockHorizontal * 3,
-                            vertical: AppUIConst.safeBlockVertical * 1,
+                            horizontal: SizeConfig.safeBlockHorizontal * 3,
+                            vertical: SizeConfig.safeBlockVertical * 1,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -60,31 +61,37 @@ class IssueRequestsScreen extends StatelessWidget {
                               Utils().getText(
                                 "Sort by: ",
                                 fontWeight: FontWeight.bold,
-                                fontSize: AppUIConst.baseFontSize * 3.8,
+                                fontSize: SizeConfig.baseFontSize * 3.8,
                               ),
                               Utils().getText(
                                 _issueRequestController.selectedStatus.value,
                                 // fontWeight: FontWeight.bold,
-                                fontSize: AppUIConst.baseFontSize * 3.8,
+                                fontSize: SizeConfig.baseFontSize * 3.8,
                               ),
                             ],
                           ),
                         ),
                         onSelected: (result) {
                           print(result);
-                          _issueRequestController.selectedStatus.value = result.toString();
+                          _issueRequestController.selectedStatus.value =
+                              result.toString();
                           if (result == "All") {
                             _issueRequestController.fetchIssueRequests();
                           } else if (result == "Pending") {
-                            _issueRequestController.fetchIssueRequestsByStatus("Pending");
+                            _issueRequestController
+                                .fetchIssueRequestsByStatus("Pending");
                           } else if (result == "Approved") {
-                            _issueRequestController.fetchIssueRequestsByStatus("Approved");
+                            _issueRequestController
+                                .fetchIssueRequestsByStatus("Approved");
                           } else if (result == "Issued") {
-                            _issueRequestController.fetchIssueRequestsByStatus("Issued");
+                            _issueRequestController
+                                .fetchIssueRequestsByStatus("Issued");
                           } else if (result == "Returned") {
-                            _issueRequestController.fetchIssueRequestsByStatus("Returned");
+                            _issueRequestController
+                                .fetchIssueRequestsByStatus("Returned");
                           } else {
-                            _issueRequestController.fetchIssueRequestsByStatus("Declined");
+                            _issueRequestController
+                                .fetchIssueRequestsByStatus("Declined");
                           }
                         },
                         itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -118,7 +125,8 @@ class IssueRequestsScreen extends StatelessWidget {
                     _issueRequestController.issueRequestList.length == 0
                         ? NoIssueRequestsView()
                         : ListView.builder(
-                            itemCount: _issueRequestController.issueRequestList.length,
+                            itemCount:
+                                _issueRequestController.issueRequestList.length,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) => getBookItem(index),
@@ -145,9 +153,9 @@ class IssueRequestsScreen extends StatelessWidget {
         ),
       ),
       margin: EdgeInsets.only(
-        left: AppUIConst.safeBlockHorizontal * 2,
-        right: AppUIConst.safeBlockHorizontal * 2,
-        top: AppUIConst.safeBlockVertical * 2,
+        left: SizeConfig.safeBlockHorizontal * 2,
+        right: SizeConfig.safeBlockHorizontal * 2,
+        top: SizeConfig.safeBlockVertical * 2,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,43 +165,60 @@ class IssueRequestsScreen extends StatelessWidget {
               _issueRequestController.issueRequestList[index].bookName,
               color: Utils.primaryColor,
               fontWeight: FontWeight.bold,
-              fontSize: AppUIConst.baseFontSize * 3.7,
+              fontSize: SizeConfig.baseFontSize * 3.7,
             ),
-            top: AppUIConst.safeBlockVertical * 1,
-            right: AppUIConst.safeBlockHorizontal * 3,
-            left: AppUIConst.safeBlockHorizontal * 3,
+            top: SizeConfig.safeBlockVertical * 1,
+            right: SizeConfig.safeBlockHorizontal * 3,
+            left: SizeConfig.safeBlockHorizontal * 3,
           ),
           Utils().getWithPadding(
             Utils().getText(
               _issueRequestController.issueRequestList[index].authorName,
               color: Utils.grey,
               fontWeight: FontWeight.bold,
-              fontSize: AppUIConst.baseFontSize * 3.2,
+              fontSize: SizeConfig.baseFontSize * 3.2,
             ),
-            right: AppUIConst.safeBlockHorizontal * 3,
-            left: AppUIConst.safeBlockHorizontal * 3,
-            bottom: AppUIConst.safeBlockVertical * 1,
+            right: SizeConfig.safeBlockHorizontal * 3,
+            left: SizeConfig.safeBlockHorizontal * 3,
+            bottom: SizeConfig.safeBlockVertical * 1,
           ),
-          if (_issueRequestController.issueRequestList[index].status == "Declined") ...[
-            getStatusView("Declined", _issueRequestController.issueRequestList[index].declinedAt, color: Utils.red),
+          if (_issueRequestController.issueRequestList[index].status ==
+              "Declined") ...[
+            getStatusView("Declined",
+                _issueRequestController.issueRequestList[index].declinedAt,
+                color: Utils.red),
           ],
-          if (_issueRequestController.issueRequestList[index].status == "Pending") ...[
-            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
+          if (_issueRequestController.issueRequestList[index].status ==
+              "Pending") ...[
+            getStatusView("Pending",
+                _issueRequestController.issueRequestList[index].createdAt),
           ],
-          if (_issueRequestController.issueRequestList[index].status == "Approved") ...[
-            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
-            getStatusView("Approved", _issueRequestController.issueRequestList[index].approvedAt),
+          if (_issueRequestController.issueRequestList[index].status ==
+              "Approved") ...[
+            getStatusView("Pending",
+                _issueRequestController.issueRequestList[index].createdAt),
+            getStatusView("Approved",
+                _issueRequestController.issueRequestList[index].approvedAt),
           ],
-          if (_issueRequestController.issueRequestList[index].status == "Issued") ...[
-            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
-            getStatusView("Approved", _issueRequestController.issueRequestList[index].approvedAt),
-            getStatusView("Issued", _issueRequestController.issueRequestList[index].issuedAt),
+          if (_issueRequestController.issueRequestList[index].status ==
+              "Issued") ...[
+            getStatusView("Pending",
+                _issueRequestController.issueRequestList[index].createdAt),
+            getStatusView("Approved",
+                _issueRequestController.issueRequestList[index].approvedAt),
+            getStatusView("Issued",
+                _issueRequestController.issueRequestList[index].issuedAt),
           ],
-          if (_issueRequestController.issueRequestList[index].status == "Returned") ...[
-            getStatusView("Pending", _issueRequestController.issueRequestList[index].createdAt),
-            getStatusView("Approved", _issueRequestController.issueRequestList[index].approvedAt),
-            getStatusView("Issued", _issueRequestController.issueRequestList[index].issuedAt),
-            getStatusView("Returned", _issueRequestController.issueRequestList[index].returnedAt),
+          if (_issueRequestController.issueRequestList[index].status ==
+              "Returned") ...[
+            getStatusView("Pending",
+                _issueRequestController.issueRequestList[index].createdAt),
+            getStatusView("Approved",
+                _issueRequestController.issueRequestList[index].approvedAt),
+            getStatusView("Issued",
+                _issueRequestController.issueRequestList[index].issuedAt),
+            getStatusView("Returned",
+                _issueRequestController.issueRequestList[index].returnedAt),
           ],
           SizedBox(
             height: 5,
@@ -206,74 +231,106 @@ class IssueRequestsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              if (_issueRequestController.issueRequestList[index].status == "Pending" || _issueRequestController.issueRequestList[index].status == "Declined") ...[
+              if (_issueRequestController.issueRequestList[index].status ==
+                      "Pending" ||
+                  _issueRequestController.issueRequestList[index].status ==
+                      "Declined") ...[
                 Expanded(
                   child: MaterialButton(
                     onPressed: () async {
-                      if (_issueRequestController.issueRequestList[index].status != "Declined") {
+                      if (_issueRequestController
+                              .issueRequestList[index].status !=
+                          "Declined") {
                         var result = await Utils().showDialog(
                           "Alert",
                           "Are you sure you want to decline this request",
                           () {
-                            _issueRequestController.issueRequestList[index].status = "Declined";
-                            _issueRequestController.issueRequestList[index].declinedAt = DateTime.now();
+                            _issueRequestController
+                                .issueRequestList[index].status = "Declined";
+                            _issueRequestController.issueRequestList[index]
+                                .declinedAt = DateTime.now();
                             Get.back(result: "statusUpdated");
                           },
                         );
                         if (result != null && result == "statusUpdated") {
-                          await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
-                          Utils().showConfirmSnackbar("Status updated successfully");
+                          await _issueRequestController.updateIssueRequest(
+                              _issueRequestController.issueRequestList[index],
+                              index);
+                          Utils().showConfirmSnackbar(
+                              "Status updated successfully");
                         }
                       }
                     },
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     child: Utils().getText(
-                      _issueRequestController.issueRequestList[index].status == "Declined" ? "Request Declined" : "Decline",
+                      _issueRequestController.issueRequestList[index].status ==
+                              "Declined"
+                          ? "Request Declined"
+                          : "Decline",
                       color: Utils.red,
                       fontWeight: FontWeight.bold,
-                      fontSize: AppUIConst.baseFontSize * 3.5,
+                      fontSize: SizeConfig.baseFontSize * 3.5,
                     ),
                   ),
                 ),
-                if (_issueRequestController.issueRequestList[index].status == "Pending")
+                if (_issueRequestController.issueRequestList[index].status ==
+                    "Pending")
                   Container(
                     color: Utils.grey,
                     width: 0.5,
                     height: 25,
                   ),
               ],
-              if (_issueRequestController.issueRequestList[index].status != "Declined")
+              if (_issueRequestController.issueRequestList[index].status !=
+                  "Declined")
                 Expanded(
                   child: MaterialButton(
                     onPressed: () async {
-                      String status = _issueRequestController.getStatus(_issueRequestController.issueRequestList[index].status);
+                      String status = _issueRequestController.getStatus(
+                          _issueRequestController
+                              .issueRequestList[index].status);
                       if (status != "Book Returned") {
                         var result = await Utils().showDialog(
                           "Alert",
                           "Are you sure you want to mark the book as \"$status\"",
                           () {
-                            _issueRequestController.issueRequestList[index].status = status;
+                            _issueRequestController
+                                .issueRequestList[index].status = status;
                             if (status == "Approved")
-                              _issueRequestController.issueRequestList[index].approvedAt = DateTime.now();
+                              _issueRequestController.issueRequestList[index]
+                                  .approvedAt = DateTime.now();
                             else if (status == "Issued")
-                              _issueRequestController.issueRequestList[index].issuedAt = DateTime.now();
-                            else if (status == "Returned") _issueRequestController.issueRequestList[index].returnedAt = DateTime.now();
+                              _issueRequestController.issueRequestList[index]
+                                  .issuedAt = DateTime.now();
+                            else if (status == "Returned")
+                              _issueRequestController.issueRequestList[index]
+                                  .returnedAt = DateTime.now();
                             Get.back(result: "statusUpdated");
                           },
                         );
                         if (result != null && result == "statusUpdated") {
-                          await _issueRequestController.updateIssueRequest(_issueRequestController.issueRequestList[index], index);
-                          Utils().showConfirmSnackbar("Status updated successfully");
+                          await _issueRequestController.updateIssueRequest(
+                              _issueRequestController.issueRequestList[index],
+                              index);
+                          Utils().showConfirmSnackbar(
+                              "Status updated successfully");
                         }
                       }
                     },
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     child: Utils().getText(
-                      (_issueRequestController.issueRequestList[index].status != "Returned" ? "Mark as " : "") +
-                          _issueRequestController.getStatus(_issueRequestController.issueRequestList[index].status),
+                      (_issueRequestController.issueRequestList[index].status !=
+                                  "Returned"
+                              ? "Mark as "
+                              : "") +
+                          _issueRequestController.getStatus(
+                              _issueRequestController
+                                  .issueRequestList[index].status),
                       color: Utils.green,
                       fontWeight: FontWeight.bold,
-                      fontSize: AppUIConst.baseFontSize * 3.5,
+                      fontSize: SizeConfig.baseFontSize * 3.5,
                     ),
                   ),
                 ),
@@ -303,20 +360,20 @@ class IssueRequestsScreen extends StatelessWidget {
               ),
             ],
           ),
-          left: AppUIConst.safeBlockHorizontal * 3,
-          right: AppUIConst.safeBlockHorizontal * 1,
+          left: SizeConfig.safeBlockHorizontal * 3,
+          right: SizeConfig.safeBlockHorizontal * 1,
         ),
         Utils().getText(
           status + " - ",
           color: color,
           fontWeight: FontWeight.bold,
-          fontSize: AppUIConst.baseFontSize * 3,
+          fontSize: SizeConfig.baseFontSize * 3,
         ),
         Utils().getText(
           DateFormat.yMMMEd().format(date).toString(),
           color: color,
           fontWeight: FontWeight.bold,
-          fontSize: AppUIConst.baseFontSize * 2.9,
+          fontSize: SizeConfig.baseFontSize * 2.9,
         ),
       ],
     );
@@ -336,12 +393,12 @@ class NoIssueRequestsView extends StatelessWidget {
               color: Utils.darkGrey,
               fontWeight: FontWeight.bold,
             ),
-            top: AppUIConst.safeBlockVertical * 2,
-            bottom: AppUIConst.safeBlockVertical * 2,
+            top: SizeConfig.safeBlockVertical * 2,
+            bottom: SizeConfig.safeBlockVertical * 2,
           ),
           Image.asset(
             "assets/images/issue.png",
-            height: AppUIConst.screenWidth / 1.5,
+            height: SizeConfig.screenWidth / 1.5,
           ),
         ],
       ),

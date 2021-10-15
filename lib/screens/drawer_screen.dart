@@ -1,5 +1,5 @@
 import 'package:e_lib_admin/Utils/app_routes.dart';
-import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,15 +32,15 @@ class DrawerScreen extends StatelessWidget {
                     Utils().getText(
                       "Maulana Azad",
                       fontWeight: FontWeight.bold,
-                      fontSize: AppUIConst.baseFontSize * 4,
+                      fontSize: SizeConfig.baseFontSize * 4,
                     ),
-                    top: AppUIConst.safeBlockVertical * 1,
+                    top: SizeConfig.safeBlockVertical * 1,
                   ),
                   Utils().getText(
                     "Aligarh",
                     color: Utils.grey,
                     fontWeight: FontWeight.bold,
-                    fontSize: AppUIConst.baseFontSize * 3.5,
+                    fontSize: SizeConfig.baseFontSize * 3.5,
                   )
                 ],
               ),
@@ -131,8 +131,8 @@ class DrawerScreen extends StatelessWidget {
         ),
         onTap: onTap,
       ),
-      left: AppUIConst.safeBlockHorizontal * 3,
-      right: AppUIConst.safeBlockHorizontal * 3,
+      left: SizeConfig.safeBlockHorizontal * 3,
+      right: SizeConfig.safeBlockHorizontal * 3,
     );
   }
 }

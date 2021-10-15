@@ -1,4 +1,4 @@
-import 'package:e_lib_admin/Utils/app_ui_constant.dart';
+import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
@@ -25,31 +25,32 @@ class OTPScreen extends StatelessWidget {
                   Utils().getWithPadding(
                     Utils().getText(
                       "Verify Phone",
-                      fontSize: AppUIConst.baseFontSize * 4.5,
+                      fontSize: SizeConfig.baseFontSize * 4.5,
                     ),
-                    left: AppUIConst.safeBlockHorizontal * 4,
-                    right: AppUIConst.safeBlockHorizontal * 4,
-                    top: AppUIConst.safeBlockVertical * 8,
-                    bottom: AppUIConst.safeBlockVertical * 4,
+                    left: SizeConfig.safeBlockHorizontal * 4,
+                    right: SizeConfig.safeBlockHorizontal * 4,
+                    top: SizeConfig.safeBlockVertical * 8,
+                    bottom: SizeConfig.safeBlockVertical * 4,
                   ),
                   Utils().getWithPadding(
                     Utils().getText(
-                      "Code is sent to " + _loginController.phoneController.text,
+                      "Code is sent to " +
+                          _loginController.phoneController.text,
                       color: Utils.darkGrey,
                       textAlign: TextAlign.center,
-                      fontSize: AppUIConst.baseFontSize * 4,
+                      fontSize: SizeConfig.baseFontSize * 4,
                     ),
-                    left: AppUIConst.safeBlockHorizontal * 4,
-                    right: AppUIConst.safeBlockHorizontal * 4,
+                    left: SizeConfig.safeBlockHorizontal * 4,
+                    right: SizeConfig.safeBlockHorizontal * 4,
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(
-                      vertical: AppUIConst.safeBlockVertical * 4,
+                      vertical: SizeConfig.safeBlockVertical * 4,
                     ),
                     child: Image.asset(
                       "assets/images/phoneNumber.png",
                       fit: BoxFit.fill,
-                      height: AppUIConst.screenHeight / 5,
+                      height: SizeConfig.screenHeight / 5,
                     ),
                   ),
                   Row(
@@ -60,9 +61,9 @@ class OTPScreen extends StatelessWidget {
                           "Didn't recieve code?",
                           color: Utils.darkGrey,
                           textAlign: TextAlign.center,
-                          fontSize: AppUIConst.baseFontSize * 4,
+                          fontSize: SizeConfig.baseFontSize * 4,
                         ),
-                        left: AppUIConst.safeBlockHorizontal * 4,
+                        left: SizeConfig.safeBlockHorizontal * 4,
                       ),
                       InkWell(
                         onTap: () {
@@ -72,12 +73,14 @@ class OTPScreen extends StatelessWidget {
                         child: Utils().getWithPadding(
                           Utils().getText(
                             "Request again",
-                            color: _loginController.seconds.value == 0 ? Utils.primaryColor : Utils.grey,
+                            color: _loginController.seconds.value == 0
+                                ? Utils.primaryColor
+                                : Utils.grey,
                             textAlign: TextAlign.center,
-                            fontSize: AppUIConst.baseFontSize * 4,
+                            fontSize: SizeConfig.baseFontSize * 4,
                           ),
-                          left: AppUIConst.safeBlockHorizontal * 1,
-                          right: AppUIConst.safeBlockHorizontal * 4,
+                          left: SizeConfig.safeBlockHorizontal * 1,
+                          right: SizeConfig.safeBlockHorizontal * 4,
                         ),
                       ),
                     ],
@@ -90,11 +93,11 @@ class OTPScreen extends StatelessWidget {
                       ),
                     ),
                     padding: EdgeInsets.symmetric(
-                      horizontal: AppUIConst.safeBlockHorizontal * 2,
-                      vertical: AppUIConst.safeBlockVertical * 0.1,
+                      horizontal: SizeConfig.safeBlockHorizontal * 2,
+                      vertical: SizeConfig.safeBlockVertical * 0.1,
                     ),
                     margin: EdgeInsets.only(
-                      top: AppUIConst.safeBlockVertical * 2,
+                      top: SizeConfig.safeBlockVertical * 2,
                     ),
                     child: Utils().getText(
                       _loginController.seconds.value == 60
@@ -104,20 +107,20 @@ class OTPScreen extends StatelessWidget {
                               : "00:0${_loginController.seconds.value}",
                       color: Utils.darkGrey,
                       textAlign: TextAlign.center,
-                      fontSize: AppUIConst.baseFontSize * 4,
+                      fontSize: SizeConfig.baseFontSize * 4,
                     ),
                   ),
                   Utils().getWithPadding(
                     phoneField(),
-                    top: AppUIConst.safeBlockVertical * 2,
-                    left: AppUIConst.safeBlockHorizontal * 4,
-                    right: AppUIConst.safeBlockHorizontal * 4,
+                    top: SizeConfig.safeBlockVertical * 2,
+                    left: SizeConfig.safeBlockHorizontal * 4,
+                    right: SizeConfig.safeBlockHorizontal * 4,
                   ),
                   Utils().getWithPadding(
                     getButton(),
-                    top: AppUIConst.safeBlockVertical * 4,
-                    left: AppUIConst.screenWidth / 3.5,
-                    right: AppUIConst.safeBlockHorizontal * 4,
+                    top: SizeConfig.safeBlockVertical * 4,
+                    left: SizeConfig.screenWidth / 3.5,
+                    right: SizeConfig.safeBlockHorizontal * 4,
                   ),
                 ],
               ),
@@ -135,7 +138,7 @@ class OTPScreen extends StatelessWidget {
         Utils().getText(
           "Enter OTP:  ",
           color: Utils.grey,
-          fontSize: AppUIConst.baseFontSize * 4,
+          fontSize: SizeConfig.baseFontSize * 4,
         ),
         Expanded(
           child: TextField(
@@ -145,12 +148,12 @@ class OTPScreen extends StatelessWidget {
             maxLength: 6,
             style: TextStyle(
               color: Utils.primaryColor,
-              fontSize: AppUIConst.baseFontSize * 4,
+              fontSize: SizeConfig.baseFontSize * 4,
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(
-                horizontal: AppUIConst.safeBlockHorizontal * 4,
-                vertical: AppUIConst.safeBlockVertical * 1.5,
+                horizontal: SizeConfig.safeBlockHorizontal * 4,
+                vertical: SizeConfig.safeBlockVertical * 1.5,
               ),
               counterText: "",
               border: OutlineInputBorder(
@@ -180,13 +183,13 @@ class OTPScreen extends StatelessWidget {
           color: Utils.blue,
         ),
         padding: EdgeInsets.symmetric(
-          horizontal: AppUIConst.safeBlockHorizontal * 3,
-          vertical: AppUIConst.safeBlockVertical * 1,
+          horizontal: SizeConfig.safeBlockHorizontal * 3,
+          vertical: SizeConfig.safeBlockVertical * 1,
         ),
         child: Utils().getText(
           "Verify and Create Account",
           color: Utils.white,
-          fontSize: AppUIConst.baseFontSize * 4.5,
+          fontSize: SizeConfig.baseFontSize * 4.5,
         ),
       ),
     );
