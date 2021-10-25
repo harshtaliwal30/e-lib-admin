@@ -9,8 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class HomeScreen extends StatelessWidget {
-  final HomeScreenController _homePageController =
-      Get.put(HomeScreenController());
+  final HomeScreenController _homePageController = Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +145,7 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: Row(
                                   children: [
-                                    Utils().getChipView("+",
-                                        color: Colors.purple.shade300),
+                                    Utils().getChipView("+", color: Colors.purple.shade300),
                                     SizedBox(width: 5),
                                     Utils().getText(
                                       "Add Book",
@@ -166,8 +164,7 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 child: Row(
                                   children: [
-                                    Utils().getChipView("22",
-                                        color: Colors.blue.shade300),
+                                    Utils().getChipView("22", color: Colors.blue.shade300),
                                     SizedBox(width: 5),
                                     Utils().getText(
                                       "Issue Requests",
@@ -213,13 +210,13 @@ class HomeScreen extends StatelessWidget {
       margin: EdgeInsets.only(
         left: SizeConfig.safeBlockHorizontal * 2,
         right: SizeConfig.safeBlockHorizontal * 2,
-        bottom: SizeConfig.safeBlockHorizontal * 3,
+        bottom: SizeConfig.safeBlockHorizontal * 6,
       ),
       child: Stack(
         children: [
           Card(
             shadowColor: Utils.white,
-            elevation: 15,
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -236,10 +233,7 @@ class HomeScreen extends StatelessWidget {
                     height: SizeConfig.screenHeight / 5.5,
                     width: SizeConfig.screenWidth / 4,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
+                      borderRadius: BorderRadius.circular(8),
                       child: CachedNetworkImage(
                         fit: BoxFit.fill,
                         imageUrl:
@@ -283,10 +277,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: Utils().getWithPadding(
                             Utils().getText(
-                              "Quantity: " +
-                                  _homePageController
-                                      .booksDataList[index].quantity
-                                      .toString(),
+                              "Quantity: " + _homePageController.booksDataList[index].quantity.toString(),
                               color: Utils.white,
                               fontWeight: FontWeight.bold,
                               fontSize: SizeConfig.baseFontSize * 2.9,
@@ -302,10 +293,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Utils().getWithPadding(
                               Utils().getText(
-                                "₹" +
-                                    _homePageController
-                                        .booksDataList[index].price
-                                        .toString(),
+                                "₹" + _homePageController.booksDataList[index].price.toString(),
                                 color: Utils.green,
                                 fontWeight: FontWeight.bold,
                                 fontSize: SizeConfig.baseFontSize * 3.2,
@@ -315,11 +303,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Utils().getWithPadding(
                               Utils().getText(
-                                "Security: " +
-                                    _homePageController
-                                        .booksDataList[index].percentSecurity
-                                        .toString() +
-                                    "%",
+                                "Security: " + _homePageController.booksDataList[index].percentSecurity.toString() + "%",
                                 color: Utils.primaryColor,
                                 fontSize: SizeConfig.baseFontSize * 3.2,
                               ),
@@ -344,9 +328,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           child: Utils().getWithPadding(
                             Utils().getText(
-                              _homePageController
-                                      .booksDataList[index].category ??
-                                  "Category",
+                              _homePageController.booksDataList[index].category ?? "Category",
                               fontSize: SizeConfig.baseFontSize * 3.0,
                             ),
                             top: SizeConfig.safeBlockVertical * 0.2,
@@ -390,8 +372,7 @@ class HomeScreen extends StatelessWidget {
                       "Alert",
                       "Are you sure you want to delete the book?",
                       () {
-                        _homePageController.deleteBook(
-                            _homePageController.booksDataList[index].bookDocId);
+                        _homePageController.deleteBook(_homePageController.booksDataList[index].bookDocId);
                         Get.back(result: "deleted");
                       },
                     );
