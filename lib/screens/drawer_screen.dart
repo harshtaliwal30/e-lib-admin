@@ -1,14 +1,13 @@
 import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
+import 'package:e_lib_admin/controllers/profile_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -16,36 +15,38 @@ class DrawerScreen extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Utils.blue,
-                    backgroundImage: NetworkImage(
-                      "https://firebasestorage.googleapis.com/v0/b/e-lib-e53d6.appspot.com/o/28828394_950086555154619_9137006216337597187_o.jpg?alt=media&token=dd2c5145-1e19-43d6-ace7-6bede86f7a7d",
+            GetBuilder<ProfileController>(builder: (profileController) {
+              return DrawerHeader(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Utils.blue,
+                      backgroundImage: NetworkImage(
+                        profileController.libraryModel.libraryImage!,
+                      ),
                     ),
-                  ),
-                  Utils().getWithPadding(
+                    Utils().getWithPadding(
+                      Utils().getText(
+                        profileController.libraryModel.libraryName!,
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.baseFontSize * 4,
+                      ),
+                      top: SizeConfig.safeBlockVertical * 1,
+                    ),
                     Utils().getText(
-                      "Maulana Azad",
+                      profileController.libraryModel.city!,
+                      color: Utils.grey,
                       fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.baseFontSize * 4,
-                    ),
-                    top: SizeConfig.safeBlockVertical * 1,
-                  ),
-                  Utils().getText(
-                    "Aligarh",
-                    color: Utils.grey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.baseFontSize * 3.5,
-                  )
-                ],
-              ),
-              decoration: BoxDecoration(),
-            ),
+                      fontSize: SizeConfig.baseFontSize * 3.5,
+                    )
+                  ],
+                ),
+                decoration: BoxDecoration(),
+              );
+            }),
             SizedBox(height: 10),
             getDrawerItem(
               "Home",
@@ -120,8 +121,7 @@ class DrawerScreen extends StatelessWidget {
         title: Utils().getText(
           title,
           color: Get.currentRoute == route ? Utils.white : color,
-          fontWeight:
-              Get.currentRoute == route ? FontWeight.bold : FontWeight.normal,
+          fontWeight: Get.currentRoute == route ? FontWeight.bold : FontWeight.normal,
         ),
         tileColor: Get.currentRoute == route ? Utils.blue : null,
         shape: RoundedRectangleBorder(

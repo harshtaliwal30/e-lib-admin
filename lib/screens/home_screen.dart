@@ -3,6 +3,7 @@ import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/home_screen_controller.dart';
+import 'package:e_lib_admin/controllers/profile_controller.dart';
 import 'package:e_lib_admin/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,16 +16,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Utils.white,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Utils.primaryColor),
-        elevation: 0.0,
-        centerTitle: true,
-        backgroundColor: Utils.white,
-        title: Utils().getText(
-          "Library Name",
-          color: Utils.primaryColor,
-          fontSize: SizeConfig.baseFontSize * 4.5,
-        ),
+      appBar: PreferredSize(
+        preferredSize: const Size(0, 60),
+        child: GetBuilder<ProfileController>(
+            init: ProfileController(),
+            builder: (profileController) {
+              return AppBar(
+                iconTheme: IconThemeData(color: Utils.primaryColor),
+                elevation: 0.0,
+                centerTitle: true,
+                backgroundColor: Utils.white,
+                title: Utils().getText(
+                  profileController.libraryModel.libraryName ?? "",
+                  color: Utils.primaryColor,
+                  fontSize: SizeConfig.baseFontSize * 4.5,
+                ),
+              );
+            }),
       ),
       body: Obx(
         () => _homePageController.isLoading.isTrue

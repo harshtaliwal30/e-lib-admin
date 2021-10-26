@@ -55,24 +55,18 @@ class ProfileScreen extends StatelessWidget {
                                     Radius.circular(10),
                                   ),
                                 ),
-                                child:
-                                    _profileController.imageUrl.value.length > 0
-                                        ? Image.network(_profileController
-                                            .libraryModel.libraryImage!)
-                                        : _profileController
-                                                    .image.value.path.length >
-                                                0
-                                            ? Image.file(
-                                                _profileController.image.value,
-                                                fit: BoxFit.fill,
-                                              )
-                                            : Icon(
-                                                Icons.photo_library,
-                                                color: Utils.amber,
-                                                size: SizeConfig
-                                                        .iconGeneralHeightAndWidth *
-                                                    2,
-                                              ),
+                                child: _profileController.imageUrl.value.length > 0
+                                    ? Image.network(_profileController.libraryModel.libraryImage!)
+                                    : _profileController.image.value.path.length > 0
+                                        ? Image.file(
+                                            _profileController.image.value,
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Icon(
+                                            Icons.photo_library,
+                                            color: Utils.amber,
+                                            size: SizeConfig.iconGeneralHeightAndWidth * 2,
+                                          ),
                               ),
                             ),
                             Image.asset(
@@ -234,9 +228,7 @@ class ProfileScreen extends StatelessWidget {
           Text("Institutional"),
         ],
         onPressed: (int index) {
-          for (int buttonIndex = 0;
-              buttonIndex < _profileController.isSelected.length;
-              buttonIndex++) {
+          for (int buttonIndex = 0; buttonIndex < _profileController.isSelected.length; buttonIndex++) {
             if (buttonIndex == index) {
               _profileController.isSelected[buttonIndex] = true;
             } else {
