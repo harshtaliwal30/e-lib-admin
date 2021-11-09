@@ -5,6 +5,8 @@ class IssueRequestModel {
   String? libraryId;
   String? status;
   String? userId;
+  String? userName;
+  String? userImage;
   DateTime? createdAt;
   DateTime? approvedAt;
   DateTime? issuedAt;
@@ -18,6 +20,8 @@ class IssueRequestModel {
     this.libraryId,
     this.status,
     this.userId,
+    this.userName,
+    this.userImage,
     this.createdAt,
     this.approvedAt,
     this.issuedAt,
@@ -32,6 +36,8 @@ class IssueRequestModel {
     libraryId = json['libraryId'];
     status = json['status'];
     userId = json['userId'];
+    userName = json['userName'];
+    userImage = json['userImage'];
     createdAt = json['createdAt'].toDate();
     approvedAt = json['approvedAt'].toDate();
     issuedAt = json['issuedAt'].toDate();
@@ -47,6 +53,8 @@ class IssueRequestModel {
     data['libraryId'] = this.libraryId;
     data['status'] = this.status;
     data['userId'] = this.userId;
+    data['userName'] = this.userName;
+    data['userImage'] = this.userImage;
     data['createdAt'] = this.createdAt;
     data['approvedAt'] = this.approvedAt;
     data['issuedAt'] = this.issuedAt;

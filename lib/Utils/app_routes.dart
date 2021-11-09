@@ -41,8 +41,7 @@ class AppRoutes {
     Get.toNamed(routeName);
   }
 
-  static void moveToScreenWithArguments(String routeName,
-      {@required var arguments}) {
+  static void moveToScreenWithArguments(String routeName, {@required var arguments}) {
     Get.toNamed(routeName, arguments: arguments);
   }
 
@@ -54,8 +53,7 @@ class AppRoutes {
     Get.offAllNamed(routeName);
   }
 
-  static void moveOffAllScreenWithArguments(String routeName,
-      {@required var arguments}) {
+  static void moveOffAllScreenWithArguments(String routeName, {@required var arguments}) {
     Get.offAll(routeName, arguments: arguments);
   }
 
