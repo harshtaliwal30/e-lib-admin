@@ -191,8 +191,15 @@ class IssueRequestsScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
+                  Get.dialog(
+                    Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    barrierDismissible: false,
+                  );
                   final UsersController _usersController = Get.put(UsersController());
                   UserModel userModel = await _usersController.fetchUserData(_issueRequestController.issueRequestList[index].userId!);
+                  Get.back();
                   AppRoutes.openUserDetailsBottomSheet(userModel: userModel);
                 },
                 child: Row(

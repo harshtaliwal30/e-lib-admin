@@ -83,7 +83,6 @@ class AppRoutes {
         userModel: userModel,
       ),
       backgroundColor: Utils.primaryColor,
-      isDismissible: false,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(10),
