@@ -1,5 +1,6 @@
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/models/book_model.dart';
+import 'package:e_lib_admin/models/user_model.dart';
 import 'package:e_lib_admin/screens/add_book_screen.dart';
 import 'package:e_lib_admin/screens/home_screen.dart';
 import 'package:e_lib_admin/screens/issue_requests_screen.dart';
@@ -7,6 +8,7 @@ import 'package:e_lib_admin/screens/login_screen.dart';
 import 'package:e_lib_admin/screens/otp_screen.dart';
 import 'package:e_lib_admin/screens/profile_screen.dart';
 import 'package:e_lib_admin/screens/splash_screen.dart';
+import 'package:e_lib_admin/screens/user_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +19,7 @@ class AppRoutes {
   static const String homeScreenRoute = "/homeScreen";
   static const String issueRequestsScreenRoute = "/issueRequestsScreen";
   static const String profileScreenRoute = "/profileScreen";
+  static const String userDetailsScreenRoute = "/userDetailsScreen";
 
   static routes() {
     GetPage<dynamic> _page(String route, var page) {
@@ -30,6 +33,7 @@ class AppRoutes {
       _page(homeScreenRoute, () => HomeScreen()),
       _page(issueRequestsScreenRoute, () => IssueRequestsScreen()),
       _page(profileScreenRoute, () => ProfileScreen()),
+      GetPage(name: userDetailsScreenRoute, page: () => UserDetailsScreen(userModel: Get.arguments)),
       // GetPage(name: loginRoute, page: () => LoginScreen()),
       // GetPage(
       //     name: homeitemviewRoute,
@@ -63,6 +67,22 @@ class AppRoutes {
         bookData: bookData,
       ),
       backgroundColor: Utils.white,
+      isDismissible: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      elevation: 15,
+    );
+  }
+
+  static Future<dynamic> openUserDetailsBottomSheet({required UserModel userModel}) {
+    return Get.bottomSheet(
+      UserDetailsScreen(
+        userModel: userModel,
+      ),
+      backgroundColor: Utils.primaryColor,
       isDismissible: false,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(

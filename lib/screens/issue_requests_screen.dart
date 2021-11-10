@@ -1,6 +1,9 @@
+import 'package:e_lib_admin/Utils/app_routes.dart';
 import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
 import 'package:e_lib_admin/controllers/issue_request_controller.dart';
+import 'package:e_lib_admin/controllers/users_controller.dart';
+import 'package:e_lib_admin/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -186,24 +189,35 @@ class IssueRequestsScreen extends StatelessWidget {
                 left: SizeConfig.safeBlockHorizontal * 3,
                 right: SizeConfig.safeBlockHorizontal * 1,
               ),
-              CircleAvatar(
-                radius: SizeConfig.iconGeneralHeightAndWidth * 0.38,
-                backgroundColor: Utils.blue,
-                backgroundImage: _issueRequestController.issueRequestList[index].userImage != null
-                    ? NetworkImage(
-                        _issueRequestController.issueRequestList[index].userImage!,
-                      )
-                    : null,
-              ),
-              Utils().getWithPadding(
-                Utils().getText(
-                  _issueRequestController.issueRequestList[index].userName,
-                  color: Utils.primaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: SizeConfig.baseFontSize * 3.2,
+              GestureDetector(
+                onTap: () async {
+                  final UsersController _usersController = Get.put(UsersController());
+                  UserModel userModel = await _usersController.fetchUserData(_issueRequestController.issueRequestList[index].userId!);
+                  AppRoutes.openUserDetailsBottomSheet(userModel: userModel);
+                },
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: SizeConfig.iconGeneralHeightAndWidth * 0.38,
+                      backgroundColor: Utils.blue,
+                      backgroundImage: _issueRequestController.issueRequestList[index].userImage != null
+                          ? NetworkImage(
+                              _issueRequestController.issueRequestList[index].userImage!,
+                            )
+                          : null,
+                    ),
+                    Utils().getWithPadding(
+                      Utils().getText(
+                        _issueRequestController.issueRequestList[index].userName,
+                        color: Utils.primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.baseFontSize * 3.2,
+                      ),
+                      right: SizeConfig.safeBlockHorizontal * 3,
+                      left: SizeConfig.safeBlockHorizontal * 1,
+                    ),
+                  ],
                 ),
-                right: SizeConfig.safeBlockHorizontal * 3,
-                left: SizeConfig.safeBlockHorizontal * 1,
               ),
             ],
           ),

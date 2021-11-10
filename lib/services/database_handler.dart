@@ -32,7 +32,12 @@ class DatabaseHandler {
   }
 
   Future<QuerySnapshot> fetchIssueRequestsByStatus(String? libraryId, String status) async {
-    return databaseReference.collection('issueRequests').where('libraryId', isEqualTo: libraryId).orderBy("createdAt", descending: true).where("status", isEqualTo: status).get();
+    return databaseReference
+        .collection('issueRequests')
+        .where('libraryId', isEqualTo: libraryId)
+        .orderBy("createdAt", descending: true)
+        .where("status", isEqualTo: status)
+        .get();
   }
 
   Future<void> updateIssueRequest(var data) async {
@@ -53,5 +58,9 @@ class DatabaseHandler {
 
   Future<void> deleteBook(String? id) async {
     await databaseReference.collection('books').doc(id).delete();
+  }
+
+  Future<DocumentSnapshot> fetchUserData(String? userId) {
+    return databaseReference.collection('users').doc(userId).get();
   }
 }
