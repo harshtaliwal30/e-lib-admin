@@ -9,6 +9,7 @@ import 'package:e_lib_admin/screens/otp_screen.dart';
 import 'package:e_lib_admin/screens/profile_screen.dart';
 import 'package:e_lib_admin/screens/splash_screen.dart';
 import 'package:e_lib_admin/screens/user_details_screen.dart';
+import 'package:e_lib_admin/screens/users_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,7 @@ class AppRoutes {
   static const String homeScreenRoute = "/homeScreen";
   static const String issueRequestsScreenRoute = "/issueRequestsScreen";
   static const String profileScreenRoute = "/profileScreen";
+  static const String userScreenRoute = "/userScreen";
   static const String userDetailsScreenRoute = "/userDetailsScreen";
 
   static routes() {
@@ -33,6 +35,7 @@ class AppRoutes {
       _page(homeScreenRoute, () => HomeScreen()),
       _page(issueRequestsScreenRoute, () => IssueRequestsScreen()),
       _page(profileScreenRoute, () => ProfileScreen()),
+      _page(userScreenRoute, () => UsersScreen()),
       GetPage(name: userDetailsScreenRoute, page: () => UserDetailsScreen(userModel: Get.arguments)),
       // GetPage(name: loginRoute, page: () => LoginScreen()),
       // GetPage(

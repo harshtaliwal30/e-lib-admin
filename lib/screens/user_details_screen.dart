@@ -1,6 +1,5 @@
 import 'package:e_lib_admin/Utils/size_config.dart';
 import 'package:e_lib_admin/Utils/utils.dart';
-import 'package:e_lib_admin/controllers/users_controller.dart';
 import 'package:e_lib_admin/models/user_model.dart';
 import 'package:flutter/material.dart';
 

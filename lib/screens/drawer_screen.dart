@@ -51,22 +51,22 @@ class DrawerScreen extends StatelessWidget {
             getDrawerItem(
               "Home",
               Icons.home,
-              "/homeScreen",
+              AppRoutes.homeScreenRoute,
               () => {
                 Get.back(),
                 AppRoutes.moveOffAllScreen(
-                  "/homeScreen",
+                  AppRoutes.homeScreenRoute,
                 )
               },
             ),
             getDrawerItem(
               "Issue Requests",
               Icons.notifications_on_outlined,
-              "/issueRequestsScreen",
+              AppRoutes.issueRequestsScreenRoute,
               () => {
                 Get.back(),
                 AppRoutes.moveToScreen(
-                  "/issueRequestsScreen",
+                  AppRoutes.issueRequestsScreenRoute,
                 )
               },
               isTrailing: true,
@@ -74,18 +74,29 @@ class DrawerScreen extends StatelessWidget {
             getDrawerItem(
               "Profile",
               Icons.person,
-              "/profileScreen",
+              AppRoutes.profileScreenRoute,
               () => {
                 Get.back(),
                 AppRoutes.moveToScreen(
-                  "/profileScreen",
+                  AppRoutes.profileScreenRoute,
+                )
+              },
+            ),
+            getDrawerItem(
+              "All Members",
+              Icons.person,
+              AppRoutes.userScreenRoute,
+              () => {
+                Get.back(),
+                AppRoutes.moveToScreen(
+                  AppRoutes.userScreenRoute,
                 )
               },
             ),
             getDrawerItem(
               "Logout",
               Icons.logout_rounded,
-              "/loginScreen",
+              AppRoutes.loginScreenRoute,
               () => {
                 Get.back(),
                 SharedPreferences.getInstance().then((onValue) {

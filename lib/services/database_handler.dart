@@ -63,4 +63,8 @@ class DatabaseHandler {
   Future<DocumentSnapshot> fetchUserData(String? userId) {
     return databaseReference.collection('users').doc(userId).get();
   }
+
+  Future<QuerySnapshot> fetchUsers() {
+    return databaseReference.collection('users').get();
+  }
 }
