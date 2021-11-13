@@ -24,18 +24,17 @@ class UsersScreen extends StatelessWidget {
         ),
       ),
       body: Obx(
-        () => ListView.builder(
+        () => ListView.separated(
+          separatorBuilder: (_, __) => Divider(
+            height: 0,
+            color: Utils.primaryColor,
+            endIndent: 20,
+            indent: 20,
+          ),
           itemCount: _usersController.usersList.length,
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => Container(
-            color: Utils.primaryColor,
-            margin: EdgeInsets.symmetric(
-              vertical: SizeConfig.safeBlockVertical * 0.5,
-            ),
-            child: getUserItem(
-              _usersController.usersList[index],
-            ),
+          itemBuilder: (context, index) => getUserItem(
+            _usersController.usersList[index],
           ),
         ),
       ),
@@ -72,7 +71,7 @@ class UsersScreen extends StatelessWidget {
                   Text(
                     userModel.userName!,
                     style: TextStyle(
-                      color: Utils.white,
+                      color: Utils.primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: SizeConfig.baseFontSize * 4.5,
                     ),
@@ -81,7 +80,7 @@ class UsersScreen extends StatelessWidget {
                   Text(
                     userModel.userEmail!,
                     style: TextStyle(
-                      color: Utils.white,
+                      color: Utils.primaryColor,
                       // fontWeight: FontWeight.bold,
                       fontSize: SizeConfig.baseFontSize * 3.8,
                     ),
@@ -102,7 +101,7 @@ class UsersScreen extends StatelessWidget {
               Text(
                 userModel.userPhone!,
                 style: TextStyle(
-                  color: Utils.white,
+                  color: Utils.primaryColor,
                   // fontWeight: FontWeight.bold,
                   fontSize: SizeConfig.baseFontSize * 3.8,
                 ),
@@ -122,7 +121,7 @@ class UsersScreen extends StatelessWidget {
                 child: Text(
                   userModel.address! + ", " + userModel.city! + ", " + userModel.state! + ", " + userModel.country!,
                   style: TextStyle(
-                    color: Utils.white,
+                    color: Utils.primaryColor,
                     fontSize: SizeConfig.baseFontSize * 4,
                   ),
                 ),
